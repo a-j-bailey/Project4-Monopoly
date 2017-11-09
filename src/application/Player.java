@@ -14,7 +14,6 @@ public class Player {
 	
 	public Player(String name){
 		this.playerName = name;
-		//this.playerNum = num;
 	}
 	
 	public int getMoney(){
@@ -23,6 +22,18 @@ public class Player {
 
 	public int getGetOutOfJailFreeCards(){
 		return this.numGetOutOfJailCards;
+	}
+	
+	public void fine(int amount){
+		if (amount > this.money){
+			this.money -= amount;
+		} else {
+			System.err.println("You'd go broke");
+		}
+	}
+	
+	public void gainMoney(int amount){
+		this.money += amount;
 	}
 	
 	//Returns First Name Only

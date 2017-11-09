@@ -1,0 +1,14 @@
+Advance to Go,0,-1,-1,FALSE
+Advance to Illinois Ave,24,-1,-1,FALSE
+Advance to St. Charles Place,11,-1,-1,FALSE
+Advance to Nearest RR,-1,-1,-1,TRUE,1
+Bank Pays you $50,-1,-1,50,FALSE
+Get Out of Jail Free,-1,-1,-1,TRUE,2
+Go back three spaces,-1,-1,-1,TRUE,3
+Go To Jail - Go Directly To Jail,-1,-1,-1,TRUE,4
+Make Repairs to Properties,-1,-1,-1,TRUE,5
+Pay Poor Tax,-1,15,-1,FALSE
+Take a Trip on the Reading RR,-1,-1,-1,TRUE,6
+Take a Walk on the Boardwalk,39,-1,-1,FALSE
+You've Been Elected Chairman of the Board,-1,-1,-1,TRUE,7
+Your Building and Loan Matures,-1,-1,150,FALSE
