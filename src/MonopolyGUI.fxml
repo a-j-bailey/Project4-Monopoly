@@ -26,16 +26,16 @@
                            <bottom>
                               <VBox>
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="500.0" text="Roll Dice" />
+                                    <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#rollDice" prefHeight="40.0" prefWidth="500.0" text="Roll Dice" />
                                     <HBox BorderPane.alignment="CENTER">
                                        <children>
-                                          <MenuButton alignment="CENTER" mnemonicParsing="false" popupSide="TOP" prefHeight="60.0" prefWidth="250.0" text="Manage Properties">
+                                          <MenuButton alignment="CENTER" disable="true" mnemonicParsing="false" popupSide="TOP" prefHeight="60.0" prefWidth="250.0" text="Manage Properties">
                                             <items>
                                               <MenuItem mnemonicParsing="false" text="Build Houses" />
                                               <MenuItem mnemonicParsing="false" text="Morrgage Properties" />
                                             </items>
                                           </MenuButton>
-                                          <Button cancelButton="true" layoutX="250.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" text="Trade With Players">
+                                          <Button cancelButton="true" disable="true" layoutX="250.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" text="Trade With Players">
                                              <cursor>
                                                 <Cursor fx:constant="DEFAULT" />
                                              </cursor>
@@ -318,7 +318,6 @@
                   <MenuItem mnemonicParsing="false" text="New Game" />
               </items>
             </MenuButton>
-            <Button mnemonicParsing="false" text="End Turn" />
         </items>
       </ToolBar>
    </top>
@@ -330,11 +329,16 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TitledPane animated="false" collapsible="false" layoutY="50.0" prefHeight="550.0" prefWidth="200.0" text="My Items" BorderPane.alignment="TOP_CENTER">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </TitledPane>
+            <Separator layoutY="49.0" prefWidth="200.0" />
+            <Label fx:id="currentTurn1" layoutY="500.0" prefHeight="50.0" prefWidth="200.0" text="Alerts:">
+               <font>
+                  <Font size="12.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </Label>
+            <Button disable="true" layoutX="25.0" layoutY="559.0" mnemonicParsing="false" prefWidth="150.0" text="End Turn" textFill="RED" />
          </children>
       </AnchorPane>
    </right>
