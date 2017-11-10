@@ -11,6 +11,11 @@ import java.util.Scanner;
  */
 
 public class Property extends Location{
+	
+	private String type;
+	
+	private int owner;
+	
 	private int value;
 	
 	private int rent;
@@ -21,11 +26,10 @@ public class Property extends Location{
 	
 	private boolean isBought;
 	
-	/*
-	 * We should just have main read in the txt file values. just make a loop that builds an arrayList or something. 
-	 */
+	 //We should just have Game read in the txt file values. just make a loop that builds an arrayList or something. 
 	
 	/**
+	 * Constructor for a Property
 	 * 
 	 * @param position
 	 * @param color
@@ -33,7 +37,6 @@ public class Property extends Location{
 	 * @param price
 	 * @param mortgage
 	 * @param rent
-	 * Constructor for a Property
 	 */
 	public Property(int position, String color, String name, int price, int mortgage, int rent) { //note I skipped the ones that don't apply to Property
 		super(position, color, name);

@@ -53,32 +53,32 @@
                                           <Image url="@../imgs/monopoly_board.jpg" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="p6_token" disable="true" fitHeight="40.0" fitWidth="40.0" layoutX="426.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="p6_token" disable="true" fitHeight="40.0" fitWidth="40.0" layoutX="426.0" layoutY="408.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../imgs/player6_token.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="p5_token" disable="true" fitHeight="40.0" fitWidth="40.0" layoutX="426.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="p5_token" disable="true" fitHeight="40.0" fitWidth="40.0" layoutX="426.0" layoutY="408.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../imgs/player5_token.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="p4_token" disable="true" fitHeight="40.0" fitWidth="40.0" layoutX="426.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="p4_token" disable="true" fitHeight="40.0" fitWidth="40.0" layoutX="426.0" layoutY="408.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../imgs/player4_token.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="p3_token" disable="true" fitHeight="40.0" fitWidth="40.0" layoutX="426.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="p3_token" disable="true" fitHeight="40.0" fitWidth="40.0" layoutX="426.0" layoutY="408.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../imgs/player3_token.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="p2_token" disable="true" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" x="426.0" y="408.0">
+                                    <ImageView fx:id="p2_token" disable="true" fitHeight="40.0" fitWidth="40.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" x="426.0" y="408.0">
                                        <image>
                                           <Image url="@../imgs/player2_token.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="p1_token" disable="true" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" x="426.0" y="408.0">
+                                    <ImageView fx:id="p1_token" disable="true" fitHeight="40.0" fitWidth="40.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" x="426.0" y="408.0">
                                        <image>
                                           <Image url="@../imgs/player1_token.png" />
                                        </image>
