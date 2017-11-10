@@ -22,12 +22,17 @@ public abstract class ChanceCard extends Card{
 		if (special){
 			switch (specialNum){
 				case 1: 
+					//move player to nearest RR
+					//RRs @: 5, 15, 25, 35
 					break;
 				case 2:
+					Game.getCurrPlayer().addGetOutOfJailFreeCard();
 					break;
 				case 3:
+					Game.getCurrPlayer().changePos(-3);
 					break;
 				case 4:
+					Game.getCurrPlayer().setPos(10);
 					break;
 				case 5:
 					break;

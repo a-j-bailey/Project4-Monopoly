@@ -14,7 +14,7 @@ public class Game {
 	
 	private static int numPlayers;
 	
-	private int currPlayer;
+	private static int currPlayer = 0;
 	
 	public void launchGUI(){
 		Parent root;
@@ -64,7 +64,7 @@ public class Game {
 	 * @return
 	 */
 	public static Player getCurrPlayer(){
-		
+		return players.get(currPlayer);
 	}
 	
 	/**
@@ -109,6 +109,13 @@ public class Game {
 	 * Moves current player to given position.
 	 */
 	public static void moveTo(int newPos){
+		
+	}
+	
+	/**
+	 * Sends player to jail and LOCKS 'EM UP
+	 */
+	public static void goToJailSucker(){
 		
 	}
 }
