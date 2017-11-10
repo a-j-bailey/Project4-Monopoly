@@ -29,7 +29,7 @@
                                     <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#rollDice" prefHeight="40.0" prefWidth="500.0" text="Roll Dice" />
                                     <HBox BorderPane.alignment="CENTER">
                                        <children>
-                                          <MenuButton alignment="CENTER" disable="true" mnemonicParsing="false" popupSide="TOP" prefHeight="60.0" prefWidth="250.0" text="Manage Properties">
+                                          <MenuButton fx:id="managePropertiesButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#manageProperties" popupSide="TOP" prefHeight="60.0" prefWidth="250.0" text="Manage Properties">
                                             <items>
                                               <MenuItem mnemonicParsing="false" text="Build Houses" />
                                               <MenuItem mnemonicParsing="false" text="Morrgage Properties" />
@@ -73,12 +73,12 @@
                                           <Image url="@../imgs/player3_token.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="p2_token" disable="true" fitHeight="40.0" fitWidth="40.0" layoutX="426.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="p2_token" disable="true" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" x="426.0" y="408.0">
                                        <image>
                                           <Image url="@../imgs/player2_token.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fx:id="p1_token" disable="true" fitHeight="40.0" fitWidth="40.0" layoutX="426.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="p1_token" disable="true" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" x="426.0" y="408.0">
                                        <image>
                                           <Image url="@../imgs/player1_token.png" />
                                        </image>
@@ -338,7 +338,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
             </Label>
-            <Button disable="true" layoutX="25.0" layoutY="559.0" mnemonicParsing="false" prefWidth="150.0" text="End Turn" textFill="RED" />
+            <Button fx:id="endTurnButton" disable="true" layoutX="25.0" layoutY="559.0" mnemonicParsing="false" onAction="#endTurn" prefWidth="150.0" text="End Turn" textFill="RED" />
          </children>
       </AnchorPane>
    </right>

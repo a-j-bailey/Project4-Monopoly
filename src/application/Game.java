@@ -5,22 +5,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Controller.GameController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Game {
+public class Game{
 	private static ArrayList<Player> players = new ArrayList<Player>();
 	
 	private static int numPlayers;
 	
 	private static int currPlayer = 0;
 	
+	private static GameController gc;
+	
 	public void launchGUI(){
-		Parent root;
 		try {
-            root = FXMLLoader.load(getClass().getResource("/MonopolyGUI.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MonopolyGUI.fxml"));
+			Parent root;
+            root = fxmlLoader.load();
+            gc = fxmlLoader.getController();
+            System.out.println(gc);
             Stage stage = new Stage();
             stage.setTitle("MONOPOLY");
             stage.setScene(new Scene(root, 900, 640));
@@ -75,29 +81,7 @@ public class Game {
 	public static int getCurrPlayerNum(){
 		return currPlayer;
 	}
-	
-	/**
-	 * Returns name of player at index
-	 * @author adambailey
-	 * @param index
-	 * @return
-	 */
-	/*
-	public static String getPlayerName(int index){
-		return players.get(index).getPlayerName();
-	}
-	*/
-	/**
-	 * Returns the amount of money player at index __ has.
-	 * 
-	 * @param index
-	 * @return
-	 */
-	/*
-	public static int getPlayerMoney(int index){
-		return players.get(index).getMoney();
-	}
-	*/
+
 	/**
 	 * Rolls dice, moves player, and handles all other actions related to a player's roll. 
 	 * Calls methods accordingly
@@ -108,6 +92,7 @@ public class Game {
 		Random rand = new Random();
 		int d1 = rand.nextInt(6)+1;
 		int d2 = rand.nextInt(6)+1;
+		System.out.println("Roll Dice:\tD1: " + d1 + " D2: " + d2);
 		players.get(currPlayer).changePos(d1 + d2);
 	}
 	
@@ -146,5 +131,13 @@ public class Game {
 			}
 			players.get(currPlayer).changeMoney((-1)*amount*numPlayers);
 		}
+	}
+	
+	public static GameController getController(){
+		return gc;
+	}
+	
+	public static void endTurn(){
+		System.out.println("");
 	}
 }
