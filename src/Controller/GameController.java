@@ -68,6 +68,7 @@ public class GameController implements Initializable{
 		System.out.println(" -- Game Initialized -- ");
 	}
 	
+	
 	public void moveToken(int player, int x, int y){
 		if (player == 0){
 			p1_token.setX(x);
