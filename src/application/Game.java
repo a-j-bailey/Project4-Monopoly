@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -59,6 +60,10 @@ public class Game {
 		return numPlayers;
 	}
 	
+	public static Player getPlayer(int index){
+		return players.get(index);
+	}
+	
 	/**
 	 * Returns current player.
 	 * @return
@@ -67,26 +72,32 @@ public class Game {
 		return players.get(currPlayer);
 	}
 	
+	public static int getCurrPlayerNum(){
+		return currPlayer;
+	}
+	
 	/**
 	 * Returns name of player at index
 	 * @author adambailey
 	 * @param index
 	 * @return
 	 */
+	/*
 	public static String getPlayerName(int index){
 		return players.get(index).getPlayerName();
 	}
-	
+	*/
 	/**
 	 * Returns the amount of money player at index __ has.
 	 * 
 	 * @param index
 	 * @return
 	 */
+	/*
 	public static int getPlayerMoney(int index){
 		return players.get(index).getMoney();
 	}
-	
+	*/
 	/**
 	 * Rolls dice, moves player, and handles all other actions related to a player's roll. 
 	 * Calls methods accordingly
@@ -94,7 +105,10 @@ public class Game {
 	 * @return
 	 */
 	public static void rollDice(){
-		//TODO: this... duh
+		Random rand = new Random();
+		int d1 = rand.nextInt(6)+1;
+		int d2 = rand.nextInt(6)+1;
+		players.get(currPlayer).changePos(d1 + d2);
 	}
 	
 	/**
@@ -116,6 +130,21 @@ public class Game {
 	 * Sends player to jail and LOCKS 'EM UP
 	 */
 	public static void goToJailSucker(){
-		
+		players.get(currPlayer).changeIncarceration();
+		players.get(currPlayer).setPos(10);
+	}
+	
+	/**
+	 * Use a negative amount if the current player is gaining money. 
+	 * And a positive amount if the current player is losing money
+	 * @param amount
+	 */
+	public static void manageAllPlayersMoney(int amount){
+		for(int i=0; i<numPlayers; i++){
+			if(i != currPlayer){
+				players.get(i).changeMoney(amount);
+			}
+			players.get(currPlayer).changeMoney((-1)*amount*numPlayers);
+		}
 	}
 }
