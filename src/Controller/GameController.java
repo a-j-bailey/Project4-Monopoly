@@ -68,7 +68,7 @@ public class GameController implements Initializable{
 		System.out.println(" -- Game Initialized -- ");
 	}
 	
-	/*public static void moveToken(int player, int x, int y){
+	public void moveToken(int player, int x, int y){
 		if (player == 0){
 			p1_token.setX(x);
 			p1_token.setY(y);
@@ -89,7 +89,7 @@ public class GameController implements Initializable{
 			p6_token.setY(y);
 		}
 	}
-	*/
+	
 	@FXML
 	private TitledPane pp1;
 	@FXML

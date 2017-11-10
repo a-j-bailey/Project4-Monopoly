@@ -66,12 +66,16 @@ public class Player {
 				GameController.moveToken(Game.getCurrPlayerNum(), 426, 408);
 				break;
 			case 1:
+				GameController.moveToken(Game.getCurrPlayerNum(), x, y);
 				break;
 			case 2:
+				GameController.moveToken(Game.getCurrPlayerNum(), x, y);
 				break;
 			case 3:
+				GameController.moveToken(Game.getCurrPlayerNum(), x, y);
 				break;
 			case 4:
+				GameController.moveToken(Game.getCurrPlayerNum(), x, y);
 				break;
 			case 5:
 				break;
