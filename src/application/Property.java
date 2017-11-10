@@ -24,6 +24,17 @@ public class Property extends Location{
 	/*
 	 * We should just have main read in the txt file values. just make a loop that builds an arrayList or something. 
 	 */
+	
+	/**
+	 * 
+	 * @param position
+	 * @param color
+	 * @param name
+	 * @param price
+	 * @param mortgage
+	 * @param rent
+	 * Constructor for a Property
+	 */
 	public Property(int position, String color, String name, int price, int mortgage, int rent) { //note I skipped the ones that don't apply to Property
 		super(position, color, name);
 		this.value = price;

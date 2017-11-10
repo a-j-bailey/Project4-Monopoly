@@ -13,6 +13,13 @@ public class Location {
 	
 	private String propertyName;
 	
+	/**
+	 * 
+	 * @param position
+	 * @param color
+	 * @param name
+	 * Constructor for location
+	 */
 	public Location(int position, String color, String name) {
 		this.position = position;
 		this.color = color;
@@ -34,6 +41,10 @@ public class Location {
 		return color;
 	}
 	
+	/**
+	 * 
+	 * @return property Name
+	 */
 	public String getPropertyName() {
 		return propertyName;
 	}
