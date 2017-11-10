@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 
@@ -30,35 +31,35 @@ public class GameController implements Initializable{
 				
 		if(playerNum >= 2){
 			this.pp2.setDisable(false);
-			p2_token.setDisable(false);
+			this.p2_token.setDisable(false);
 			this.pp2.setText(Game.getPlayer(1).getPlayerName());
 			this.pp2_money.setText("$" + Game.getPlayer(1).getMoney());
 		}
 				
 		if(playerNum >= 3){
 			this.pp3.setDisable(false);
-			p3_token.setDisable(false);
+			this.p3_token.setDisable(false);
 			this.pp3.setText(Game.getPlayer(2).getPlayerName());
 			this.pp3_money.setText("$" + Game.getPlayer(2).getMoney());
 		}
 				
 		if(playerNum >= 4){
 			this.pp4.setDisable(false);
-			p4_token.setDisable(false);
+			this.p4_token.setDisable(false);
 			this.pp4.setText(Game.getPlayer(3).getPlayerName());
 			this.pp4_money.setText("$" + Game.getPlayer(3).getMoney());
 		}
 				
 		if(playerNum >= 5){
 			this.pp5.setDisable(false);
-			p5_token.setDisable(false);
+			this.p5_token.setDisable(false);
 			this.pp5.setText(Game.getPlayer(4).getPlayerName());
 			this.pp5_money.setText("$" + Game.getPlayer(4).getMoney());
 		}
 				
 		if(playerNum >= 6){
 			this.pp6.setDisable(false);
-			p6_token.setDisable(false);
+			this.p6_token.setDisable(false);
 			this.pp6.setText(Game.getPlayer(5).getPlayerName());
 			this.pp6_money.setText("$" + Game.getPlayer(5).getMoney());
 		}
@@ -67,7 +68,6 @@ public class GameController implements Initializable{
 		
 		System.out.println(" -- Game Initialized -- ");
 	}
-	
 	
 	public void moveToken(int player, int x, int y){
 		if (player == 0){
@@ -89,6 +89,11 @@ public class GameController implements Initializable{
 			p6_token.setX(x);
 			p6_token.setY(y);
 		}
+		//TODO: Update sidepanel and inform user of dice roll and move
+		//TODO: Update side panel with info on current position
+		rollDiceButton.setDisable(true);
+		managePropertiesButton.setDisable(false);
+		endTurnButton.setDisable(false);
 	}
 	
 	@FXML
@@ -127,19 +132,30 @@ public class GameController implements Initializable{
 	@FXML
 	private ImageView p1_token;
 	@FXML
-	private static ImageView p2_token;
+	private ImageView p2_token;
 	@FXML
-	private static ImageView p3_token;
+	private ImageView p3_token;
 	@FXML
-	private static ImageView p4_token;
+	private ImageView p4_token;
 	@FXML
-	private static ImageView p5_token;
+	private ImageView p5_token;
 	@FXML
-	private static ImageView p6_token;
+	private ImageView p6_token;
 	
 	@FXML
 	private Button rollDiceButton;
 	public void rollDice(ActionEvent event){
 		Game.rollDice();
+	}
+	
+	@FXML
+	private MenuButton managePropertiesButton;
+	public void manageProperties(){
+		//TODO: This
+	}
+	@FXML
+	private Button endTurnButton;
+	public void endTurn(){
+		Game.endTurn();
 	}
 }

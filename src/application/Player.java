@@ -60,92 +60,127 @@ public class Player {
 	 * @param num
 	 */
 	public void changePos(int num){
-		this.pos += num;
+		this.pos = (this.pos + num) % 40;
 		switch (pos){
 			case 0:
-				GameController.moveToken(Game.getCurrPlayerNum(), 426, 408);
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 426, 408);
 				break;
 			case 1:
-				GameController.moveToken(Game.getCurrPlayerNum(), x, y);
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 378, 408);
 				break;
 			case 2:
-				GameController.moveToken(Game.getCurrPlayerNum(), x, y);
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 342, 408);
 				break;
 			case 3:
-				GameController.moveToken(Game.getCurrPlayerNum(), x, y);
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 304, 408);
 				break;
 			case 4:
-				GameController.moveToken(Game.getCurrPlayerNum(), x, y);
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 268, 408);
 				break;
 			case 5:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 231, 408);
 				break;
 			case 6:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 193, 408);
 				break;
 			case 7:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 157, 408);
 				break;
 			case 8:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 120, 408);
 				break;
 			case 9:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 83, 408);
 				break;
 			case 10:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 422);
 				break;
 			case 11:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 360);
 				break;
 			case 12:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 323);
 				break;
 			case 13:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 286);
 				break;
 			case 14:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 249);
 				break;
 			case 15:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 212);
 				break;
 			case 16:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 176);
 				break;
 			case 17:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 139);
 				break;
 			case 18:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 103);
 				break;
 			case 19:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 66);
 				break;
 			case 20:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 35, 16);
 				break;
 			case 21:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 83, 6);
 				break;
 			case 22:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 120, 6);
 				break;
 			case 23:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 157, 6);
 				break;
 			case 24:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 193, 6);
 				break;
 			case 25:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 231, 6);
 				break;
 			case 26:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 268, 6);
 				break;
 			case 27:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 304, 6);
 				break;
 			case 28:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 342, 6);
 				break;
 			case 29:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 378, 6);
 				break;
 			case 30:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 426, 18);
 				break;
 			case 31:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 436, 66);
 				break;
 			case 32:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 436, 103);
 				break;
 			case 33:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 436, 139);
 				break;
 			case 34:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 436, 176);
 				break;
 			case 35:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 436, 212);
 				break;
 			case 36:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 436, 249);
 				break;
 			case 37:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 436, 286);
 				break;
 			case 38:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 436, 323);
 				break;
 			case 39:
+				Game.getController().moveToken(Game.getCurrPlayerNum(), 436, 360);
 				break;
 		}
 	}
