@@ -63,7 +63,7 @@ public class Player {
 		this.pos += num;
 		switch (pos){
 			case 0:
-				GameController.moveToken(Game.getCurrPlayerNum(), x, y);
+				GameController.moveToken(Game.getCurrPlayerNum(), 426, 408);
 				break;
 			case 1:
 				break;
