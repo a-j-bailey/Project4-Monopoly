@@ -14,6 +14,8 @@ public class Game {
 	
 	private static int numPlayers;
 	
+	private int currPlayer;
+	
 	public void launchGUI(){
 		Parent root;
 		try {
@@ -58,6 +60,14 @@ public class Game {
 	}
 	
 	/**
+	 * Returns current player.
+	 * @return
+	 */
+	public static Player getCurrPlayer(){
+		
+	}
+	
+	/**
 	 * Returns name of player at index
 	 * @author adambailey
 	 * @param index
@@ -92,6 +102,13 @@ public class Game {
 	 * 
 	 */
 	public static void mortgageProperties(){
+		
+	}
+	
+	/**
+	 * Moves current player to given position.
+	 */
+	public static void moveTo(int newPos){
 		
 	}
 }
