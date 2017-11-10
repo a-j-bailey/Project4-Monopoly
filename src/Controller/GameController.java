@@ -23,7 +23,7 @@ public class GameController implements Initializable{
 				
 		if(playerNum >= 1){
 			this.pp1.setDisable(false);
-			p1_token.setDisable(false);
+			this.p1_token.setDisable(false);
 			this.pp1.setText(Game.getPlayer(0).getPlayerName());
 			this.pp1_money.setText("$" + Game.getPlayer(0).getMoney());
 		}
@@ -68,7 +68,7 @@ public class GameController implements Initializable{
 		System.out.println(" -- Game Initialized -- ");
 	}
 	
-	public static void moveToken(int player, int x, int y){
+	/*public static void moveToken(int player, int x, int y){
 		if (player == 0){
 			p1_token.setX(x);
 			p1_token.setY(y);
@@ -89,7 +89,7 @@ public class GameController implements Initializable{
 			p6_token.setY(y);
 		}
 	}
-	
+	*/
 	@FXML
 	private TitledPane pp1;
 	@FXML
@@ -124,7 +124,7 @@ public class GameController implements Initializable{
 	private Label currentTurn;
 	
 	@FXML
-	private static ImageView p1_token;
+	private ImageView p1_token;
 	@FXML
 	private static ImageView p2_token;
 	@FXML
