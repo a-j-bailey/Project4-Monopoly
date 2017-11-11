@@ -1,6 +1,5 @@
 package Controller;
 
-import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Game;
@@ -10,8 +9,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
+
+import java.net.URL;
 
 public class GameController implements Initializable{
 	
@@ -71,6 +74,9 @@ public class GameController implements Initializable{
 		}
 		
 		this.currentTurn.setText(Game.getPlayer(0).getPlayerName() + "'s Turn");
+		updatePropertyInfo();
+		
+		Game.getLocation(Game.getCurrPlayer().getPos());
 		
 		System.out.println(" -- Game Initialized -- ");
 	}
@@ -108,48 +114,69 @@ public class GameController implements Initializable{
 			endTurnButton.setDisable(false);
 		}
 		managePropertiesButton.setDisable(false);
+		updatePropertyInfo();
 	}
 	
 	public void nextPlayer(){
 		rollDiceButton.setDisable(false);
 		managePropertiesButton.setDisable(true);
 		endTurnButton.setDisable(true);
+		
+		//TODO: THIS WILL BE REMOVED
+		buyProperty.setOpacity(0d);
+		
 		this.currentTurn.setText(Game.getCurrPlayer().getPlayerName() + "'s Turn");
 	}
 	
+	public void updatePropertyInfo(){
+		//Sets pane title based on current player
+		this.propertyInfo.setText(Game.getLocation(Game.getCurrPlayer().getPos()).getPropertyName());
+		
+		//Populates Property Info table with information:
+		this.propertyInfoText.setText("This will contain some nifty info about this property."
+				+ "\nOnce Stephan finishes that part. ;)");
+		if(Game.getLocation(Game.getCurrPlayer().getPos()).getPropertyType().equals("Residential")){
+			this.buyProperty.setOpacity(1);
+		}
+	}
+	
+	//LEFT SIDEBAR
 	@FXML
 	private TitledPane pp1;
 	@FXML
 	private Label pp1_money;
-	
 	@FXML
 	private TitledPane pp2;
 	@FXML
 	private Label pp2_money;
-	
 	@FXML
 	private TitledPane pp3;
 	@FXML
 	private Label pp3_money;
-	
 	@FXML
 	private TitledPane pp4;
 	@FXML
 	private Label pp4_money;
-	
 	@FXML
 	private TitledPane pp5;
 	@FXML
 	private Label pp5_money;
-	
 	@FXML
 	private TitledPane pp6;
 	@FXML
 	private Label pp6_money;
-	
+
+	//RIGHT SIDEBAR
 	@FXML
 	private Label currentTurn;
+	@FXML
+	private TitledPane propertyInfo;
+	@FXML
+	private TextArea propertyInfoText;
+	@FXML 
+	private Button buyProperty;
 	
+	//GAME BOARD
 	@FXML
 	private ImageView p1_token;
 	@FXML
@@ -178,5 +205,6 @@ public class GameController implements Initializable{
 	private Button endTurnButton;
 	public void endTurn(){
 		Game.endTurn();
+		updatePropertyInfo();
 	}
 }

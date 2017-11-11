@@ -13,7 +13,7 @@ import java.util.Scanner;
  * 
  */
 public class Location {
-	
+	private String type;
 	private int position;
 	private String color;
 	private String propertyName;
@@ -28,7 +28,7 @@ public class Location {
 	public Location(String inputLine) {
 		Scanner lnScn = new Scanner(inputLine);
 		lnScn.useDelimiter(",");
-		lnScn.next(); //Gets passed the type String that was used to identify this line in the Game class.
+		this.type = lnScn.next();
 		this.propertyName = lnScn.next();
 		System.out.println("\t" + this.propertyName);
 		lnScn.close();
@@ -54,5 +54,9 @@ public class Location {
 	 */
 	public String getPropertyName() {
 		return propertyName;
+	}
+	
+	public String getPropertyType(){
+		return type;
 	}
 }
