@@ -9,7 +9,6 @@ public class Tax extends Location{
 	 */
 	public Tax(String inputLine) {
 		super(inputLine);
-		this.taxAmount = taxAmount;
 	}
 	/**
 	 * taxes player

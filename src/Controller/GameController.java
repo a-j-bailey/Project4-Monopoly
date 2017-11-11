@@ -18,7 +18,7 @@ public class GameController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 				
-		System.out.println(" -- Initializing Game -- ");
+		System.out.println("\tLoading...");
 		int playerNum = Game.getNumPlayers();
 		System.out.println("\tNum Players: " + playerNum);
 				

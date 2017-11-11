@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Scanner;
+
 /*
  * Expected text file line for locations/properties:
  * 		location,Color,Name,Tax,Price,Mortgage,houseCost,rent,rentHouse1,rentHouse2,rentHouse3,rentHouse4,rentHouse5
@@ -13,9 +15,7 @@ package application;
 public class Location {
 	
 	private int position;
-	
 	private String color;
-	
 	private String propertyName;
 	
 	/**
@@ -25,11 +25,13 @@ public class Location {
 	 * @param name
 	 * Constructor for location
 	 */
-	public Location(int position, String color, String name) {
-		this.position = position;
-		this.color = color;
-		this.propertyName = name;
-		
+	public Location(String inputLine) {
+		Scanner lnScn = new Scanner(inputLine);
+		lnScn.useDelimiter(",");
+		lnScn.next(); //Gets passed the type String that was used to identify this line in the Game class.
+		this.propertyName = lnScn.next();
+		System.out.println("\t" + this.propertyName);
+		lnScn.close();
 	}
 	
 	/**

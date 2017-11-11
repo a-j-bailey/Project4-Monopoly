@@ -1,1 +1,40 @@
-TYPE:	TITLE:	
+Location,Go,
+Residential,Mediterranean Avenue,
+cardLocation,Community Chest,
+Residential,Baltic Avenue,
+Tax,Income Tax,
+Utility,Reading RR,
+Residential,Oriental Avenue
+cardLocation,Chance
+Residential,Vermont Avenue
+Residential,Connecticut Avenue
+Location,JAIL
+Residential,St. Charles Place
+Utility,Electric Company
+Residential,States Avenue
+Residential,Virginia Avenue
+Utility,Pennsylvania RR
+Residential,St. James Place
+cardLocation,Community Chest
+Residential,Tennessee Avenue
+Residential,New York Avenue
+Location,Free Parking
+Residential,Kentucky Avenue
+cardLocation,Chance
+Residential,Indiana Avenue
+Residential,Illinois Avenue
+Utility,B & O RR
+Residential,Atlantic Avenue
+Residential,Ventor Avenue
+Utility,Water Works
+Residential,Marvin Gardens
+Location,Go To Jail
+Residential,Pacific Avenue
+Residential,North Carolina Avenue
+cardLocation,Community Chest
+Residential,Pennsylvania Avenue
+Utility,Short Line
+cardLocation,Chance
+Residential,Park Place
+Tax,Luxury Tax
+Residential,Boardwalk

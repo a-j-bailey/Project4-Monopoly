@@ -33,12 +33,6 @@ public class Property extends Location{
 	
 	private boolean isBought;
 	
-<<<<<<< HEAD
-=======
-
-	
-	
->>>>>>> branch 'current_build' of https://github.com/adamjbailey/Project4-Monopoly.git
 	/**
 	 * Constructor for a Property
 	 * 
@@ -49,15 +43,8 @@ public class Property extends Location{
 	 * @param mortgage
 	 * @param rent
 	 */
-	public Property(int position, String color, String name, int price, int mortgageValue, int rent, boolean isMortgaged, boolean isBought) { //note I skipped the ones that don't apply to Property
-		super(position, color, name);
-		this.value = price;
-		this.rent = rent;
-		this.mortgageValue = mortgageValue;
-		this.isMortgaged = isMortgaged;
-		this.isBought = isBought;
-		
-		
+	public Property(String inputLine) { //note I skipped the ones that don't apply to Property
+		super(inputLine);
 	}
 	
 	

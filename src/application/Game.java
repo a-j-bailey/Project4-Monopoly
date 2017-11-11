@@ -15,12 +15,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Game{
+	final static String chanceCardFile = "ChanceCards.txt";
+	final static String communityChestCardFile = "communityChestCards.txt";
 	private static ArrayList<Player> players = new ArrayList<Player>();
 	private static int numPlayers;
 	private static int currPlayer = 0;
 	private static GameController gc;
 	private static boolean canReroll = false;
 	private static Location[] locations = new Location[40];
+	
+	
 	
 	public void launchGUI(){
 		try {
@@ -54,19 +58,24 @@ public class Game{
 			players.add(thisPlayer);
 		}
 		numPlayers = playerNames.size();
+		System.out.println("\tLoading Properties");
+		loadProperties();
+		System.out.println("\tProperties Loaded"
+				+ "\nLoading Cards");
 		
 		launchGUI();
 	}
 	
 	public static void loadProperties(){
 		try{
-			File propertyFile = new File("/Properties.txt");
+			File propertyFile = new File("Properties.txt");
 			Scanner scnr = new Scanner(propertyFile);
 			int i = 0;
 			while (scnr.hasNextLine()){
+				System.out.print("\t" + i);
 				String nextLine = scnr.nextLine();
 				Scanner lnScn = new Scanner(nextLine);
-				lnScn.useDelimiter(" ");
+				lnScn.useDelimiter(",");
 				String id = lnScn.next();
 				if (id.equals("Residential")){
 					Residential property = new Residential(nextLine);
@@ -77,7 +86,7 @@ public class Game{
 				} else if (id.equals("Utility")){
 					Utility utility = new Utility(nextLine);
 					locations[i] = utility;
-				} else if (id.equals("CardLocation")){
+				} else if (id.equals("cardLocation")){
 					cardLocation cardLocation = new cardLocation(nextLine);
 					locations[i] = cardLocation;
 				} else if (id.equals("Location")){
@@ -88,6 +97,7 @@ public class Game{
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("Couldn't open property file");
+			System.err.println("\t" + e.getMessage());
 		}
 		
 	}
