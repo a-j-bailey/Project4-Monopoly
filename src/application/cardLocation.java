@@ -6,6 +6,6 @@ package application;
  * 
  */
 
-public class cardLocation extends actionSpot{
+public class cardLocation extends Location{
 
 }

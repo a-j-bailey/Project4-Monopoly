@@ -3,6 +3,11 @@ package application;
 public class Utility extends Property{
 	
 	
+	/*
+	 * TODO: methods for rent as the act differently than a normal property. 
+	 */
+	
+	
 	
 	/**
 	 * 
@@ -14,9 +19,17 @@ public class Utility extends Property{
 	 * @param rent
 	 * Constructor for utility properties (including railroads)
 	 */
-	public Utility(int position, String color, String name, int price, int mortgage, int rent) {
-		super(position, color, name, price, mortgage, rent);
-		// TODO Auto-generated constructor stub
+	
+	
+	public Utility(int location, String color, String name, int value, int mortgageValue, int rent, boolean isMortgaged, boolean isBought) {
+		super(location, color, name, value, mortgageValue, rent, isMortgaged, isBought);
+		
+	}
+	/**
+	 * set the rent of the utility
+	 */
+	public void setRent() {
+		//this changes depending on how many are owned and which kind of utility. 
 	}
 	
 	

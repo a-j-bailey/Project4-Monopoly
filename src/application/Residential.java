@@ -45,7 +45,10 @@ public class Residential extends Property{
 	 * @param rentHouse5
 	 * Constructor for Residential Properties
 	 */
-	public Residential(int location, String Color, String name, int tax, int price, int mortgage, int housePrice, int rent, int rentHouse1, int rentHouse2, int rentHouse3, int rentHouse4, int rentHouse5){
+	
+	
+	public Residential(int location, String color, String name, int value, int mortgageValue, int rent, boolean isMortgaged, boolean isBought, int housePrice, int rentHouse1, int rentHouse2, int rentHouse3, int rentHouse4, int rentHouse5){
+		super(location, color, name, value, rent, mortgageValue, isMortgaged, isBought);
 		this.housePrice=housePrice;
 		this.numHouses=0;
 		this.rentHouse1 = rentHouse1;
@@ -95,6 +98,8 @@ public class Residential extends Property{
 	
 	
 	
+	
+	
 	/**
 	 * 
 	 * @return number of houses on property
@@ -109,7 +114,7 @@ public class Residential extends Property{
 	 * @return number of properties in a set
 	 */
 	public int getSetNum() {
-		return setNum
+		return setNum;
 	}
 	
 	/**

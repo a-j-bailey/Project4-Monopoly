@@ -33,12 +33,8 @@ public class Property extends Location{
 	
 	private boolean isBought;
 	
-<<<<<<< HEAD
-	 //We should just have Game read in the txt file values. just make a loop that builds an arrayList or something. 
-=======
+
 	
-	
->>>>>>> branch 'current_build' of https://github.com/adamjbailey/Project4-Monopoly.git
 	
 	/**
 	 * Constructor for a Property
@@ -60,6 +56,17 @@ public class Property extends Location{
 		
 		
 	}
+	
+	
+	/**
+	 * 
+	 * @param isMortgaged
+	 * 
+	 */
+	public void setIsMortgaged(boolean isMortgaged) {
+		this.isMortgaged = isMortgaged;
+	}
+	
 	/**
 	 * 
 	 * @return value of property
