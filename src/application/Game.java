@@ -1,9 +1,12 @@
 package application;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import Controller.GameController;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +20,7 @@ public class Game{
 	private static int currPlayer = 0;
 	private static GameController gc;
 	private static boolean canReroll = false;
+	private static ArrayList<Property> locations;
 	
 	public void launchGUI(){
 		try {
@@ -52,6 +56,31 @@ public class Game{
 		numPlayers = playerNames.size();
 		
 		launchGUI();
+	}
+	
+	public static void loadProperties(){
+		try{
+			File propertyFile = new File("/Properties.txt");
+			Scanner scnr = new Scanner(propertyFile);
+			
+			while (scnr.hasNextLine()){
+				String nextLine = scnr.nextLine();
+				Scanner lnScn = new Scanner(nextLine);
+				String id = lnScn.next();
+				if (id.equals("Residential")){
+					Residential property = Residential(nextLine);
+				} else if (id.equals("Tax")){
+					Tax property = Tax(nextLine);
+				} else if (id.equals("Utility")){
+					Utility utility = Utility(nextLine);
+				} else if (id.equals("CardLocation")){
+					//CardLocation cards
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Couldn't open property file");
+		}
+		
 	}
 	
 	/**
