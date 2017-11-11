@@ -1,14 +1,14 @@
 package application;
 
-public abstract class Tax extends Location{
+public class Tax extends Location{
 	
 	private int taxAmount;
 	
 	/**
 	 * constructs spaces where a tax is imposed
 	 */
-	public void Tax(String name, String color, Int location, int taxAmount) {
-		super(location, color, name);
+	public Tax(String inputLine) {
+		super(inputLine);
 		this.taxAmount = taxAmount;
 	}
 	/**

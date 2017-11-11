@@ -1,15 +1,5 @@
 package application;
 
-
-/*
- * 
- * 
- * 
- * 
- */
-
-
-
 public class Residential extends Property{
 	private int housePrice;
 	
@@ -18,13 +8,9 @@ public class Residential extends Property{
 	private int setNum;
 	
 	private int rentHouse1;
-	
 	private int rentHouse2;
-	
 	private int rentHouse3;
-	
 	private int rentHouse4;
-	
 	private int rentHouse5;
 	
 	

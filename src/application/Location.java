@@ -10,7 +10,6 @@ package application;
  * 
  * 
  */
-
 public class Location {
 	
 	private int position;
