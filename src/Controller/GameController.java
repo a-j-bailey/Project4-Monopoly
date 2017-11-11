@@ -25,6 +25,7 @@ public class GameController implements Initializable{
 		if(playerNum >= 1){
 			this.pp1.setDisable(false);
 			this.p1_token.setDisable(false);
+			this.p1_token.setOpacity(1);
 			this.pp1.setText(Game.getPlayer(0).getPlayerName());
 			this.pp1_money.setText("$" + Game.getPlayer(0).getMoney());
 		}
@@ -32,6 +33,7 @@ public class GameController implements Initializable{
 		if(playerNum >= 2){
 			this.pp2.setDisable(false);
 			this.p2_token.setDisable(false);
+			this.p2_token.setOpacity(1);
 			this.pp2.setText(Game.getPlayer(1).getPlayerName());
 			this.pp2_money.setText("$" + Game.getPlayer(1).getMoney());
 		}
@@ -39,6 +41,7 @@ public class GameController implements Initializable{
 		if(playerNum >= 3){
 			this.pp3.setDisable(false);
 			this.p3_token.setDisable(false);
+			this.p3_token.setOpacity(1);
 			this.pp3.setText(Game.getPlayer(2).getPlayerName());
 			this.pp3_money.setText("$" + Game.getPlayer(2).getMoney());
 		}
@@ -46,6 +49,7 @@ public class GameController implements Initializable{
 		if(playerNum >= 4){
 			this.pp4.setDisable(false);
 			this.p4_token.setDisable(false);
+			this.p4_token.setOpacity(1);
 			this.pp4.setText(Game.getPlayer(3).getPlayerName());
 			this.pp4_money.setText("$" + Game.getPlayer(3).getMoney());
 		}
@@ -53,6 +57,7 @@ public class GameController implements Initializable{
 		if(playerNum >= 5){
 			this.pp5.setDisable(false);
 			this.p5_token.setDisable(false);
+			this.p5_token.setOpacity(1);
 			this.pp5.setText(Game.getPlayer(4).getPlayerName());
 			this.pp5_money.setText("$" + Game.getPlayer(4).getMoney());
 		}
@@ -60,6 +65,7 @@ public class GameController implements Initializable{
 		if(playerNum >= 6){
 			this.pp6.setDisable(false);
 			this.p6_token.setDisable(false);
+			this.p6_token.setOpacity(1);
 			this.pp6.setText(Game.getPlayer(5).getPlayerName());
 			this.pp6_money.setText("$" + Game.getPlayer(5).getMoney());
 		}
@@ -69,6 +75,12 @@ public class GameController implements Initializable{
 		System.out.println(" -- Game Initialized -- ");
 	}
 	
+	/**
+	 * Accepts player number and (x,y) coordinates and moves player to correct position
+	 * @param player
+	 * @param x
+	 * @param y
+	 */
 	public void moveToken(int player, int x, int y){
 		if (player == 0){
 			p1_token.setX(x);
@@ -91,9 +103,18 @@ public class GameController implements Initializable{
 		}
 		//TODO: Update sidepanel and inform user of dice roll and move
 		//TODO: Update side panel with info on current position
-		rollDiceButton.setDisable(true);
+		if (!Game.getCanReroll()){
+			rollDiceButton.setDisable(true);
+			endTurnButton.setDisable(false);
+		}
 		managePropertiesButton.setDisable(false);
-		endTurnButton.setDisable(false);
+	}
+	
+	public void nextPlayer(){
+		rollDiceButton.setDisable(false);
+		managePropertiesButton.setDisable(true);
+		endTurnButton.setDisable(true);
+		this.currentTurn.setText(Game.getCurrPlayer().getPlayerName() + "'s Turn");
 	}
 	
 	@FXML

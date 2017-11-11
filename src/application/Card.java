@@ -5,10 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public abstract class Card {
-	
-	//TODO: Figure out how to represent deck of cards.
-	//      Should each card be a seperate object with a method that handles the action of that card?
-	
 	protected String title;
 	protected int moveTo;
 	protected int fine;

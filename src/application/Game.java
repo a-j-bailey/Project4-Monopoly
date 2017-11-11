@@ -1,9 +1,12 @@
 package application;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import Controller.GameController;
 import javafx.fxml.FXMLLoader;
@@ -13,12 +16,11 @@ import javafx.stage.Stage;
 
 public class Game{
 	private static ArrayList<Player> players = new ArrayList<Player>();
-	
 	private static int numPlayers;
-	
 	private static int currPlayer = 0;
-	
 	private static GameController gc;
+	private static boolean canReroll = false;
+	private static Location[] locations = new Location[40];
 	
 	public void launchGUI(){
 		try {
@@ -26,7 +28,7 @@ public class Game{
 			Parent root;
             root = fxmlLoader.load();
             gc = fxmlLoader.getController();
-            System.out.println(gc);
+            System.out.println("\tgc = " + gc);
             Stage stage = new Stage();
             stage.setTitle("MONOPOLY");
             stage.setScene(new Scene(root, 900, 640));
@@ -51,10 +53,43 @@ public class Game{
 			Player thisPlayer = new Player(name);
 			players.add(thisPlayer);
 		}
-		
 		numPlayers = playerNames.size();
 		
 		launchGUI();
+	}
+	
+	public static void loadProperties(){
+		try{
+			File propertyFile = new File("/Properties.txt");
+			Scanner scnr = new Scanner(propertyFile);
+			int i = 0;
+			while (scnr.hasNextLine()){
+				String nextLine = scnr.nextLine();
+				Scanner lnScn = new Scanner(nextLine);
+				lnScn.useDelimiter(" ");
+				String id = lnScn.next();
+				if (id.equals("Residential")){
+					Residential property = new Residential(nextLine);
+					locations[i] = property;
+				} else if (id.equals("Tax")){
+					Tax tax = new Tax(nextLine);
+					locations[i] = tax;
+				} else if (id.equals("Utility")){
+					Utility utility = new Utility(nextLine);
+					locations[i] = utility;
+				} else if (id.equals("CardLocation")){
+					cardLocation cardLocation = new cardLocation(nextLine);
+					locations[i] = cardLocation;
+				} else if (id.equals("Location")){
+					Location location = new Location(nextLine);
+					locations[i] = location;
+				}
+				i++;
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Couldn't open property file");
+		}
+		
 	}
 	
 	/**
@@ -92,7 +127,12 @@ public class Game{
 		Random rand = new Random();
 		int d1 = rand.nextInt(6)+1;
 		int d2 = rand.nextInt(6)+1;
-		System.out.println("Roll Dice:\tD1: " + d1 + " D2: " + d2);
+		if (d1 == d2){
+			canReroll = true;
+		} else {
+			canReroll = false;
+		}
+		System.out.println("\tRoll Dice:\tD1: " + d1 + " D2: " + d2);
 		players.get(currPlayer).changePos(d1 + d2);
 	}
 	
@@ -138,6 +178,11 @@ public class Game{
 	}
 	
 	public static void endTurn(){
-		System.out.println("");
+		currPlayer = (currPlayer + 1) % numPlayers;
+		gc.nextPlayer();
+	}
+	
+	public static boolean getCanReroll(){
+		return canReroll;
 	}
 }
