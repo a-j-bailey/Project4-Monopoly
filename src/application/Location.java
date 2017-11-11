@@ -3,6 +3,12 @@ package application;
 /*
  * Expected text file line for locations/properties:
  * 		location,Color,Name,Tax,Price,Mortgage,houseCost,rent,rentHouse1,rentHouse2,rentHouse3,rentHouse4,rentHouse5
+ * 
+ * 
+ * 
+ * possibly add a variable for the type of property it is (residential, utility, etc.) to determine which constructor it uses
+ * 
+ * 
  */
 
 public class Location {
