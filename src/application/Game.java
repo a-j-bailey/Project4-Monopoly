@@ -20,7 +20,7 @@ public class Game{
 	private static int currPlayer = 0;
 	private static GameController gc;
 	private static boolean canReroll = false;
-	private static ArrayList<Property> locations;
+	private static ArrayList<Location> locations;
 	
 	public void launchGUI(){
 		try {
@@ -68,14 +68,22 @@ public class Game{
 				Scanner lnScn = new Scanner(nextLine);
 				String id = lnScn.next();
 				if (id.equals("Residential")){
-					Residential property = Residential(nextLine);
+					Residential property = new Residential(nextLine);
+					locations.add(property);
 				} else if (id.equals("Tax")){
-					Tax property = Tax(nextLine);
+					Tax tax = new Tax(nextLine);
+					locations.add(tax);
 				} else if (id.equals("Utility")){
-					Utility utility = Utility(nextLine);
+					Utility utility = new Utility(nextLine);
+					locations.add(utility);
 				} else if (id.equals("CardLocation")){
-					//CardLocation cards
+					cardLocation cardLocation = new cardLocation(nextLine);
+					locations.add(cardLocation);
+				} else if (id.equals("Location")){
+					Location location = new Location(nextLine);
+					locations.add(location);
 				}
+				
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("Couldn't open property file");
