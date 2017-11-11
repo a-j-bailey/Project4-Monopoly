@@ -18,4 +18,6 @@ public class Utility extends Property{
 		super(position, color, name, price, mortgage, rent);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 }
