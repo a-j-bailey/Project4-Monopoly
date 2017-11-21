@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import application.Game;
 import application.Location;
+import application.Property;
 import application.Residential;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -134,7 +135,7 @@ public class GameController implements Initializable{
 		rollDiceButton.setDisable(false);
 		managePropertiesButton.setDisable(true);
 		endTurnButton.setDisable(true);
-		
+		updatePlayerInfo(Game.getCurrPlayerNum() - 1);
 		//TODO: THIS WILL BE REMOVED
 		buyProperty.setOpacity(0);
 		
@@ -156,6 +157,17 @@ public class GameController implements Initializable{
 				this.propertyInfoText.setText("This property is for sale!"
 						+ "\nYou can buy it for " + resLocation.getValue());
 			}
+		}
+	}
+	
+	public void updatePlayerInfo(int pNum){
+		switch (pNum){
+		case 1:
+			this.pp1_money.setText("$" + Game.getPlayer(1).getMoney());
+		case 2:
+			this.pp2_money.setText("$" + Game.getPlayer(2).getMoney());
+		case 3:
+			this.pp3_money.setText("$" + Game.getPlayer(3).getMoney());
 		}
 	}
 	
@@ -194,6 +206,13 @@ public class GameController implements Initializable{
 	private TextArea propertyInfoText;
 	@FXML 
 	private Button buyProperty;
+	public void buyProperty(){
+		Property location = (Property) Game.getLocation(Game.getCurrPlayer().getPos());
+		int propValue = location.getValue();
+		Game.getCurrPlayer().changeMoney(-propValue);
+		System.out.println("\tBought Property:"
+				+ "\n\t$" + Game.getCurrPlayer().getMoney());
+	}
 	
 	//GAME BOARD
 	@FXML

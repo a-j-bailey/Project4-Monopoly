@@ -329,7 +329,7 @@
                               <VBox>
                                  <children>
                                     <TextArea fx:id="propertyInfoText" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
-                                    <Button fx:id="buyProperty" alignment="CENTER" mnemonicParsing="false" opacity="0.0" prefWidth="100.0" text="BUY" textFill="#10c600">
+                                    <Button fx:id="buyProperty" alignment="CENTER" mnemonicParsing="false" onAction="#buyProperty" opacity="0.0" prefWidth="100.0" text="BUY" textFill="#10c600">
                                        <VBox.margin>
                                           <Insets left="50.0" top="10.0" />
                                        </VBox.margin>

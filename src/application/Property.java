@@ -20,17 +20,11 @@ import java.util.Scanner;
 public class Property extends Location{
 	
 	private String type;
-	
 	private int owner;
-	
 	private int value;
-	
 	private int rent;
-	
 	private int mortgageValue;
-		
-	private boolean isMortgaged;
-	
+	private boolean isMortgaged;	
 	private boolean isBought;
 	
 	/**
@@ -98,6 +92,10 @@ public class Property extends Location{
 	 */
 	public boolean isBought() {
 		return isBought;
+	}
+	
+	public String getType(){
+		return type;
 	}
 	
 }
