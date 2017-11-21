@@ -29,10 +29,10 @@
                                     <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#rollDice" prefHeight="40.0" prefWidth="500.0" text="Roll Dice" />
                                     <HBox BorderPane.alignment="CENTER">
                                        <children>
-                                          <MenuButton fx:id="managePropertiesButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#manageProperties" popupSide="TOP" prefHeight="60.0" prefWidth="250.0" text="Manage Properties">
+                                          <MenuButton fx:id="manageProperties" alignment="CENTER" disable="true" mnemonicParsing="false" popupSide="TOP" prefHeight="60.0" prefWidth="250.0" text="Manage Properties">
                                             <items>
-                                              <MenuItem mnemonicParsing="false" text="Build Houses" />
-                                              <MenuItem mnemonicParsing="false" text="Morrgage Properties" />
+                                              <MenuItem fx:id="buildHouses" mnemonicParsing="false" onAction="#buildHouses" text="Build Houses" />
+                                              <MenuItem fx:id="mortgageProperty" mnemonicParsing="false" onAction="#mortgageProperties" text="Mortgage Properties" />
                                             </items>
                                           </MenuButton>
                                           <Button cancelButton="true" disable="true" layoutX="250.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" text="Trade With Players">

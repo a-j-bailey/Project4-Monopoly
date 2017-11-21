@@ -11,22 +11,30 @@ import application.Residential;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 
 public class GameController implements Initializable{
@@ -127,13 +135,13 @@ public class GameController implements Initializable{
 			rollDiceButton.setDisable(true);
 			endTurnButton.setDisable(false);
 		}
-		managePropertiesButton.setDisable(false);
+		manageProperties.setDisable(false);
 		updatePropertyInfo();
 	}
 	
 	public void nextPlayer(){
 		rollDiceButton.setDisable(false);
-		managePropertiesButton.setDisable(true);
+		manageProperties.setDisable(true);
 		endTurnButton.setDisable(true);
 		updatePlayerInfo(Game.getCurrPlayerNum() - 1);
 		//TODO: THIS WILL BE REMOVED
@@ -261,14 +269,36 @@ public class GameController implements Initializable{
 	}
 	
 	@FXML
-	private MenuButton managePropertiesButton;
-	public void manageProperties(){
-		//TODO: This
+	private MenuButton manageProperties;
+	@FXML
+	private MenuItem buildHouses;
+	@FXML
+	private MenuItem mortgageProperties;
+	public void buildHouses(){
+		launchPopUp("Build");
 	}
+	public void mortgageProperties(){
+		launchPopUp("Mortgage");
+	}
+	
 	@FXML
 	private Button endTurnButton;
 	public void endTurn(){
 		Game.endTurn();
 		updatePropertyInfo();
+	}
+	
+	//POPUP:
+	public void launchPopUp(String type){
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/PopUp.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 }
