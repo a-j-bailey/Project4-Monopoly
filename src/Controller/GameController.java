@@ -1,14 +1,26 @@
 package Controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import application.Game;
+import application.Location;
+import application.Residential;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
@@ -77,6 +89,7 @@ public class GameController implements Initializable{
 		updatePropertyInfo();
 		
 		Game.getLocation(Game.getCurrPlayer().getPos());
+		loadGraph();
 		
 		System.out.println(" -- Game Initialized -- ");
 	}
@@ -123,20 +136,26 @@ public class GameController implements Initializable{
 		endTurnButton.setDisable(true);
 		
 		//TODO: THIS WILL BE REMOVED
-		buyProperty.setOpacity(0d);
+		buyProperty.setOpacity(0);
 		
 		this.currentTurn.setText(Game.getCurrPlayer().getPlayerName() + "'s Turn");
 	}
 	
 	public void updatePropertyInfo(){
+		Location thisLocation = Game.getLocation(Game.getCurrPlayer().getPos());
 		//Sets pane title based on current player
-		this.propertyInfo.setText(Game.getLocation(Game.getCurrPlayer().getPos()).getPropertyName());
+		this.propertyInfo.setText(thisLocation.getPropertyName() + ":");
 		
 		//Populates Property Info table with information:
 		this.propertyInfoText.setText("This will contain some nifty info about this property."
 				+ "\nOnce Stephan finishes that part. ;)");
-		if(Game.getLocation(Game.getCurrPlayer().getPos()).getPropertyType().equals("Residential")){
-			this.buyProperty.setOpacity(1);
+		if(thisLocation.getPropertyType().equals("Residential")){
+			Residential resLocation = (Residential) thisLocation;
+			if(!resLocation.isBought()){
+				this.buyProperty.setOpacity(1);
+				this.propertyInfoText.setText("This property is for sale!"
+						+ "\nYou can buy it for " + resLocation.getValue());
+			}
 		}
 	}
 	
@@ -177,6 +196,32 @@ public class GameController implements Initializable{
 	private Button buyProperty;
 	
 	//GAME BOARD
+	@FXML
+	private TabPane windowTab;
+	@FXML
+	private StackedBarChart<String, Number> leaderBoard;
+	final CategoryAxis xAxis = new CategoryAxis();
+	final NumberAxis yAxis = new NumberAxis();
+	private XYChart.Series<String, Number> money = new XYChart.Series<>();
+	public void loadGraph(){
+		int numPlayers = Game.getNumPlayers();
+		//MONEY
+		money.setName("Money");
+		for(int i=0; i<numPlayers; i++){
+			money.getData().add(new XYChart.Data<String, Number>(
+					Game.getPlayer(i).getPlayerName(),
+					Game.getPlayer(i).getMoney()));
+		}
+		leaderBoard.getData().add(money);
+		System.out.println("\tLoaded Graph");
+	}
+	public void updateGraph(){
+		//Game.getCurrPlayer().changeMoney(100);
+		money.getData().set(Game.getCurrPlayerNum(), new XYChart.Data<String, Number>(
+				Game.getCurrPlayer().getPlayerName(),
+				Game.getCurrPlayer().getMoney()));
+	}
+	
 	@FXML
 	private ImageView p1_token;
 	@FXML

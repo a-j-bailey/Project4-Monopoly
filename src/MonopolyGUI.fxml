@@ -16,7 +16,7 @@
 
 <BorderPane prefHeight="640.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameController">
    <center>
-      <TabPane prefHeight="600.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane fx:id="windowTab" prefHeight="600.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="Game">
             <content>
@@ -91,18 +91,18 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Leader Board">
+          <Tab onSelectionChanged="#updateGraph" text="Leader Board">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
-                        <BarChart fx:id="leaderBoard" prefHeight="570.0">
+                        <StackedBarChart fx:id="leaderBoard" animated="false" layoutX="-1.0" prefHeight="567.0" prefWidth="500.0" title="Player Worth:">
                           <xAxis>
                             <CategoryAxis label="Player" side="BOTTOM" />
                           </xAxis>
                           <yAxis>
-                            <NumberAxis label="Worth" side="LEFT" upperBound="10000.0" />
+                            <NumberAxis label="Worth" side="LEFT" tickUnit="100.0" upperBound="10000.0" />
                           </yAxis>
-                        </BarChart>
+                        </StackedBarChart>
                      </children></AnchorPane>
             </content>
           </Tab>

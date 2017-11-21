@@ -220,7 +220,7 @@ public class Player {
 	 * Adds a specific amount of money to player's money
 	 * @param amount
 	 */
-	public void changeMoney(int amount){
+	public void changeMoney(double amount){
 		this.money += amount;
 	}
 	

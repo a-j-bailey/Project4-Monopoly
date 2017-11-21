@@ -154,14 +154,15 @@ public class Game{
 	 * 
 	 */
 	public static void mortgageProperties(){
-		
+		//TODO: this
 	}
 	
 	/**
 	 * Moves current player to given position.
 	 */
 	public static void moveTo(int newPos){
-		
+		//TODO: This (for go to jail or cards that say
+		// "go to nearest RR" or "Take a walk on Boardwalk" 
 	}
 	
 	/**
