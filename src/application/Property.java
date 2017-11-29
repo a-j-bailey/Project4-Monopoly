@@ -19,10 +19,10 @@ import java.util.Scanner;
 
 public class Property extends Location{
 	
-	private String type;
+
 	private int owner;
 	private int value;
-	private int rent;
+	
 	private int mortgageValue;
 	private boolean isMortgaged;	
 	private boolean isBought;
@@ -37,14 +37,36 @@ public class Property extends Location{
 	 * @param mortgage
 	 * @param rent
 	 */
-	public Property(String inputLine) { //note I skipped the ones that don't apply to Property
+	public Property(String inputLine) {
 		super(inputLine);
+		
+		this.isMortgaged = false;
+		this.isBought = false;
+		this.owner = 0;
+		
+		Scanner lnScn = new Scanner(inputLine);
+		lnScn.useDelimiter(",");
+		
+		
+		
+		lnScn.next();
+		lnScn.next();			//These three are taken care of in super
+		lnScn.next();
+		
+		lnScn.next(); 			//Skip over Tax space
+		
+		this.value = lnScn.nextInt();
+		this.mortgageValue = lnScn.nextInt();
+		
+		
+		lnScn.close();
 	}
 	
 	
 	/**
 	 * 
-	 * @param isMortgaged
+	 * @param isMortgaged 
+	 * Changes isMortgage status
 	 * 
 	 */
 	public void setIsMortgaged(boolean isMortgaged) {
@@ -59,19 +81,8 @@ public class Property extends Location{
 		return value;
 	}
 	
-	public void setRent(int newRent) {
-		this.rent = newRent;
-	}
 	
 	
-	/**
-	 * 
-	 * @return rent value of property
-	 */
-	
-	public int getRent() {
-		return rent;
-	}
 	/**
 	 * 
 	 * @return mortgage Value
@@ -94,8 +105,16 @@ public class Property extends Location{
 		return isBought;
 	}
 	
-	public String getType(){
-		return type;
+	
+	
+	public void changeOwner(int newOwner) {
+		this.owner = newOwner;
+		if (!(owner == 0)) {
+			this.isBought = true;					
+		}
+		else {
+			this.isBought = false;
+		}
 	}
 	
 }

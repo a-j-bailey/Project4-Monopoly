@@ -1,12 +1,14 @@
 package application;
 
+import java.util.Scanner;
+
 public class Residential extends Property{
-	private int housePrice;
+	private int houseCost;
 	
 	private int numHouses;
 	
-	private int setNum;
-	
+	private int numSet;
+	private int rent;
 	private int rentHouse1;
 	private int rentHouse2;
 	private int rentHouse3;
@@ -35,6 +37,36 @@ public class Residential extends Property{
 	
 	public Residential(String inputLine){
 		super(inputLine);
+		
+		Scanner lnScn = new Scanner(inputLine);
+		lnScn.useDelimiter(",");
+		
+		
+		
+		lnScn.next();
+		lnScn.next();			//These three are taken care of in super
+		lnScn.next();
+		
+		lnScn.next(); 			//Skip over Tax space
+		
+		lnScn.nextInt();		//These two are taken care of in super
+		lnScn.nextInt();
+		
+		
+		this.houseCost = lnScn.nextInt();
+		this.rent = lnScn.nextInt();
+		this.rentHouse1 = lnScn.nextInt();
+		this.rentHouse2 = lnScn.nextInt();
+		this.rentHouse3 = lnScn.nextInt();
+		this.rentHouse4 = lnScn.nextInt();
+		this.rentHouse5 = lnScn.nextInt();
+		this.numSet = lnScn.nextInt();
+		
+		numHouses = 0;
+		
+		
+		
+		lnScn.close();
 	}
 	
 	/**
@@ -66,10 +98,7 @@ public class Residential extends Property{
 			//return some error or something that no more houses can be built
 		}
 		
-		
-		
-		
-		
+	
 		
 	}
 	
@@ -85,13 +114,36 @@ public class Residential extends Property{
 		return this.numHouses;
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param newRent Changes rent of the property 
+	 */	
+	public void setRent(int newRent) {
+		this.rent = newRent;
+	}
+	
+	
+	/**
+	 * 
+	 * @return rent 
+	 */
+	public int getRent() {
+		return this.rent;
+	}
+	
+	
+	public int getHouseCost() {
+		return this.houseCost;
+	}
+	
 	
 	/**
 	 * 
 	 * @return number of properties in a set
 	 */
-	public int getSetNum() {
-		return setNum;
+	public int getNumSet() {
+		return numSet;
 	}
 	
 	/**
