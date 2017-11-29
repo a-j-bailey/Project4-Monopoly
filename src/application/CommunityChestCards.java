@@ -10,6 +10,10 @@ public class CommunityChestCards extends Card{
 		
 	}
 	
+	
+	/**
+	 * Does the specified action of a card 
+	 */
 	@Override
 	public void cardAction() {
 		if (moveTo > -1){
