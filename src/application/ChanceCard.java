@@ -1,8 +1,10 @@
 package application;
 
 public abstract class ChanceCard extends Card{
-
-	public ChanceCard(String cardFile) {
+	
+	final static String cardFile = "ChanceCards.txt";
+	
+	public ChanceCard() {
 		super(cardFile);
 	}
 	

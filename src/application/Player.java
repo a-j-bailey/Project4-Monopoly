@@ -6,8 +6,7 @@ import java.util.Scanner;
 import Controller.GameController;
 
 public class Player {
-	private ArrayList<Residential> residentialProperties;
-	private ArrayList<Utility> utilityProperties;
+	private ArrayList<Property> playerProperties;
 	private int money = 1500;	
 	private int numGetOutOfJailCards = 0;
 	private String playerName;
@@ -220,8 +219,10 @@ public class Player {
 	 * Adds a specific amount of money to player's money
 	 * @param amount
 	 */
-	public void changeMoney(int amount){
+	public void changeMoney(double amount){
+		System.out.println("\tChange Money: " + amount);
 		this.money += amount;
+		System.out.println("\t" + this.money);
 	}
 	
 	//Returns First Name Only
@@ -238,8 +239,11 @@ public class Player {
 	 */
 	public int getNumHouses(){
 		int totalHouses = 0;
-		for(Residential property : residentialProperties){
-			totalHouses += property.getNumHouses();
+		for(Property property : playerProperties){
+			if (property.getType().equals("Residential")){
+				Residential resProperty = (Residential) property;
+				totalHouses += resProperty.getNumHouses();
+			}
 		}
 		return totalHouses;
 	}
@@ -250,10 +254,14 @@ public class Player {
 	 */
 	public int getNumHotels(){
 		int numHotels = 0;
-		for(Residential property : residentialProperties){
-			if(property.getNumHouses() == 5){
-				numHotels++;
+		for(Property property : playerProperties){
+			if (property.getType().equals("Residential")){
+				Residential resProperty = (Residential) property;
+				if(resProperty.getNumHouses() == 5){
+					numHotels++;
+				}
 			}
+			
 		}
 		return numHotels;
 	}
@@ -271,5 +279,9 @@ public class Player {
 	 */
 	public void changeIncarceration(){
 		this.isIncarcerated = !this.isIncarcerated;
+	}
+	
+	public ArrayList<Property> getProperties(){
+		return this.playerProperties;
 	}
 }

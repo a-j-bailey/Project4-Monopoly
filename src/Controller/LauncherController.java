@@ -88,6 +88,8 @@ public class LauncherController implements Initializable{
 		Stage stage = (Stage) play.getScene().getWindow();
 		stage.close();
 		
+		System.out.println(" -- Initializing Game -- ");
+		
 		new Game(playerNames);
 	}
 }

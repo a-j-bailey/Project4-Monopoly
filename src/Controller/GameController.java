@@ -1,24 +1,48 @@
 package Controller;
 
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import application.Game;
+import application.Location;
+import application.Property;
+import application.Residential;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class GameController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 				
-		System.out.println(" -- Initializing Game -- ");
+		System.out.println("\tLoading...");
 		int playerNum = Game.getNumPlayers();
 		System.out.println("\tNum Players: " + playerNum);
 				
@@ -71,6 +95,10 @@ public class GameController implements Initializable{
 		}
 		
 		this.currentTurn.setText(Game.getPlayer(0).getPlayerName() + "'s Turn");
+		updatePropertyInfo();
+		
+		Game.getLocation(Game.getCurrPlayer().getPos());
+		loadGraph();
 		
 		System.out.println(" -- Game Initialized -- ");
 	}
@@ -107,48 +135,119 @@ public class GameController implements Initializable{
 			rollDiceButton.setDisable(true);
 			endTurnButton.setDisable(false);
 		}
-		managePropertiesButton.setDisable(false);
+		manageProperties.setDisable(false);
+		updatePropertyInfo();
 	}
 	
 	public void nextPlayer(){
 		rollDiceButton.setDisable(false);
-		managePropertiesButton.setDisable(true);
+		manageProperties.setDisable(true);
 		endTurnButton.setDisable(true);
+		updatePlayerInfo(Game.getCurrPlayerNum() - 1);
+		//TODO: THIS WILL BE REMOVED
+		buyProperty.setOpacity(0);
+		
 		this.currentTurn.setText(Game.getCurrPlayer().getPlayerName() + "'s Turn");
 	}
 	
+	public void updatePropertyInfo(){
+		Location thisLocation = Game.getLocation(Game.getCurrPlayer().getPos());
+		//Sets pane title based on current player
+		this.propertyInfo.setText(thisLocation.getPropertyName() + ":");
+		
+		//Populates Property Info table with information:
+		this.propertyInfoText.setText("This will contain some nifty info about this property."
+				+ "\nOnce Stephan finishes that part. ;)");
+		if(thisLocation.getPropertyType().equals("Residential")){
+			Residential resLocation = (Residential) thisLocation;
+			if(!resLocation.isBought()){
+				this.buyProperty.setOpacity(1);
+				this.propertyInfoText.setText("This property is for sale!"
+						+ "\nYou can buy it for " + resLocation.getValue());
+			}
+		}
+	}
+	
+	public void updatePlayerInfo(int pNum){
+		switch (pNum){
+		case 1:
+			this.pp1_money.setText("$" + Game.getPlayer(1).getMoney());
+		case 2:
+			this.pp2_money.setText("$" + Game.getPlayer(2).getMoney());
+		case 3:
+			this.pp3_money.setText("$" + Game.getPlayer(3).getMoney());
+		}
+	}
+	
+	//LEFT SIDEBAR
 	@FXML
 	private TitledPane pp1;
 	@FXML
 	private Label pp1_money;
-	
 	@FXML
 	private TitledPane pp2;
 	@FXML
 	private Label pp2_money;
-	
 	@FXML
 	private TitledPane pp3;
 	@FXML
 	private Label pp3_money;
-	
 	@FXML
 	private TitledPane pp4;
 	@FXML
 	private Label pp4_money;
-	
 	@FXML
 	private TitledPane pp5;
 	@FXML
 	private Label pp5_money;
-	
 	@FXML
 	private TitledPane pp6;
 	@FXML
 	private Label pp6_money;
-	
+
+	//RIGHT SIDEBAR
 	@FXML
 	private Label currentTurn;
+	@FXML
+	private TitledPane propertyInfo;
+	@FXML
+	private TextArea propertyInfoText;
+	@FXML 
+	private Button buyProperty;
+	public void buyProperty(){
+		Property location = (Property) Game.getLocation(Game.getCurrPlayer().getPos());
+		int propValue = location.getValue();
+		Game.getCurrPlayer().changeMoney(-propValue);
+		System.out.println("\tBought Property:"
+				+ "\n\t$" + Game.getCurrPlayer().getMoney());
+	}
+	
+	//GAME BOARD
+	@FXML
+	private TabPane windowTab;
+	@FXML
+	private StackedBarChart<String, Number> leaderBoard;
+	final CategoryAxis xAxis = new CategoryAxis();
+	final NumberAxis yAxis = new NumberAxis();
+	private XYChart.Series<String, Number> money = new XYChart.Series<>();
+	public void loadGraph(){
+		int numPlayers = Game.getNumPlayers();
+		//MONEY
+		money.setName("Money");
+		for(int i=0; i<numPlayers; i++){
+			money.getData().add(new XYChart.Data<String, Number>(
+					Game.getPlayer(i).getPlayerName(),
+					Game.getPlayer(i).getMoney()));
+		}
+		leaderBoard.getData().add(money);
+		System.out.println("\tLoaded Graph");
+	}
+	public void updateGraph(){
+		//Game.getCurrPlayer().changeMoney(100);
+		money.getData().set(Game.getCurrPlayerNum(), new XYChart.Data<String, Number>(
+				Game.getCurrPlayer().getPlayerName(),
+				Game.getCurrPlayer().getMoney()));
+	}
 	
 	@FXML
 	private ImageView p1_token;
@@ -170,13 +269,36 @@ public class GameController implements Initializable{
 	}
 	
 	@FXML
-	private MenuButton managePropertiesButton;
-	public void manageProperties(){
-		//TODO: This
+	private MenuButton manageProperties;
+	@FXML
+	private MenuItem buildHouses;
+	@FXML
+	private MenuItem mortgageProperties;
+	public void buildHouses(){
+		launchPopUp("Build");
 	}
+	public void mortgageProperties(){
+		launchPopUp("Mortgage");
+	}
+	
 	@FXML
 	private Button endTurnButton;
 	public void endTurn(){
 		Game.endTurn();
+		updatePropertyInfo();
+	}
+	
+	//POPUP:
+	public void launchPopUp(String type){
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/PopUp.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 }

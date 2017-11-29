@@ -16,7 +16,7 @@
 
 <BorderPane prefHeight="640.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GameController">
    <center>
-      <TabPane prefHeight="600.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane fx:id="windowTab" prefHeight="600.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="Game">
             <content>
@@ -29,10 +29,10 @@
                                     <Button fx:id="rollDiceButton" mnemonicParsing="false" onAction="#rollDice" prefHeight="40.0" prefWidth="500.0" text="Roll Dice" />
                                     <HBox BorderPane.alignment="CENTER">
                                        <children>
-                                          <MenuButton fx:id="managePropertiesButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#manageProperties" popupSide="TOP" prefHeight="60.0" prefWidth="250.0" text="Manage Properties">
+                                          <MenuButton fx:id="manageProperties" alignment="CENTER" disable="true" mnemonicParsing="false" popupSide="TOP" prefHeight="60.0" prefWidth="250.0" text="Manage Properties">
                                             <items>
-                                              <MenuItem mnemonicParsing="false" text="Build Houses" />
-                                              <MenuItem mnemonicParsing="false" text="Morrgage Properties" />
+                                              <MenuItem fx:id="buildHouses" mnemonicParsing="false" onAction="#buildHouses" text="Build Houses" />
+                                              <MenuItem fx:id="mortgageProperty" mnemonicParsing="false" onAction="#mortgageProperties" text="Mortgage Properties" />
                                             </items>
                                           </MenuButton>
                                           <Button cancelButton="true" disable="true" layoutX="250.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="250.0" text="Trade With Players">
@@ -91,27 +91,18 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Leader Board">
+          <Tab onSelectionChanged="#updateGraph" text="Leader Board">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
-                        <SplitPane dividerPositions="0.7" orientation="VERTICAL" prefHeight="570.0" prefWidth="500.0">
-                          <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0">
-                                 <children>
-                                    <BarChart>
-                                      <xAxis>
-                                        <CategoryAxis label="Player" side="BOTTOM" />
-                                      </xAxis>
-                                      <yAxis>
-                                        <NumberAxis label="Worth" side="LEFT" upperBound="10000.0" />
-                                      </yAxis>
-                                    </BarChart>
-                                 </children>
-                              </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="431.0" />
-                          </items>
-                        </SplitPane>
+                        <StackedBarChart fx:id="leaderBoard" animated="false" layoutX="-1.0" prefHeight="567.0" prefWidth="500.0" title="Player Worth:">
+                          <xAxis>
+                            <CategoryAxis label="Player" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis label="Worth" side="LEFT" tickUnit="100.0" upperBound="10000.0" />
+                          </yAxis>
+                        </StackedBarChart>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -324,21 +315,46 @@
    <right>
       <AnchorPane>
          <children>
-            <Label fx:id="currentTurn" alignment="CENTER" prefHeight="50.0" prefWidth="200.0" text="_____'s Turn">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Separator layoutY="49.0" prefWidth="200.0" />
-            <Label fx:id="currentTurn1" layoutY="500.0" prefHeight="50.0" prefWidth="200.0" text="Alerts:">
-               <font>
-                  <Font size="12.0" />
-               </font>
-               <padding>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </padding>
-            </Label>
-            <Button fx:id="endTurnButton" disable="true" layoutX="25.0" layoutY="559.0" mnemonicParsing="false" onAction="#endTurn" prefWidth="150.0" text="End Turn" textFill="RED" />
+            <VBox layoutX="-1.0" maxWidth="200.0" prefHeight="600.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="currentTurn" alignment="CENTER" layoutX="1.0" prefHeight="50.0" prefWidth="200.0" text="_____'s Turn">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TitledPane fx:id="propertyInfo" animated="false" collapsible="false" layoutX="-1.0" layoutY="50.0" prefWidth="200.0" text="Property Info">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="200.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <TextArea fx:id="propertyInfoText" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+                                    <Button fx:id="buyProperty" alignment="CENTER" mnemonicParsing="false" onAction="#buyProperty" opacity="0.0" prefWidth="100.0" text="BUY" textFill="#10c600">
+                                       <VBox.margin>
+                                          <Insets left="50.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <Label fx:id="currentTurn1" disable="true" layoutX="1.0" layoutY="500.0" prefHeight="50.0" prefWidth="200.0" text="No Alerts." textFill="RED">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="endTurnButton" disable="true" layoutX="25.0" layoutY="559.0" mnemonicParsing="false" onAction="#endTurn" prefWidth="150.0" text="End Turn" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </right>

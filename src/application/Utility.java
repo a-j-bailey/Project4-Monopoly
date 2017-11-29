@@ -21,8 +21,8 @@ public class Utility extends Property{
 	 */
 	
 	
-	public Utility(int location, String color, String name, int value, int mortgageValue, int rent, boolean isMortgaged, boolean isBought) {
-		super(location, color, name, value, mortgageValue, rent, isMortgaged, isBought);
+	public Utility(String inputLine) {
+		super(inputLine);
 		
 	}
 	/**
