@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Scanner;
+
 public class Tax extends Location{
 	
 	private int taxAmount;
@@ -9,12 +11,28 @@ public class Tax extends Location{
 	 */
 	public Tax(String inputLine) {
 		super(inputLine);
+		
+		Scanner lnScn = new Scanner(inputLine);
+		lnScn.useDelimiter(",");
+		lnScn.next();
+		lnScn.next();
+		lnScn.next();
+		this.taxAmount = lnScn.nextInt();
+		
+		lnScn.close();
+		
 	}
+	
+	
 	/**
-	 * taxes player
+	 * 
+	 * @return taxAmount
 	 */
-	public void taxPlayer() {
-		//subtract tax amount from player's cash. 
+	public int getTaxAmount() {
+		return this.taxAmount;
 	}
+	
+	
+	
 	
 }
