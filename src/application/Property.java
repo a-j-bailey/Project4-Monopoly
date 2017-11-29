@@ -47,8 +47,6 @@ public class Property extends Location{
 		Scanner lnScn = new Scanner(inputLine);
 		lnScn.useDelimiter(",");
 		
-		
-		
 		lnScn.next();
 		lnScn.next();			//These three are taken care of in super
 		lnScn.next();
