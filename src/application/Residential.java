@@ -49,8 +49,8 @@ public class Residential extends Property{
 		
 		lnScn.next(); 			//Skip over Tax space
 		
-		lnScn.nextInt();		//These two are taken care of in super
-		lnScn.nextInt();
+		lnScn.next();		//These two are taken care of in super
+		lnScn.next();
 		
 		
 		this.houseCost = lnScn.nextInt();
@@ -118,7 +118,8 @@ public class Residential extends Property{
 	 * 
 	 * 
 	 * @param newRent Changes rent of the property 
-	 */	
+	 */
+	
 	public void setRent(int newRent) {
 		this.rent = newRent;
 	}

@@ -106,7 +106,17 @@ public class Property extends Location{
 	}
 	
 	
+	/**
+	 * returns owners
+	 */
+	public int getOwner() {
+		return owner;
+	}
 	
+	/**
+	 * 
+	 * @param change owner to input integer
+	 */
 	public void changeOwner(int newOwner) {
 		this.owner = newOwner;
 		if (!(owner == 0)) {
