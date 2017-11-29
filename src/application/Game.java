@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Stack;
 
 import Controller.GameController;
 import javafx.fxml.FXMLLoader;
@@ -151,12 +152,34 @@ public class Game{
 	
 	/**
 	 * Is triggered by player selecting "Mortgage Properties" from the action menu.
+	 * takes Stack of locations as input
 	 * 
 	 */
-	public static void mortgageProperties(){
+	public static void mortgageProperties(Stack<Integer> propertiesToDo){
 		//TODO: this
+		//Takes in a stack of the property locations and mortgages/unmortgages them. 
+
+		while(!propertiesToDo.isEmpty()) {
+			if(((Property) locations.get(propertiesToDo.peek())).isMortgaged()) {  //Look, I have no idea what the (Property) thing is at the bigging of this if statement. It fixed my problems though
+				((Property) locations.get(propertiesToDo.peek())).setIsMortgaged(false);		//I'm pretty sure its specifying the location type
+				int temp = ((Property) locations.get(propertiesToDo.pop())).getMortgageValue();
+				getCurrPlayer().changeMoney((-1)*temp);
+
+
+			}
+			else if(!((Property) locations.get(propertiesToDo.peek())).isMortgaged()) {  
+				((Property) locations.get(propertiesToDo.peek())).setIsMortgaged(true);	
+				int temp = ((Property) locations.get(propertiesToDo.pop())).getMortgageValue();
+				getCurrPlayer().changeMoney(temp);
+
+
+			}
+		}
+
+
+
 	}
-	
+
 	/**
 	 * Moves current player to given position.
 	 */

@@ -1,15 +1,17 @@
 package application;
 
-public abstract class ChanceCard extends Card{
+public class CommunityChestCards extends Card{
 	
-	final static String cardFile = "ChanceCards.txt";
 	
-	public ChanceCard() {
+	final static String cardFile = "CommunityChestCards.txt";
+
+	public CommunityChestCards(String cardFile) {
 		super(cardFile);
+		
 	}
 	
 	@Override
-	public void cardAction(){
+	public void cardAction() {
 		if (moveTo > -1){
 			Game.moveTo(moveTo);
 		}
@@ -21,33 +23,35 @@ public abstract class ChanceCard extends Card{
 			Player currPlayer = Game.getCurrPlayer();
 			currPlayer.changeMoney(get);
 		}
+		
 		if (special){
 			switch (specialNum){
-				case 1: 
-					//move player to nearest RR
-					//RRs @: 5, 15, 25, 35
-					break;
-				case 2:
+				
+				case 1:
 					Game.getCurrPlayer().addGetOutOfJailFreeCard();						//Get out of jail free
 					break;
-				case 3:
-					Game.getCurrPlayer().changePos(-3);									//Go back three spaces
-					break;
-				case 4:
+				case 2:
 					Game.goToJailSucker();												//Go to jail
 					break;	
+				case 3:
+					Game.manageAllPlayersMoney(-50);									//Take $50 from each player
+					break;
+				case 4:
+					Game.manageAllPlayersMoney(-10);									//Take $10 from each player
+					break;
 				case 5:
 					int numHouses = Game.getCurrPlayer().getNumHouses();				//For each house/hotel pay...
 					int numHotels = Game.getCurrPlayer().getNumHotels();
-					Game.getCurrPlayer().changeMoney((-1)*100*numHotels - 25*numHouses);
+					Game.getCurrPlayer().changeMoney((-1)*115*numHotels - 40*numHouses);
 					break;
-				case 6:
-					Game.getCurrPlayer().setPos(5);										//report to reading railroad
-					break;
-				case 7:
-					Game.manageAllPlayersMoney(50);										//Pay each player $50
-					break;
+					
 			}
 		}
+		
 	}
+	
+	
+	
+	
+
 }
