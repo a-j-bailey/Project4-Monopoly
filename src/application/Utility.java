@@ -25,17 +25,37 @@ public class Utility extends Property{
 	public Utility(String inputLine) {
 		super(inputLine);
 		
+
 	}
 	/**
 	 * set the rent of the utility
 	 */
-	public int calcRent(String type, int diceRoll, int numTypeOwned) {
-		 
-		//if(type.equals(anObject))
-		
-		return 0;
-		//return rent;
+
+	public int calcUtilityRent(int diceRoll, int numTypeOwned) {
+
+
+		if (numTypeOwned == 2) {
+			return diceRoll * 10;
+		}
+		else {
+			return diceRoll * 4;
+		}
+
+
 	}
-	
-	
+
+	public int calcRailroadRent (int numTypeOwned) {
+		if(numTypeOwned == 1) {
+			return 25;
+		}
+		if(numTypeOwned == 2) {
+			return 50;
+		}
+		if(numTypeOwned == 3) {
+			return 100;
+		}
+		else {
+			return 200;
+		}
+	}
 }
