@@ -1,13 +1,10 @@
 package application;
 
-import java.util.Scanner;
 
 public class Utility extends Property{
 	
 	
-	/*
-	 * TODO: methods for rent as the act differently than a normal property. 
-	 */
+	
 	
 	
 	/**
@@ -38,7 +35,7 @@ public class Utility extends Property{
 			return diceRoll * 10;
 		}
 		else {
-			return diceRoll * 4;
+			return diceRoll * 4;				//If only one is owned do this
 		}
 
 
@@ -54,7 +51,7 @@ public class Utility extends Property{
 		if(numTypeOwned == 3) {
 			return 100;
 		}
-		else {
+		else {								//If four are owned
 			return 200;
 		}
 	}
