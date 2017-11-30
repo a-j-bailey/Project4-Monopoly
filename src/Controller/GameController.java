@@ -1,50 +1,34 @@
 package Controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import application.Game;
 import application.Location;
 import application.Property;
-import application.Residential;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
-import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 
 public class GameController implements Initializable{
@@ -139,8 +123,6 @@ public class GameController implements Initializable{
 			p6_token.setX(x);
 			p6_token.setY(y);
 		}
-		//TODO: Update sidepanel and inform user of dice roll and move
-		//TODO: Update side panel with info on current position
 		if (!Game.getCanReroll()){
 			rollDiceButton.setDisable(true);
 			endTurnButton.setDisable(false);
@@ -181,11 +163,16 @@ public class GameController implements Initializable{
 	public TextFlow updatePlayerPropertyList(int pNum){
 		TextFlow list = new TextFlow();
 		pNum--;
-		for(Property property : Game.getPlayer(pNum).getProperties()){
-			Text propName = new Text("\t" + property.getPropertyName() + "\n");
-			System.out.println("\t" + property.getPropertyName());
-			propName.setFill(Color.web(property.getColor()));
-			list.getChildren().add(propName);
+		
+		for (int i=1; i<=Game.getPlayer(pNum).getProperties().size(); i++){
+			for(Property property : Game.getPlayer(pNum).getProperties().get(i)){
+				Text propName = new Text("\t" + property.getPropertyName() + "\n");
+				System.out.println("\t" + property.getPropertyName());
+				propName.setFill(Color.web(property.getColor()));
+				list.getChildren().add(propName);
+			}
+			Text blankLine = new Text("\n");
+			list.getChildren().add(blankLine);
 		}
 		
 		return list;

@@ -26,7 +26,6 @@ public class Game{
 	private static boolean canReroll = false;
 	private static HashMap<Integer, Location> locations = new HashMap<Integer, Location>();
 	
-	
 	/**
 	 * lanches the GUI
 	 */
@@ -167,7 +166,6 @@ public class Game{
 	 * 
 	 */
 	public static void mortgageProperties(Stack<Integer> propertiesToDo){
-		/ 
 
 		while(!propertiesToDo.isEmpty()) {
 			if(((Property) locations.get(propertiesToDo.peek())).isMortgaged()) {  //Look, I have no idea what the (Property) thing is at the bigging of this if statement. It fixed my problems though

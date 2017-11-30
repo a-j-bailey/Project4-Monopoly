@@ -123,5 +123,4 @@ public class Property extends Location{
 			this.isBought = false;
 		}
 	}
-	
 }

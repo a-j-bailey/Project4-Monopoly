@@ -1,12 +1,14 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 import Controller.GameController;
 
 public class Player {
-	private ArrayList<Property> playerProperties;
+	private HashMap<Integer, ArrayList<Property>> playerProperties;
 	private int money = 1500;	
 	private int numGetOutOfJailCards = 0;
 	private String playerName;
@@ -19,7 +21,10 @@ public class Player {
 	 */
 	public Player(String name){
 		this.playerName = name;
-		this.playerProperties = new ArrayList<>();
+		this.playerProperties = new HashMap<>();
+		for(int i=1; i<11; i++){
+			this.playerProperties.put(i, new ArrayList<Property>());
+		}
 	}
 	
 	/**
@@ -286,14 +291,27 @@ public class Player {
 	 * Adds properties 
 	 */
 	public void addProperty(Property prop){
-		this.playerProperties.add(prop);
+		if(prop.getPropertyType().equals("Utility")){
+			String name = prop.getPropertyName();
+			Scanner nameScn = new Scanner(name);
+			name = nameScn.next();
+			if(name.equals("Electric") || name.equals("Water")){
+				playerProperties.get(10).add(prop);
+			} else {
+				playerProperties.get(9).add(prop);
+			}
+			nameScn.close();
+		} else {
+			Residential resProp = (Residential) prop;
+			playerProperties.get(resProp.getNumSet()).add(resProp);
+		}
 	}
 	
 	public void removeProperty(){
-		
+		//TODO;
 	}
 	
-	public ArrayList<Property> getProperties(){
+	public HashMap<Integer, ArrayList<Property>> getProperties(){
 		return this.playerProperties;
 	}
 }
