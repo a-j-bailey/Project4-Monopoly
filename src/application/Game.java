@@ -145,8 +145,8 @@ public class Game{
 		} else {
 			canReroll = false;
 		}
-		System.out.println("\tRoll Dice:\tD1: " + d1 + " D2: " + d2);
 		players.get(currPlayer).changePos(d1 + d2);
+		System.out.println(Game.getCurrPlayer().getPos());
 	}
 	
 	/**

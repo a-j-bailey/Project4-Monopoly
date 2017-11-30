@@ -19,6 +19,7 @@ public class Player {
 	 */
 	public Player(String name){
 		this.playerName = name;
+		this.playerProperties = new ArrayList<>();
 	}
 	
 	/**
@@ -279,6 +280,17 @@ public class Player {
 	 */
 	public void changeIncarceration(){
 		this.isIncarcerated = !this.isIncarcerated;
+	}
+	
+	/**
+	 * Adds properties 
+	 */
+	public void addProperty(Property prop){
+		this.playerProperties.add(prop);
+	}
+	
+	public void removeProperty(){
+		
 	}
 	
 	public ArrayList<Property> getProperties(){

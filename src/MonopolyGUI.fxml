@@ -118,7 +118,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="200.0">
+                              <VBox prefHeight="400.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <VBox.margin>
@@ -138,6 +138,11 @@
                                           <Insets left="10.0" top="10.0" />
                                        </padding>
                                     </Label>
+                                    <ScrollPane prefViewportHeight="285.0" prefViewportWidth="200.0" vbarPolicy="NEVER">
+                                       <content>
+                                          <TextFlow fx:id="pp1_propertyArea" prefHeight="285.0" prefWidth="180.0" />
+                                       </content>
+                                    </ScrollPane>
                                  </children>
                               </VBox>
                            </children></AnchorPane>
@@ -169,6 +174,15 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ScrollPane layoutX="-1.0" layoutY="115.0" prefViewportHeight="285.0" prefViewportWidth="200.0" vbarPolicy="NEVER">
+                                 <content>
+                                    <ScrollPane prefViewportHeight="285.0" prefViewportWidth="180.0">
+                                       <content>
+                                          <TextFlow fx:id="pp2_propertyArea" prefHeight="285.0" prefWidth="180.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </ScrollPane>
                            </children></AnchorPane>
                   </content>
                 </TitledPane>
@@ -198,6 +212,15 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ScrollPane layoutX="-1.0" layoutY="116.0" prefViewportHeight="285.0" prefViewportWidth="200.0" prefWidth="200.0" vbarPolicy="NEVER">
+                                 <content>
+                                    <ScrollPane prefViewportHeight="285.0" prefViewportWidth="180.0">
+                                       <content>
+                                          <TextFlow fx:id="pp3_propertyArea" prefHeight="285.0" prefWidth="180.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </ScrollPane>
                            </children></AnchorPane>
                   </content>
                 </TitledPane>
@@ -227,6 +250,15 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ScrollPane layoutX="-1.0" layoutY="115.0" prefViewportHeight="285.0" prefViewportWidth="200.0" prefWidth="200.0" vbarPolicy="NEVER">
+                                 <content>
+                                    <ScrollPane prefViewportHeight="285.0" prefViewportWidth="180.0">
+                                       <content>
+                                          <TextFlow fx:id="pp4_propertyArea" prefHeight="285.0" prefWidth="180.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </ScrollPane>
                            </children></AnchorPane>
                      </content>
                   </TitledPane>
@@ -256,6 +288,15 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ScrollPane layoutX="-1.0" layoutY="116.0" prefViewportHeight="285.0" prefViewportWidth="200.0" prefWidth="200.0" vbarPolicy="NEVER">
+                                 <content>
+                                    <ScrollPane prefViewportHeight="285.0" prefViewportWidth="180.0">
+                                       <content>
+                                          <TextFlow fx:id="pp5_propertyArea" prefHeight="285.0" prefWidth="180.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </ScrollPane>
                            </children></AnchorPane>
                      </content>
                   </TitledPane>
@@ -285,6 +326,15 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ScrollPane layoutX="-1.0" layoutY="115.0" prefViewportHeight="285.0" prefViewportWidth="200.0" prefWidth="200.0" vbarPolicy="NEVER">
+                                 <content>
+                                    <ScrollPane prefViewportHeight="285.0" prefViewportWidth="180.0">
+                                       <content>
+                                          <TextFlow fx:id="pp6_propertyArea" prefHeight="285.0" prefWidth="180.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </ScrollPane>
                            </children></AnchorPane>
                      </content>
                   </TitledPane>
