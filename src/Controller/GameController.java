@@ -1,10 +1,13 @@
 package Controller;
 
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import application.Game;
 import application.Location;
 import application.Property;
+import application.Residential;
+import application.Utility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -104,22 +107,22 @@ public class GameController implements Initializable{
 	 * @param y
 	 */
 	public void moveToken(int player, int x, int y){
-		if (player == 0){
+		if (player == 1){
 			p1_token.setX(x);
 			p1_token.setY(y);
-		} else if (player == 1){
+		} else if (player == 2){
 			p2_token.setX(x);
 			p2_token.setY(y);
-		} else if (player == 2){
+		} else if (player == 3){
 			p3_token.setX(x);
 			p3_token.setY(y);
-		} else if (player == 3){
+		} else if (player == 4){
 			p4_token.setX(x);
 			p4_token.setY(y);
-		} else if (player == 4){
+		} else if (player == 5){
 			p5_token.setX(x);
 			p5_token.setY(y);
-		} else if (player == 5){
+		} else if (player == 6){
 			p6_token.setX(x);
 			p6_token.setY(y);
 		}
@@ -146,18 +149,47 @@ public class GameController implements Initializable{
 		//Sets pane title based on current player
 		this.propertyInfo.setText(thisLocation.getPropertyName() + ":");
 		
+		System.out.println("\tCurrent Player: " + Game.getCurrPlayer().getPlayerName());
+		System.out.println("\tCurrent Property: " + thisLocation.getPropertyName());
+		
 		//Populates Property Info table with information:
-		this.propertyInfoText.setText("This will contain some nifty info about this property."
-				+ "\nOnce Stephan finishes that part. ;)");
-		if(thisLocation.getPropertyType().equals("Residential") || 
+		if(thisLocation.getPropertyType().equals("Residential") ||
 				thisLocation.getPropertyType().equals("Utility")){
-			Property propLocation = (Property) thisLocation;
-			if(!propLocation.isBought()){
+			Property property = (Property) thisLocation;
+			if(property.isBought()){
+				int rent = 0;
+				if(property.getPropertyType().equals("Utility")){
+					Utility util = (Utility) property;
+					String name = util.getPropertyName();
+					Scanner nameScn = new Scanner(name);
+					if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){
+						int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(10).size();
+						int dice = Game.getCurrentDice()[0] + Game.getCurrentDice()[1];
+						rent = util.calcUtilityRent(dice, numOwned);
+					} else {
+						int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(9).size();
+						rent = util.calcRailroadRent(numOwned);
+						System.out.println("\tRR Rent: " + rent);
+					}
+					nameScn.close();
+				} else {
+					Residential prop = (Residential) property;
+					rent = prop.getRent();
+				}
+				this.propertyInfoText.setText("This property is owned by " + 
+						Game.getPlayer(property.getOwner()).getPlayerName() + 
+						"\nYou paid " + rent + " in rent.");
+			} else {
 				this.buyProperty.setOpacity(1);
 				this.propertyInfoText.setText("This property is for sale!"
-						+ "\nYou can buy it for $" + propLocation.getValue());
+						+ "\nYou can buy it for $" + property.getValue());
 			}
+		} else {
+			this.buyProperty.setOpacity(0);
+			this.propertyInfoText.setText("");
 		}
+		
+		
 	}
 	
 	public TextFlow updatePlayerPropertyList(int pNum){
@@ -187,27 +219,27 @@ public class GameController implements Initializable{
 			pp1_propertyArea.getChildren().addAll(updatePlayerPropertyList(1));
 			break;
 		case 2:
-			this.pp2_money.setText("$" + Game.getPlayer(0).getMoney());
+			this.pp2_money.setText("$" + Game.getPlayer(1).getMoney());
 			pp2_propertyArea.getChildren().clear();
 			pp2_propertyArea.getChildren().addAll(updatePlayerPropertyList(2));
 			break;
 		case 3:
-			this.pp3_money.setText("$" + Game.getPlayer(0).getMoney());
+			this.pp3_money.setText("$" + Game.getPlayer(2).getMoney());
 			pp3_propertyArea.getChildren().clear();
 			pp3_propertyArea.getChildren().addAll(updatePlayerPropertyList(3));
 			break;
 		case 4:
-			this.pp4_money.setText("$" + Game.getPlayer(0).getMoney());
+			this.pp4_money.setText("$" + Game.getPlayer(3).getMoney());
 			pp4_propertyArea.getChildren().clear();
 			pp4_propertyArea.getChildren().addAll(updatePlayerPropertyList(4));
 			break;
 		case 5:
-			this.pp5_money.setText("$" + Game.getPlayer(0).getMoney());
+			this.pp5_money.setText("$" + Game.getPlayer(4).getMoney());
 			pp5_propertyArea.getChildren().clear();
 			pp5_propertyArea.getChildren().addAll(updatePlayerPropertyList(5));
 			break;
 		case 6:
-			this.pp1_money.setText("$" + Game.getPlayer(0).getMoney());
+			this.pp1_money.setText("$" + Game.getPlayer(5).getMoney());
 			pp6_propertyArea.getChildren().clear();
 			pp6_propertyArea.getChildren().addAll(updatePlayerPropertyList(6));
 			break;
@@ -267,7 +299,7 @@ public class GameController implements Initializable{
 		int propValue = location.getValue();
 		Game.getCurrPlayer().addProperty(location);
 		Game.getCurrPlayer().changeMoney(-propValue);
-		location.changeOwner(Game.getCurrPlayerNum() + 1);
+		location.changeOwner(Game.getCurrPlayerNum());
 		System.out.println("\tBought Property:"
 				+ "\n\t$" + Game.getCurrPlayer().getMoney());
 		buyProperty.setOpacity(0);
@@ -335,9 +367,9 @@ public class GameController implements Initializable{
 	@FXML
 	private Button endTurnButton;
 	public void endTurn(){
-		updatePropertyInfo();
-		updatePlayerInfo(Game.getCurrPlayerNum() + 1);
+		updatePlayerInfo(Game.getCurrPlayerNum());
 		Game.endTurn();
+		updatePropertyInfo();
 	}
 	
 	//POPUP:

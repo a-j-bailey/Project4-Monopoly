@@ -139,7 +139,7 @@ public class Game{
 	}
 	
 	public static int getCurrPlayerNum(){
-		return currPlayer;
+		return currPlayer + 1;
 	}
 
 	/**
@@ -153,6 +153,14 @@ public class Game{
 		Random rand = new Random();
 		int d1 = rand.nextInt(6)+1;
 		int d2 = rand.nextInt(6)+1;
+		
+		//FOR TROUBLESHOOTING
+		System.out.println("-- enter dice roll: --");
+		Scanner input = new Scanner(System.in);
+		
+		d1 = input.nextInt();
+		d2 = input.nextInt();
+		
 		if (d1 == d2){
 			canReroll = true;
 		} else {
@@ -228,6 +236,7 @@ public class Game{
 	
 	public static void endTurn(){
 		currPlayer = (currPlayer + 1) % numPlayers;
+		System.out.println("\tCurr Player " + currPlayer);
 		gc.nextPlayer();
 	}
 	

@@ -115,12 +115,14 @@ public class Property extends Location{
 	 * @param change owner to input integer
 	 */
 	public void changeOwner(int newOwner) {
+
 		this.owner = newOwner;
-		if (!(owner == 0)) {
-			this.isBought = false;					
+		if (owner != 0) {
+			this.isBought = true;					
 		}
 		else {
-			this.isBought = true;
+			this.isBought = false;
 		}
+		System.out.println("\tNew Owner: " + this.owner);
 	}
 }
