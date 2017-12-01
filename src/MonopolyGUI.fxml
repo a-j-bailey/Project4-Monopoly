@@ -46,7 +46,7 @@
                               </VBox>
                            </bottom>
                            <center>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="466.0" prefWidth="500.0">
+                            <AnchorPane fx:id="boardGame" minHeight="0.0" minWidth="0.0" prefHeight="466.0" prefWidth="500.0">
                                  <children>
                                     <ImageView fitHeight="450.0" fitWidth="450.0" layoutX="25.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -91,18 +91,15 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab onSelectionChanged="#updateGraph" text="Leader Board">
+          <Tab text="Rules">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
-                        <StackedBarChart fx:id="leaderBoard" animated="false" layoutX="-1.0" prefHeight="567.0" prefWidth="500.0" title="Player Worth:">
-                          <xAxis>
-                            <CategoryAxis label="Player" side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis label="Worth" side="LEFT" tickUnit="100.0" upperBound="10000.0" />
-                          </yAxis>
-                        </StackedBarChart>
+                        <ScrollPane layoutX="-1.0" layoutY="-1.0" prefHeight="568.0" prefViewportHeight="568.0" prefViewportWidth="499.0" prefWidth="498.0">
+                           <content>
+                              <TextFlow layoutX="-1.0" layoutY="-1.0" maxWidth="496.0" minHeight="566.0" minWidth="496.0" prefHeight="566.0" prefWidth="496.0" />
+                           </content>
+                        </ScrollPane>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -331,7 +328,6 @@
                   <Image url="@../imgs/MonopolyLogo.png" />
                </image>
             </ImageView>
-          <Button mnemonicParsing="false" text="Rules" />
             <MenuButton mnemonicParsing="false" text="Game">
               <items>
                 <MenuItem mnemonicParsing="false" text="Forfeit Game" />

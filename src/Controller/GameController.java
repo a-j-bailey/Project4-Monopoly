@@ -25,7 +25,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -36,57 +38,78 @@ import java.net.URL;
 
 public class GameController implements Initializable{
 	
+	@FXML
+	private AnchorPane boardGame;
+	
+	private ImageView[] playerTokens;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 				
 		System.out.println("\tLoading...");
 		int playerNum = Game.getNumPlayers();
 		System.out.println("\tNum Players: " + playerNum);
-				
+		
+		playerTokens = new ImageView[playerNum];
+		
+		for(int i=0; i < playerNum; i++){
+			ImageView token = new ImageView();
+			String fileName = "imgs/player" + (i+1) + "_token.png";
+			try{
+				token.setImage( new Image(fileName));
+				boardGame.getChildren().add(token);
+				token.setLayoutX(426);
+				token.setLayoutY(408);
+				this.playerTokens[i] = token;
+			} catch (IllegalArgumentException e) {
+				System.err.println("\tFailed:\t" + fileName);
+			}
+		}
+		
 		if(playerNum >= 1){
 			this.pp1.setDisable(false);
-			this.p1_token.setDisable(false);
-			this.p1_token.setOpacity(1);
+			//this.p1_token.setDisable(false);
+			//this.p1_token.setOpacity(1);
 			this.pp1.setText(Game.getPlayer(0).getPlayerName());
 			this.pp1_money.setText("$" + Game.getPlayer(0).getMoney());
 		}
 				
 		if(playerNum >= 2){
 			this.pp2.setDisable(false);
-			this.p2_token.setDisable(false);
-			this.p2_token.setOpacity(1);
+			//this.p2_token.setDisable(false);
+			//this.p2_token.setOpacity(1);
 			this.pp2.setText(Game.getPlayer(1).getPlayerName());
 			this.pp2_money.setText("$" + Game.getPlayer(1).getMoney());
 		}
 				
 		if(playerNum >= 3){
 			this.pp3.setDisable(false);
-			this.p3_token.setDisable(false);
-			this.p3_token.setOpacity(1);
+			//this.p3_token.setDisable(false);
+			//this.p3_token.setOpacity(1);
 			this.pp3.setText(Game.getPlayer(2).getPlayerName());
 			this.pp3_money.setText("$" + Game.getPlayer(2).getMoney());
 		}
 				
 		if(playerNum >= 4){
 			this.pp4.setDisable(false);
-			this.p4_token.setDisable(false);
-			this.p4_token.setOpacity(1);
+			//this.p4_token.setDisable(false);
+			//this.p4_token.setOpacity(1);
 			this.pp4.setText(Game.getPlayer(3).getPlayerName());
 			this.pp4_money.setText("$" + Game.getPlayer(3).getMoney());
 		}
 				
 		if(playerNum >= 5){
 			this.pp5.setDisable(false);
-			this.p5_token.setDisable(false);
-			this.p5_token.setOpacity(1);
+			//this.p5_token.setDisable(false);
+			//this.p5_token.setOpacity(1);
 			this.pp5.setText(Game.getPlayer(4).getPlayerName());
 			this.pp5_money.setText("$" + Game.getPlayer(4).getMoney());
 		}
 				
-		if(playerNum >= 6){
+		if(playerNum == 6){
 			this.pp6.setDisable(false);
-			this.p6_token.setDisable(false);
-			this.p6_token.setOpacity(1);
+			//this.p6_token.setDisable(false);
+			//this.p6_token.setOpacity(1);
 			this.pp6.setText(Game.getPlayer(5).getPlayerName());
 			this.pp6_money.setText("$" + Game.getPlayer(5).getMoney());
 		}
@@ -95,7 +118,6 @@ public class GameController implements Initializable{
 		updatePropertyInfo();
 		
 		Game.getLocation(Game.getCurrPlayer().getPos());
-		loadGraph();
 		
 		System.out.println(" -- Game Initialized -- ");
 	}
@@ -107,6 +129,11 @@ public class GameController implements Initializable{
 	 * @param y
 	 */
 	public void moveToken(int player, int x, int y){
+		player--;
+		playerTokens[player].setX(x);
+		playerTokens[player].setY(y);
+		
+		/*
 		if (player == 1){
 			p1_token.setX(x);
 			p1_token.setY(y);
@@ -126,6 +153,7 @@ public class GameController implements Initializable{
 			p6_token.setX(x);
 			p6_token.setY(y);
 		}
+		*/
 		if (!Game.getCanReroll()){
 			rollDiceButton.setDisable(true);
 			endTurnButton.setDisable(false);
@@ -138,6 +166,7 @@ public class GameController implements Initializable{
 		rollDiceButton.setDisable(false);
 		manageProperties.setDisable(true);
 		endTurnButton.setDisable(true);
+		
 		//TODO: THIS WILL BE REMOVED
 		buyProperty.setOpacity(0);
 		
@@ -248,36 +277,48 @@ public class GameController implements Initializable{
 	}
 	
 	//LEFT SIDEBAR
+	
+
+	//private TitledPane[] playerPanes = new TitledPane[6];
+	//private Label[] playerMoneyLabels = new Label[8];
+	//private TextFlow[] playerPropertyLists = new TextFlow[8];
+	
+	
 	@FXML
 	private TitledPane pp1;
 	@FXML
 	private Label pp1_money;
 	@FXML
 	private TextFlow pp1_propertyArea;
+	
 	@FXML
 	private TitledPane pp2;
 	@FXML
 	private Label pp2_money;
 	@FXML
 	private TextFlow pp2_propertyArea;
+	
 	@FXML
 	private TitledPane pp3;
 	@FXML
 	private Label pp3_money;
 	@FXML
 	private TextFlow pp3_propertyArea;
+	
 	@FXML
 	private TitledPane pp4;
 	@FXML
 	private Label pp4_money;
 	@FXML
 	private TextFlow pp4_propertyArea;
+	
 	@FXML
 	private TitledPane pp5;
 	@FXML
 	private Label pp5_money;
 	@FXML
 	private TextFlow pp5_propertyArea;
+	
 	@FXML
 	private TitledPane pp6;
 	@FXML
@@ -308,30 +349,8 @@ public class GameController implements Initializable{
 	//GAME BOARD
 	@FXML
 	private TabPane windowTab;
-	@FXML
-	private StackedBarChart<String, Number> leaderBoard;
-	final CategoryAxis xAxis = new CategoryAxis();
-	final NumberAxis yAxis = new NumberAxis();
-	private XYChart.Series<String, Number> money = new XYChart.Series<>();
-	public void loadGraph(){
-		int numPlayers = Game.getNumPlayers();
-		//MONEY
-		money.setName("Money");
-		for(int i=0; i<numPlayers; i++){
-			money.getData().add(new XYChart.Data<String, Number>(
-					Game.getPlayer(i).getPlayerName(),
-					Game.getPlayer(i).getMoney()));
-		}
-		leaderBoard.getData().add(money);
-		System.out.println("\tLoaded Graph");
-	}
-	public void updateGraph(){
-		//Game.getCurrPlayer().changeMoney(100);
-		money.getData().set(Game.getCurrPlayerNum(), new XYChart.Data<String, Number>(
-				Game.getCurrPlayer().getPlayerName(),
-				Game.getCurrPlayer().getMoney()));
-	}
 	
+	/*
 	@FXML
 	private ImageView p1_token;
 	@FXML
@@ -344,6 +363,7 @@ public class GameController implements Initializable{
 	private ImageView p5_token;
 	@FXML
 	private ImageView p6_token;
+	*/
 	
 	@FXML
 	private Button rollDiceButton;
