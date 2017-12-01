@@ -245,11 +245,15 @@ public class Player {
 	 */
 	public int getNumHouses(){
 		int totalHouses = 0;
-		for(Property property : playerProperties){
-			if (property.getType().equals("Residential")){
-				Residential resProperty = (Residential) property;
-				totalHouses += resProperty.getNumHouses();
+			
+		for(int i = 1; i <= 8; i++) {
+			for(int j = 0; j < playerProperties.get(i).size(); j++) {
+				Residential resProperty = (Residential) playerProperties.get(i).get(j);
+				if(resProperty.getNumHouses() < 5) {
+					totalHouses += resProperty.getNumHouses();
+				}
 			}
+
 		}
 		return totalHouses;
 	}
@@ -259,18 +263,20 @@ public class Player {
 	 * @return
 	 */
 	public int getNumHotels(){
-		int numHotels = 0;
-		for(Property property : playerProperties){
-			if (property.getType().equals("Residential")){
-				Residential resProperty = (Residential) property;
-				if(resProperty.getNumHouses() == 5){
-					numHotels++;
+		int totalHotels = 0;		
+		for(int i = 1; i <= 8; i++) {
+			for(int j = 0; j < playerProperties.get(i).size(); j++) {
+				Residential resProperty = (Residential) playerProperties.get(i).get(j);
+				if(resProperty.getNumHouses() == 5) {
+					totalHotels += 1;
 				}
 			}
-			
+
 		}
-		return numHotels;
+		return totalHotels;
 	}
+		
+
 	
 	/**
 	 * Returns whether or not the player is in jail

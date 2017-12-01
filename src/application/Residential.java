@@ -109,6 +109,8 @@ public class Residential extends Property{
 		return this.numHouses;
 	}
 	
+
+	
 	/**
 	 * 
 	 * 

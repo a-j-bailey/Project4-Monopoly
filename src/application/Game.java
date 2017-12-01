@@ -25,6 +25,7 @@ public class Game{
 	private static GameController gc;
 	private static boolean canReroll = false;
 	private static HashMap<Integer, Location> locations = new HashMap<Integer, Location>();
+	private static int[] currentDice = new int[2];
 	
 	/**
 	 * lanches the GUI
@@ -145,6 +146,7 @@ public class Game{
 	 * Rolls dice, moves player, and handles all other actions related to a player's roll. 
 	 * Calls methods accordingly
 	 * Is triggered by player pressing the "Roll Dice" button
+	 * Saves dice roll to currentDice array.
 	 * @return
 	 */
 	public static void rollDice(){
@@ -158,6 +160,8 @@ public class Game{
 		}
 		players.get(currPlayer).changePos(d1 + d2);
 		System.out.println(Game.getCurrPlayer().getPos());
+		currentDice[0] = d1;
+		currentDice[1] = d2;
 	}
 	
 	/**
@@ -240,4 +244,9 @@ public class Game{
 	public static Location getLocation(int pos){
 		return locations.get(pos);
 	}
+	
+	public static int[] getCurrentDice() {
+		return currentDice;
+	}
+	
 }

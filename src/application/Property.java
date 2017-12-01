@@ -117,10 +117,10 @@ public class Property extends Location{
 	public void changeOwner(int newOwner) {
 		this.owner = newOwner;
 		if (!(owner == 0)) {
-			this.isBought = true;					
+			this.isBought = false;					
 		}
 		else {
-			this.isBought = false;
+			this.isBought = true;
 		}
 	}
 }

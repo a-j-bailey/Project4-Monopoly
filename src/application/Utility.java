@@ -24,10 +24,13 @@ public class Utility extends Property{
 		
 
 	}
+	
 	/**
-	 * set the rent of the utility
+	 * 
+	 * @param diceRoll
+	 * @param numTypeOwned
+	 * @return rent of a utility
 	 */
-
 	public int calcUtilityRent(int diceRoll, int numTypeOwned) {
 
 
@@ -40,7 +43,12 @@ public class Utility extends Property{
 
 
 	}
-
+	
+	/**
+	 * 
+	 * @param numTypeOwned
+	 * @return rent for a railroad
+	 */
 	public int calcRailroadRent (int numTypeOwned) {
 		if(numTypeOwned == 1) {
 			return 25;
