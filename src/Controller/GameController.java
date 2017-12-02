@@ -267,10 +267,32 @@ public class GameController implements Initializable{
 	@FXML
 	private MenuItem mortgageProperties;
 	public void buildHouses(){
-		launchPopUp("Build");
+		launchPopUp().buildWindow("Build");
+		//launchPopUp("Build");
 	}
 	public void mortgageProperties(){
-		launchPopUp("Mortgage");
+		//new PopUpController("Mortgage");
+
+	}
+	
+	public PopUpController launchPopUp(){
+		
+		PopUpController pc = new PopUpController();
+		
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/PopUp.fxml"));
+			Parent root = loader.load();
+            Stage stage = new Stage();
+            pc = loader.getController();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		return pc;
 	}
 	
 	@FXML
@@ -279,19 +301,5 @@ public class GameController implements Initializable{
 		updatePlayerInfo(Game.getCurrPlayerNum());
 		Game.endTurn();
 		updatePropertyInfo();
-	}
-	
-	//POPUP:
-	public void launchPopUp(String type){
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/PopUp.fxml"));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
 	}
 }

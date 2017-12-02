@@ -17,12 +17,14 @@ import javafx.stage.Stage;
 
 public class PopUpController implements Initializable{
 	
+	private String type;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println(" -- PopUp Initialized -- ");
 	}
 	
-	public void launch(String type){
+	public void launch(){
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/PopUp.fxml"));
             Stage stage = new Stage();
@@ -35,12 +37,19 @@ public class PopUpController implements Initializable{
         }
 	}
 	
+	public void buildWindow(String type){
+		System.out.println("\t" + type);
+		if (type.equals("Build")){
+			
+		}
+	}
+	
 	@FXML
 	private Label popUpTitle;
 	@FXML
-	private TreeView propertyTree;
+	private TreeView<String> propertyTree;
 	@FXML
-	private ChoiceBox houseChanger;
+	private ChoiceBox<Integer> houseChanger;
 	@FXML
 	private Label cost;
 	@FXML

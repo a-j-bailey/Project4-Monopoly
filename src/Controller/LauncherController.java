@@ -107,8 +107,5 @@ public class LauncherController implements Initializable{
 			
 			new Game(playerNames);
 		}
-		
-		
-		
 	}
 }

@@ -1,5 +1,5 @@
 	-	Property Actions (pay rent, paying tax, draw card)
-	-	Make sure player does not own property before charging them rents
+	-	Make sure player does not own property before charging them rent
 	-	Award players $200 for passing Go
 	-	Go To Jail (Property, Card, 3x Doubles)
 	-	Trade Properties
