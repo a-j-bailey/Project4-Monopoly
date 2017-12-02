@@ -1,13 +1,10 @@
 package application;
 
-import java.util.Scanner;
 
 public class Utility extends Property{
 	
 	
-	/*
-	 * TODO: methods for rent as the act differently than a normal property. 
-	 */
+	
 	
 	
 	/**
@@ -25,40 +22,45 @@ public class Utility extends Property{
 	public Utility(String inputLine) {
 		super(inputLine);
 		
-		Scanner lnScn = new Scanner(inputLine);
-		lnScn.useDelimiter(",");
-		
-		
-		
-		lnScn.next();
-		lnScn.next();			//These three are taken care of in super
-		lnScn.next();
-		
-		lnScn.next(); 			//Skip over Tax space
-		
-		lnScn.nextInt();		//These two are taken care of in super
-		lnScn.nextInt();
-		
-		
-		lnScn.nextInt();		//no rent cost
-		this.rent = lnScn.nextInt();
-		
-		
-		
-		
-		lnScn.close();
-		
+
 	}
+	
 	/**
-	 * set the rent of the utility
+	 * 
+	 * @param diceRoll
+	 * @param numTypeOwned
+	 * @return rent of a utility
 	 */
-	public int calcRent(String type, int diceRoll, int numTypeOwned) {
-		 
-		if(type.equals(anObject))
-		
-		
-		return rent;
+	public int calcUtilityRent(int diceRoll, int numTypeOwned) {
+
+
+		if (numTypeOwned == 2) {
+			return diceRoll * 10;
+		}
+		else {
+			return diceRoll * 4;				//If only one is owned do this
+		}
+
+
 	}
 	
-	
+	/**
+	 * 
+	 * @param numTypeOwned
+	 * @return rent for a railroad
+	 */
+	public int calcRailroadRent (int numTypeOwned) {
+		if(numTypeOwned == 1) {
+			return 25;
+		}
+		if(numTypeOwned == 2) {
+			return 50;
+		}
+		if(numTypeOwned == 3) {
+			return 100;
+		}
+		else {								//If four are owned
+			return 200;
+		}
+	}
 }

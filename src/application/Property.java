@@ -1,7 +1,6 @@
 package application;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.util.Scanner;
 
 
@@ -46,8 +45,6 @@ public class Property extends Location{
 		
 		Scanner lnScn = new Scanner(inputLine);
 		lnScn.useDelimiter(",");
-		
-		
 		
 		lnScn.next();
 		lnScn.next();			//These three are taken care of in super
@@ -106,15 +103,26 @@ public class Property extends Location{
 	}
 	
 	
+	/**
+	 * returns owners
+	 */
+	public int getOwner() {
+		return owner;
+	}
 	
+	/**
+	 * 
+	 * @param change owner to input integer
+	 */
 	public void changeOwner(int newOwner) {
+
 		this.owner = newOwner;
-		if (!(owner == 0)) {
+		if (owner != 0) {
 			this.isBought = true;					
 		}
 		else {
 			this.isBought = false;
 		}
+		System.out.println("\tNew Owner: " + this.owner);
 	}
-	
 }

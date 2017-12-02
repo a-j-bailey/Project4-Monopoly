@@ -1,12 +1,14 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 import Controller.GameController;
 
 public class Player {
-	private ArrayList<Property> playerProperties;
+	private HashMap<Integer, ArrayList<Property>> playerProperties;
 	private int money = 1500;	
 	private int numGetOutOfJailCards = 0;
 	private String playerName;
@@ -19,6 +21,10 @@ public class Player {
 	 */
 	public Player(String name){
 		this.playerName = name;
+		this.playerProperties = new HashMap<>();
+		for(int i=1; i<11; i++){
+			this.playerProperties.put(i, new ArrayList<Property>());
+		}
 	}
 	
 	/**
@@ -239,11 +245,15 @@ public class Player {
 	 */
 	public int getNumHouses(){
 		int totalHouses = 0;
-		for(Property property : playerProperties){
-			if (property.getType().equals("Residential")){
-				Residential resProperty = (Residential) property;
-				totalHouses += resProperty.getNumHouses();
+			
+		for(int i = 1; i <= 8; i++) {
+			for(int j = 0; j < playerProperties.get(i).size(); j++) {
+				Residential resProperty = (Residential) playerProperties.get(i).get(j);
+				if(resProperty.getNumHouses() < 5) {
+					totalHouses += resProperty.getNumHouses();
+				}
 			}
+
 		}
 		return totalHouses;
 	}
@@ -253,18 +263,20 @@ public class Player {
 	 * @return
 	 */
 	public int getNumHotels(){
-		int numHotels = 0;
-		for(Property property : playerProperties){
-			if (property.getType().equals("Residential")){
-				Residential resProperty = (Residential) property;
-				if(resProperty.getNumHouses() == 5){
-					numHotels++;
+		int totalHotels = 0;		
+		for(int i = 1; i <= 8; i++) {
+			for(int j = 0; j < playerProperties.get(i).size(); j++) {
+				Residential resProperty = (Residential) playerProperties.get(i).get(j);
+				if(resProperty.getNumHouses() == 5) {
+					totalHotels += 1;
 				}
 			}
-			
+
 		}
-		return numHotels;
+		return totalHotels;
 	}
+		
+
 	
 	/**
 	 * Returns whether or not the player is in jail
@@ -281,7 +293,31 @@ public class Player {
 		this.isIncarcerated = !this.isIncarcerated;
 	}
 	
-	public ArrayList<Property> getProperties(){
+	/**
+	 * Adds properties 
+	 */
+	public void addProperty(Property prop){
+		if(prop.getPropertyType().equals("Utility")){
+			String name = prop.getPropertyName();
+			Scanner nameScn = new Scanner(name);
+			name = nameScn.next();
+			if(name.equals("Electric") || name.equals("Water")){
+				playerProperties.get(10).add(prop);
+			} else {
+				playerProperties.get(9).add(prop);
+			}
+			nameScn.close();
+		} else {
+			Residential resProp = (Residential) prop;
+			playerProperties.get(resProp.getNumSet()).add(resProp);
+		}
+	}
+	
+	public void removeProperty(){
+		//TODO;
+	}
+	
+	public HashMap<Integer, ArrayList<Property>> getProperties(){
 		return this.playerProperties;
 	}
 }

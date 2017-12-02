@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Stack;
 
 import Controller.GameController;
 import javafx.fxml.FXMLLoader;
@@ -24,9 +25,11 @@ public class Game{
 	private static GameController gc;
 	private static boolean canReroll = false;
 	private static HashMap<Integer, Location> locations = new HashMap<Integer, Location>();
+	private static int[] currentDice = new int[2];
 	
-	
-	
+	/**
+	 * lanches the GUI
+	 */
 	public void launchGUI(){
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MonopolyGUI.fxml"));
@@ -67,6 +70,10 @@ public class Game{
 		launchGUI();
 	}
 	
+	
+	/**
+	 * initializes properties into a HashMap
+	 */
 	public static void loadProperties(){
 		try{
 			File propertyFile = new File("Properties.txt");
@@ -114,6 +121,11 @@ public class Game{
 		return numPlayers;
 	}
 	
+	/**
+	 * 
+	 * @param index
+	 * @return the player with respect to an index
+	 */
 	public static Player getPlayer(int index){
 		return players.get(index);
 	}
@@ -127,36 +139,66 @@ public class Game{
 	}
 	
 	public static int getCurrPlayerNum(){
-		return currPlayer;
+		return currPlayer + 1;
 	}
 
 	/**
 	 * Rolls dice, moves player, and handles all other actions related to a player's roll. 
 	 * Calls methods accordingly
 	 * Is triggered by player pressing the "Roll Dice" button
+	 * Saves dice roll to currentDice array.
 	 * @return
 	 */
 	public static void rollDice(){
 		Random rand = new Random();
 		int d1 = rand.nextInt(6)+1;
 		int d2 = rand.nextInt(6)+1;
+		
+		//FOR TROUBLESHOOTING
+		//System.out.println("-- enter dice roll: --");
+		//Scanner input = new Scanner(System.in);
+		//d1 = input.nextInt();
+		//d2 = input.nextInt();
+		
 		if (d1 == d2){
 			canReroll = true;
 		} else {
 			canReroll = false;
 		}
-		System.out.println("\tRoll Dice:\tD1: " + d1 + " D2: " + d2);
 		players.get(currPlayer).changePos(d1 + d2);
+		System.out.println(Game.getCurrPlayer().getPos());
+		currentDice[0] = d1;
+		currentDice[1] = d2;
 	}
 	
 	/**
 	 * Is triggered by player selecting "Mortgage Properties" from the action menu.
+	 * takes Stack of locations as input
 	 * 
 	 */
-	public static void mortgageProperties(){
-		//TODO: this
+	public static void mortgageProperties(Stack<Integer> propertiesToDo){
+
+		while(!propertiesToDo.isEmpty()) {
+			if(((Property) locations.get(propertiesToDo.peek())).isMortgaged()) {  //Look, I have no idea what the (Property) thing is at the bigging of this if statement. It fixed my problems though
+				((Property) locations.get(propertiesToDo.peek())).setIsMortgaged(false);		//I'm pretty sure its specifying the location type
+				int temp = ((Property) locations.get(propertiesToDo.pop())).getMortgageValue();
+				getCurrPlayer().changeMoney((-1)*temp);
+
+
+			}
+			else if(!((Property) locations.get(propertiesToDo.peek())).isMortgaged()) {  
+				((Property) locations.get(propertiesToDo.peek())).setIsMortgaged(true);	
+				int temp = ((Property) locations.get(propertiesToDo.pop())).getMortgageValue();
+				getCurrPlayer().changeMoney(temp);
+
+
+			}
+		}
+
+
+
 	}
-	
+
 	/**
 	 * Moves current player to given position.
 	 */
@@ -193,6 +235,7 @@ public class Game{
 	
 	public static void endTurn(){
 		currPlayer = (currPlayer + 1) % numPlayers;
+		System.out.println("\tCurr Player " + currPlayer);
 		gc.nextPlayer();
 	}
 	
@@ -209,4 +252,9 @@ public class Game{
 	public static Location getLocation(int pos){
 		return locations.get(pos);
 	}
+	
+	public static int[] getCurrentDice() {
+		return currentDice;
+	}
+	
 }

@@ -1,43 +1,62 @@
 package Controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+
+import javax.imageio.ImageIO;
 
 import application.Game;
 import application.Location;
 import application.Property;
 import application.Residential;
-import javafx.collections.FXCollections;
+import application.Utility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
-import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 
 public class GameController implements Initializable{
+	
+	@FXML
+	private AnchorPane boardGame;
+	@FXML
+	private Accordion ppAccordion;
+	
+	private ImageView[] playerTokens;
+	private TitledPane[] playerPanes;
+	private Label[] playerMoneyLabels;
+	private TextFlow[] playerPropertyLists;
+		
+
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -45,60 +64,64 @@ public class GameController implements Initializable{
 		System.out.println("\tLoading...");
 		int playerNum = Game.getNumPlayers();
 		System.out.println("\tNum Players: " + playerNum);
-				
-		if(playerNum >= 1){
-			this.pp1.setDisable(false);
-			this.p1_token.setDisable(false);
-			this.p1_token.setOpacity(1);
-			this.pp1.setText(Game.getPlayer(0).getPlayerName());
-			this.pp1_money.setText("$" + Game.getPlayer(0).getMoney());
+		
+		playerTokens = new ImageView[playerNum];
+		
+		for(int i=playerNum -1; i >= 0; i--){
+			ImageView token = new ImageView();
+			Image image = new Image("imgs/player" + (i+1) + "_token.png");
+			token.setImage(image);
+			token.setX(426);
+			token.setY(408);
+			token.setFitWidth(40);
+			token.setFitHeight(40);
+			token.toFront();
+			boardGame.getChildren().add(token);
+			this.playerTokens[i] = token;
 		}
-				
-		if(playerNum >= 2){
-			this.pp2.setDisable(false);
-			this.p2_token.setDisable(false);
-			this.p2_token.setOpacity(1);
-			this.pp2.setText(Game.getPlayer(1).getPlayerName());
-			this.pp2_money.setText("$" + Game.getPlayer(1).getMoney());
+		
+		playerPanes = new TitledPane[playerNum];
+		playerMoneyLabels = new Label[playerNum];
+		playerPropertyLists = new TextFlow[playerNum];
+		for (int i=0; i<playerNum; i++){
+			
+			//Token
+			ImageView token = new ImageView();
+			token.setImage(new Image("imgs/player" + (i+1) + "_token.png"));
+			token.setFitWidth(50);
+			token.setFitHeight(50);
+			//Label (Money)
+			Label money = new Label(" $" + Game.getPlayer(i).getMoney());
+			playerMoneyLabels[i] = money;
+			//Properties Title
+			Label properties = new Label(" Properties:");
+			//PropertiesTextArea
+			TextFlow propText = new TextFlow();
+			propText.setPrefWidth(160);
+			propText.setPrefHeight(280);
+			playerPropertyLists[i] = propText;
+			ScrollPane sP = new ScrollPane(propText);
+			sP.setPrefWidth(200);
+			
+			//Add All to VBOX
+			VBox vbox = new VBox();
+			vbox.setSpacing(10);
+			vbox.getChildren().add(token);
+			vbox.getChildren().add(money);
+			vbox.getChildren().add(properties);
+			vbox.getChildren().add(sP);
+			
+			//Add VBOX to pane
+			TitledPane pane = new TitledPane(Game.getPlayer(i).getPlayerName(), vbox);
+			playerPanes[i] = pane;
 		}
-				
-		if(playerNum >= 3){
-			this.pp3.setDisable(false);
-			this.p3_token.setDisable(false);
-			this.p3_token.setOpacity(1);
-			this.pp3.setText(Game.getPlayer(2).getPlayerName());
-			this.pp3_money.setText("$" + Game.getPlayer(2).getMoney());
-		}
-				
-		if(playerNum >= 4){
-			this.pp4.setDisable(false);
-			this.p4_token.setDisable(false);
-			this.p4_token.setOpacity(1);
-			this.pp4.setText(Game.getPlayer(3).getPlayerName());
-			this.pp4_money.setText("$" + Game.getPlayer(3).getMoney());
-		}
-				
-		if(playerNum >= 5){
-			this.pp5.setDisable(false);
-			this.p5_token.setDisable(false);
-			this.p5_token.setOpacity(1);
-			this.pp5.setText(Game.getPlayer(4).getPlayerName());
-			this.pp5_money.setText("$" + Game.getPlayer(4).getMoney());
-		}
-				
-		if(playerNum >= 6){
-			this.pp6.setDisable(false);
-			this.p6_token.setDisable(false);
-			this.p6_token.setOpacity(1);
-			this.pp6.setText(Game.getPlayer(5).getPlayerName());
-			this.pp6_money.setText("$" + Game.getPlayer(5).getMoney());
-		}
+		ppAccordion.getPanes().addAll(playerPanes);
+		ppAccordion.setExpandedPane(playerPanes[0]);
 		
 		this.currentTurn.setText(Game.getPlayer(0).getPlayerName() + "'s Turn");
 		updatePropertyInfo();
 		
 		Game.getLocation(Game.getCurrPlayer().getPos());
-		loadGraph();
 		
 		System.out.println(" -- Game Initialized -- ");
 	}
@@ -110,27 +133,10 @@ public class GameController implements Initializable{
 	 * @param y
 	 */
 	public void moveToken(int player, int x, int y){
-		if (player == 0){
-			p1_token.setX(x);
-			p1_token.setY(y);
-		} else if (player == 1){
-			p2_token.setX(x);
-			p2_token.setY(y);
-		} else if (player == 2){
-			p3_token.setX(x);
-			p3_token.setY(y);
-		} else if (player == 3){
-			p4_token.setX(x);
-			p4_token.setY(y);
-		} else if (player == 4){
-			p5_token.setX(x);
-			p5_token.setY(y);
-		} else if (player == 5){
-			p6_token.setX(x);
-			p6_token.setY(y);
-		}
-		//TODO: Update sidepanel and inform user of dice roll and move
-		//TODO: Update side panel with info on current position
+		player--;
+		playerTokens[player].setX(x);
+		playerTokens[player].setY(y);
+		
 		if (!Game.getCanReroll()){
 			rollDiceButton.setDisable(true);
 			endTurnButton.setDisable(false);
@@ -143,7 +149,7 @@ public class GameController implements Initializable{
 		rollDiceButton.setDisable(false);
 		manageProperties.setDisable(true);
 		endTurnButton.setDisable(true);
-		updatePlayerInfo(Game.getCurrPlayerNum() - 1);
+		
 		//TODO: THIS WILL BE REMOVED
 		buyProperty.setOpacity(0);
 		
@@ -155,56 +161,75 @@ public class GameController implements Initializable{
 		//Sets pane title based on current player
 		this.propertyInfo.setText(thisLocation.getPropertyName() + ":");
 		
+		System.out.println("\tCurrent Player: " + Game.getCurrPlayer().getPlayerName());
+		System.out.println("\tCurrent Property: " + thisLocation.getPropertyName());
+		
 		//Populates Property Info table with information:
-		this.propertyInfoText.setText("This will contain some nifty info about this property."
-				+ "\nOnce Stephan finishes that part. ;)");
-		if(thisLocation.getPropertyType().equals("Residential")){
-			Residential resLocation = (Residential) thisLocation;
-			if(!resLocation.isBought()){
+		if(thisLocation.getPropertyType().equals("Residential") ||
+				thisLocation.getPropertyType().equals("Utility")){
+			Property property = (Property) thisLocation;
+			if(property.isBought()){
+				int rent = 0;
+				if(property.getPropertyType().equals("Utility")){
+					Utility util = (Utility) property;
+					String name = util.getPropertyName();
+					Scanner nameScn = new Scanner(name);
+					if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){
+						int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(10).size();
+						int dice = Game.getCurrentDice()[0] + Game.getCurrentDice()[1];
+						rent = util.calcUtilityRent(dice, numOwned);
+					} else {
+						int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(9).size();
+						rent = util.calcRailroadRent(numOwned);
+						System.out.println("\tRR Rent: " + rent);
+					}
+					nameScn.close();
+				} else {
+					Residential prop = (Residential) property;
+					rent = prop.getRent();
+				}
+				this.propertyInfoText.setText("This property is owned by " + 
+						Game.getPlayer(property.getOwner() - 1).getPlayerName() + 
+						"\nYou paid " + rent + " in rent.");
+			} else {
 				this.buyProperty.setOpacity(1);
 				this.propertyInfoText.setText("This property is for sale!"
-						+ "\nYou can buy it for " + resLocation.getValue());
+						+ "\nYou can buy it for $" + property.getValue());
 			}
+		} else {
+			this.buyProperty.setOpacity(0);
+			this.propertyInfoText.setText("");
 		}
+		
+		
+	}
+	
+	public TextFlow updatePlayerPropertyList(int pNum){
+		TextFlow list = new TextFlow();
+		//pNum--;
+		
+		for (int i=1; i<=Game.getPlayer(pNum).getProperties().size(); i++){
+			for(Property property : Game.getPlayer(pNum).getProperties().get(i)){
+				Text propName = new Text("\t" + property.getPropertyName() + "\n");
+				System.out.println("\t" + property.getPropertyName());
+				propName.setFill(Color.web(property.getColor()));
+				list.getChildren().add(propName);
+			}
+			Text blankLine = new Text("\n");
+			list.getChildren().add(blankLine);
+		}
+		
+		return list;
 	}
 	
 	public void updatePlayerInfo(int pNum){
-		switch (pNum){
-		case 1:
-			this.pp1_money.setText("$" + Game.getPlayer(1).getMoney());
-		case 2:
-			this.pp2_money.setText("$" + Game.getPlayer(2).getMoney());
-		case 3:
-			this.pp3_money.setText("$" + Game.getPlayer(3).getMoney());
-		}
+		System.out.println("\tUpdate Player Info " + pNum);
+		pNum--;
+		playerMoneyLabels[pNum].setText("$" + Game.getPlayer(pNum).getMoney());
+		playerPropertyLists[pNum].getChildren().clear();
+		playerPropertyLists[pNum].getChildren().addAll(updatePlayerPropertyList(pNum));
 	}
 	
-	//LEFT SIDEBAR
-	@FXML
-	private TitledPane pp1;
-	@FXML
-	private Label pp1_money;
-	@FXML
-	private TitledPane pp2;
-	@FXML
-	private Label pp2_money;
-	@FXML
-	private TitledPane pp3;
-	@FXML
-	private Label pp3_money;
-	@FXML
-	private TitledPane pp4;
-	@FXML
-	private Label pp4_money;
-	@FXML
-	private TitledPane pp5;
-	@FXML
-	private Label pp5_money;
-	@FXML
-	private TitledPane pp6;
-	@FXML
-	private Label pp6_money;
-
 	//RIGHT SIDEBAR
 	@FXML
 	private Label currentTurn;
@@ -217,50 +242,17 @@ public class GameController implements Initializable{
 	public void buyProperty(){
 		Property location = (Property) Game.getLocation(Game.getCurrPlayer().getPos());
 		int propValue = location.getValue();
+		Game.getCurrPlayer().addProperty(location);
 		Game.getCurrPlayer().changeMoney(-propValue);
+		location.changeOwner(Game.getCurrPlayerNum());
 		System.out.println("\tBought Property:"
 				+ "\n\t$" + Game.getCurrPlayer().getMoney());
+		buyProperty.setOpacity(0);
 	}
 	
 	//GAME BOARD
 	@FXML
 	private TabPane windowTab;
-	@FXML
-	private StackedBarChart<String, Number> leaderBoard;
-	final CategoryAxis xAxis = new CategoryAxis();
-	final NumberAxis yAxis = new NumberAxis();
-	private XYChart.Series<String, Number> money = new XYChart.Series<>();
-	public void loadGraph(){
-		int numPlayers = Game.getNumPlayers();
-		//MONEY
-		money.setName("Money");
-		for(int i=0; i<numPlayers; i++){
-			money.getData().add(new XYChart.Data<String, Number>(
-					Game.getPlayer(i).getPlayerName(),
-					Game.getPlayer(i).getMoney()));
-		}
-		leaderBoard.getData().add(money);
-		System.out.println("\tLoaded Graph");
-	}
-	public void updateGraph(){
-		//Game.getCurrPlayer().changeMoney(100);
-		money.getData().set(Game.getCurrPlayerNum(), new XYChart.Data<String, Number>(
-				Game.getCurrPlayer().getPlayerName(),
-				Game.getCurrPlayer().getMoney()));
-	}
-	
-	@FXML
-	private ImageView p1_token;
-	@FXML
-	private ImageView p2_token;
-	@FXML
-	private ImageView p3_token;
-	@FXML
-	private ImageView p4_token;
-	@FXML
-	private ImageView p5_token;
-	@FXML
-	private ImageView p6_token;
 	
 	@FXML
 	private Button rollDiceButton;
@@ -284,6 +276,7 @@ public class GameController implements Initializable{
 	@FXML
 	private Button endTurnButton;
 	public void endTurn(){
+		updatePlayerInfo(Game.getCurrPlayerNum());
 		Game.endTurn();
 		updatePropertyInfo();
 	}

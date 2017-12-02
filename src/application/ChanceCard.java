@@ -8,6 +8,10 @@ public abstract class ChanceCard extends Card{
 		super(cardFile);
 	}
 	
+	
+	/**
+	 * does the specified action of a card
+	 */
 	@Override
 	public void cardAction(){
 		if (moveTo > -1){
@@ -28,24 +32,24 @@ public abstract class ChanceCard extends Card{
 					//RRs @: 5, 15, 25, 35
 					break;
 				case 2:
-					Game.getCurrPlayer().addGetOutOfJailFreeCard();
+					Game.getCurrPlayer().addGetOutOfJailFreeCard();						//Get out of jail free
 					break;
 				case 3:
-					Game.getCurrPlayer().changePos(-3);
+					Game.getCurrPlayer().changePos(-3);									//Go back three spaces
 					break;
 				case 4:
-					Game.goToJailSucker();
-					break;
+					Game.goToJailSucker();												//Go to jail
+					break;	
 				case 5:
-					int numHouses = Game.getCurrPlayer().getNumHouses();
+					int numHouses = Game.getCurrPlayer().getNumHouses();				//For each house/hotel pay...
 					int numHotels = Game.getCurrPlayer().getNumHotels();
 					Game.getCurrPlayer().changeMoney((-1)*100*numHotels - 25*numHouses);
 					break;
 				case 6:
-					Game.getCurrPlayer().setPos(5);
+					Game.getCurrPlayer().setPos(5);										//report to reading railroad
 					break;
 				case 7:
-					Game.manageAllPlayersMoney(50);
+					Game.manageAllPlayersMoney(50);										//Pay each player $50
 					break;
 			}
 		}

@@ -12,6 +12,12 @@ public abstract class Card {
 	protected boolean special;
 	protected int specialNum;
 	
+	
+	/**
+	 * 
+	 * @param cardFile
+	 * initializes all the cards in community chest and chance
+	 */
 	public Card(String cardFile){
 		try {
 			File inputFile = new File(cardFile);
