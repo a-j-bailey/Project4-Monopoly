@@ -3,8 +3,8 @@
 	-	Award players $200 for passing Go
 	-	Go To Jail (Property, Card, 3x Doubles)
 	-	Trade Properties
-	-	Build Houses
-	-	Mortgage Properties
+	[ADAM]	Build Houses
+	[ADAM]	Mortgage Properties
 	-	Add Rules
 	-	Player forfeits if ends turn with negative balance
 	-	Declaring a Winner
