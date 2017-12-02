@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<Pane fx:id="newGameWindow" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LauncherController">
+<Pane fx:id="newGameWindow" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LauncherController">
    <children>
       <VBox prefHeight="400.0" prefWidth="400.0">
          <children>
@@ -57,74 +57,7 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <RadioButton fx:id="p3" mnemonicParsing="false" onAction="#changeP3" text="Player 3">
-                     <padding>
-                        <Insets left="57.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </RadioButton>
-                  <TextField fx:id="p3Name" disable="true" promptText="Name:">
-                     <HBox.margin>
-                        <Insets left="18.0" top="10.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <RadioButton fx:id="p4" mnemonicParsing="false" onAction="#changeP4" text="Player 4">
-                     <padding>
-                        <Insets left="57.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </RadioButton>
-                  <TextField fx:id="p4Name" disable="true" promptText="Name:">
-                     <HBox.margin>
-                        <Insets left="18.0" top="10.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <RadioButton fx:id="p5" mnemonicParsing="false" onAction="#changeP5" text="Player 5">
-                     <padding>
-                        <Insets left="57.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </RadioButton>
-                  <TextField fx:id="p5Name" disable="true" promptText="Name:">
-                     <HBox.margin>
-                        <Insets left="19.0" top="10.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <RadioButton fx:id="p6" mnemonicParsing="false" onAction="#changeP6" text="Player 6">
-                     <padding>
-                        <Insets left="57.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </RadioButton>
-                  <TextField fx:id="p6Name" disable="true" promptText="Name:">
-                     <HBox.margin>
-                        <Insets left="18.0" top="10.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
+            <VBox fx:id="launcherVbox" prefHeight="160.0" prefWidth="400.0" />
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Button fx:id="play" contentDisplay="CENTER" mnemonicParsing="false" onAction="#launchGame" text="PLAY" textAlignment="CENTER">
