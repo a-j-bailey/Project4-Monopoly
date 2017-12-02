@@ -64,15 +64,18 @@ public class Player {
 	 * can be positive or negative
 	 * @param num
 	 */
-	public void changePos(int num){
+	public void changePos(int destination){
 		int temp = this.pos;
-		for(int i = 0; i < num; i++) {
-			temp++;
-			if (temp % 40 == 0) {
+		while(this.pos != destination) {
+			this.pos++;
+			this.pos = this.pos % 40;
+			
+			if (this.pos == 0) {
 				this.changeMoney(200);
 			}
 		}
-		this.pos = (this.pos + num) % 40;
+		//this.pos = (this.pos + destination) % 40;		//this is from when the method took a dice roll rather than a destination
+		//this.pos = destination;
 		switch (pos){
 			case 0:
 				Game.getController().moveToken(Game.getCurrPlayerNum(), 426, 408);
@@ -203,14 +206,16 @@ public class Player {
 	 */
 	public void setPos(int num){
 		this.pos = num;
-		//TODO: Call that locations action.
+		Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 422); 
+		//Set X-Y Coord. of NOT just visiting.
+		
 	}
 	
 	/**
 	 * Returns players position as an int.
 	 * @return
 	 */
-	public int getPos(){
+	public int getPos(){				
 		return this.pos;
 	}
 	

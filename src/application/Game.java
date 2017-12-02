@@ -26,6 +26,7 @@ public class Game{
 	private static boolean canReroll = false;
 	private static HashMap<Integer, Location> locations = new HashMap<Integer, Location>();
 	private static int[] currentDice = new int[2];
+	private static int numOfRolls;
 	
 	/**
 	 * lanches the GUI
@@ -150,27 +151,39 @@ public class Game{
 	 * @return
 	 */
 	public static void rollDice(){
-		Random rand = new Random();
-		int d1 = rand.nextInt(6)+1;
-		int d2 = rand.nextInt(6)+1;
+		numOfRolls++;
+		
+		//Random rand = new Random();
+		//int d1 = rand.nextInt(6)+1;
+		//int d2 = rand.nextInt(6)+1;
 		
 		//FOR TROUBLESHOOTING
-		//System.out.println("-- enter dice roll: --");
-		//Scanner input = new Scanner(System.in);
-		//d1 = input.nextInt();
-		//d2 = input.nextInt();
+		System.out.println("-- enter dice roll: --");
+		Scanner input = new Scanner(System.in);
+		int d1 = input.nextInt();
+		int d2 = input.nextInt();
+		
 		
 		if (d1 == d2){
 			canReroll = true;
-		} else {
+		} 
+		else {
 			canReroll = false;
 		}
-		players.get(currPlayer).changePos(d1 + d2);
-		System.out.println(Game.getCurrPlayer().getPos());
-		currentDice[0] = d1;
-		currentDice[1] = d2;
+		if (numOfRolls == 3) {
+			goToJailSucker();
+			canReroll = false;
+
+
+		}
+		else {
+			players.get(currPlayer).changePos((players.get(currPlayer).getPos() + d1 + d2) % 40);
+			System.out.println(Game.getCurrPlayer().getPos());
+			currentDice[0] = d1;
+			currentDice[1] = d2;
+		}
 	}
-	
+
 	/**
 	 * Is triggered by player selecting "Mortgage Properties" from the action menu.
 	 * takes Stack of locations as input
@@ -202,10 +215,9 @@ public class Game{
 	/**
 	 * Moves current player to given position.
 	 */
-	public static void moveTo(int newPos){
-		//TODO: This (for go to jail or cards that say
-		// "go to nearest RR" or "Take a walk on Boardwalk" 
-	}
+	//public static void moveTo(int newPos){			This is now in Player.java
+	//	currPlayer.changePos(newPos);
+	//}
 	
 	/**
 	 * Sends player to jail and LOCKS 'EM UP
@@ -213,6 +225,8 @@ public class Game{
 	public static void goToJailSucker(){
 		players.get(currPlayer).changeIncarceration();
 		players.get(currPlayer).setPos(10);
+		endTurn();
+		
 	}
 	
 	/**
@@ -234,6 +248,7 @@ public class Game{
 	}
 	
 	public static void endTurn(){
+		numOfRolls = 0;
 		currPlayer = (currPlayer + 1) % numPlayers;
 		System.out.println("\tCurr Player " + currPlayer);
 		gc.nextPlayer();
