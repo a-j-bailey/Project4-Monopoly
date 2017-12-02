@@ -14,13 +14,18 @@
             <Image url="@imgs/MonopolyLogo.png" />
          </image>
       </ImageView>
-      <Label fx:id="popUpTitle" contentDisplay="CENTER" layoutX="134.0" layoutY="62.0" text="PopUp Title">
+      <Label fx:id="popUpTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="134.0" layoutY="62.0" text="PopUp Title">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TreeView fx:id="propertyTree" layoutX="20.0" layoutY="100.0" prefHeight="230.0" prefWidth="200.0" />
-      <ChoiceBox fx:id="houseChanger" layoutX="229.0" layoutY="187.0" prefWidth="150.0" />
+      <ScrollPane layoutX="20.0" layoutY="100.0" maxHeight="232.0" maxWidth="202.0" prefHeight="232.0" prefViewportHeight="230.0" prefViewportWidth="200.0" prefWidth="202.0">
+         <content>
+            <ListView fx:id="propertyList" prefHeight="230.0" prefWidth="200.0" />
+         </content>
+      </ScrollPane>
+      <ChoiceBox fx:id="houseChanger" disable="true" layoutX="229.0" layoutY="187.0" opacity="0.0" prefWidth="150.0" />
+      <CheckBox fx:id="mortgageCheck" disable="true" layoutX="229.0" layoutY="192.0" mnemonicParsing="false" opacity="0.0" text="Mortgage" />
       <Label fx:id="cost" layoutX="177.0" layoutY="334.0" text="\$000">
          <font>
             <Font size="18.0" />
@@ -28,5 +33,6 @@
       </Label>
       <Button fx:id="save" layoutX="204.0" layoutY="363.0" mnemonicParsing="false" prefWidth="100.0" text="SAVE" textFill="#07e100" />
       <Button fx:id="cancel" layoutX="96.0" layoutY="363.0" mnemonicParsing="false" prefWidth="100.0" text="CANCEL" textFill="RED" />
+      <TextFlow fx:id="warningArea" layoutX="223.0" layoutY="239.0" prefHeight="91.0" prefWidth="172.0" />
    </children>
 </Pane>

@@ -175,11 +175,11 @@ public class GameController implements Initializable{
 					String name = util.getPropertyName();
 					Scanner nameScn = new Scanner(name);
 					if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){
-						int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(10).size();
+						int numOwned = Game.getPlayer(util.getOwner() - 1).getProperties().get(10).size();
 						int dice = Game.getCurrentDice()[0] + Game.getCurrentDice()[1];
 						rent = util.calcUtilityRent(dice, numOwned);
 					} else {
-						int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(9).size();
+						int numOwned = Game.getPlayer(util.getOwner() - 1).getProperties().get(9).size();
 						rent = util.calcRailroadRent(numOwned);
 						System.out.println("\tRR Rent: " + rent);
 					}
