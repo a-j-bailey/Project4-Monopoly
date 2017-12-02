@@ -155,11 +155,10 @@ public class Game{
 		int d2 = rand.nextInt(6)+1;
 		
 		//FOR TROUBLESHOOTING
-		System.out.println("-- enter dice roll: --");
-		Scanner input = new Scanner(System.in);
-		
-		d1 = input.nextInt();
-		d2 = input.nextInt();
+		//System.out.println("-- enter dice roll: --");
+		//Scanner input = new Scanner(System.in);
+		//d1 = input.nextInt();
+		//d2 = input.nextInt();
 		
 		if (d1 == d2){
 			canReroll = true;
