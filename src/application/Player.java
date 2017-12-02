@@ -65,6 +65,13 @@ public class Player {
 	 * @param num
 	 */
 	public void changePos(int num){
+		int temp = this.pos;
+		for(int i = 0; i < num; i++) {
+			temp++;
+			if (temp % 40 == 0) {
+				this.changeMoney(200);
+			}
+		}
 		this.pos = (this.pos + num) % 40;
 		switch (pos){
 			case 0:
