@@ -86,6 +86,7 @@ public class Property extends Location{
 	 * @return mortgage Value
 	 */
 	public int getMortgageValue() {
+		System.out.println(mortgageValue);
 		return mortgageValue;
 	}
 	/**

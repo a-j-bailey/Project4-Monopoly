@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
 import application.Game;
@@ -25,18 +23,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Tooltip;
-import javafx.scene.control.TreeView;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class PopUpController implements Initializable{
 	
+	private String type;
 	private Property thisProperty;
 	private int money;
-	private HashMap<Residential, Integer> changedProperties = new HashMap<>();
+	private HashMap<Property, Integer> changedProperties = new HashMap<>();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -61,6 +56,7 @@ public class PopUpController implements Initializable{
 		//
 		money = 0;
 		popUpTitle.setText("Build House"); 
+		type = "Build";
 		houseChanger.setOpacity(1);
 		houseChanger.setDisable(false);
 		houseChanger.setValue("0 Houses");
@@ -121,15 +117,59 @@ public class PopUpController implements Initializable{
 
 	public void mortgageWindow(){
 		popUpTitle.setText("Mortgage Houses");
+		type = "Mortgage";
 		mortgageCheck.setOpacity(1);
+		mortgageCheck.setDisable(false);
+		mortgageCheck.selectedProperty().addListener(new ChangeListener<Boolean>(){
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				int val = -1;
+				if(newValue){
+					val = 1;
+				} else {
+					val = 0;
+				}
+				Property prop = thisProperty;
+				changedProperties.put(prop, val);
+								
+				if(newValue){
+					System.out.println(money);
+					System.out.println(prop.getPropertyName());
+					money += prop.getMortgageValue();
+				} else {
+					money -= prop.getMortgageValue();
+				}
+				cost.setText("$"+money);
+			}
+			
+		});
 		propertyList.getItems().addAll(loadPropertyList("Mortgage"));
+		propertyList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			HashMap<Integer, ArrayList<Property>> propList = Game.getCurrPlayer().getProperties();
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+		        System.out.println("Selected item: " + newValue);
+				for(int i=1; i<=8; i++){
+					for(int j=0; j<propList.get(i).size(); j++){
+						if(propList.get(i).get(j).getPropertyName().equals(propertyList.getSelectionModel().getSelectedItem())){
+							thisProperty = (Residential) propList.get(i).get(j);
+						}
+					}
+				}
+				if(thisProperty.isMortgaged()){
+					mortgageCheck.setSelected(true);
+				} else {
+					mortgageCheck.setSelected(false);
+				}
+		    }
+		});
 	}
 
 	public ObservableList<String> loadPropertyList(String type){
 		ObservableList<String> propList = FXCollections.<String>observableArrayList();
 		HashMap<Integer, ArrayList<Property>> playerProperties = Game.getCurrPlayer().getProperties();
 		if (type.equals("Build")){
-			//TODO: Only add houses if there is a complete set. 
 			for (int i=1; i<=8; i++){
 				for(Property property : playerProperties.get(i)){
 					propList.add(property.getPropertyName());
@@ -164,16 +204,22 @@ public class PopUpController implements Initializable{
 	@FXML
 	private Button save;
 	public void save(){
-		for(Residential property : changedProperties.keySet()){
-			if (changedProperties.get(property) == 0){
-				Game.getCurrPlayer().changeMoney(property.getHouseCost() * property.getNumHouses());
-			} else if (changedProperties.get(property) < property.getNumHouses()){
-				Game.getCurrPlayer().changeMoney(property.getHouseCost() * (property.getNumHouses() - changedProperties.get(property)));
-			} else if (changedProperties.get(property) > property.getNumHouses()) {
-				Game.getCurrPlayer().changeMoney((-1)*property.getHouseCost() * (changedProperties.get(property) - property.getNumHouses()));
+		if(type.equals("Build")){
+			for(Property property : changedProperties.keySet()){
+				Residential resProp = (Residential) property;
+				if (changedProperties.get(property) == 0){
+					Game.getCurrPlayer().changeMoney(resProp.getHouseCost() * resProp.getNumHouses());
+				} else if (changedProperties.get(property) < resProp.getNumHouses()){
+					Game.getCurrPlayer().changeMoney(resProp.getHouseCost() * (resProp.getNumHouses() - changedProperties.get(property)));
+				} else if (changedProperties.get(property) > resProp.getNumHouses()) {
+					Game.getCurrPlayer().changeMoney((-1)*resProp.getHouseCost() * (changedProperties.get(property) - resProp.getNumHouses()));
+				}
+				resProp.buildHouse(changedProperties.get(property));
 			}
-			property.buildHouse(changedProperties.get(property));
+		} else if(type.equals("Mortgage")){
+			
 		}
+		
 		Stage stage = (Stage) save.getScene().getWindow();
 		stage.close();
 	}

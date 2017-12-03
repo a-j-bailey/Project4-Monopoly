@@ -17,3 +17,4 @@
 			But don't move their token unless it's doubles.
 	-	Make tokens go to jail as soon as they land on that location. 
 			Currently you have to "roll dice" again
+	-	Only refund half the cost of houses if their sold
