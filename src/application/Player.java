@@ -202,15 +202,21 @@ public class Player {
 	
 	/**
 	 * Sets position to given location
+	 * only InJail and JustVisiting
 	 * @param num
 	 */
 	public void setPos(int num){
-		this.pos = num;
-		Game.getController().moveToken(Game.getCurrPlayerNum(), 45, 400); 
-		//Set X-Y Coord. of NOT just visiting.
-		
+		if (num == 50) {
+			this.pos = num;
+			Game.getController().moveToken(Game.getCurrPlayerNum(), 45, 400); 
+		}
+		else if(num == 10) {
+			this.pos = num;
+			Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 422);
+		}
+
 	}
-	
+
 	/**
 	 * Returns players position as an int.
 	 * @return
@@ -302,8 +308,8 @@ public class Player {
 	/**
 	 * Changes the players status from in to out of jail
 	 */
-	public void changeIncarceration(){
-		this.isIncarcerated = !this.isIncarcerated;
+	public void changeIncarceration(boolean maybe){
+		this.isIncarcerated = maybe;
 	}
 	
 	/**

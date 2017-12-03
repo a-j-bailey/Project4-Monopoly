@@ -17,3 +17,7 @@
 			But don't move their token unless it's doubles.
 	-	Make tokens go to jail as soon as they land on that location. 
 			Currently you have to "roll dice" again
+	-	When a player goes to jail, the game tells them they're in jail 
+			and then they have to hit the "end turn" Button
+			
+			Also, have a message that tells the player when they go to jail and when they get out of jail
