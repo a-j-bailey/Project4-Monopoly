@@ -222,6 +222,9 @@ public class GameController implements Initializable{
 				Text propName = new Text("\t" + property.getPropertyName() + houses);
 				System.out.println("\t" + property.getPropertyName());
 				propName.setFill(Color.web(property.getColor()));
+				if(property.isMortgaged()){
+					propName.setOpacity(0.5);
+				}
 				list.getChildren().add(propName);
 			}
 			Text blankLine = new Text("\n");
