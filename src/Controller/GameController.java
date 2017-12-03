@@ -267,11 +267,10 @@ public class GameController implements Initializable{
 	@FXML
 	private MenuItem mortgageProperties;
 	public void buildHouses(){
-		launchPopUp().buildWindow("Build");
-		//launchPopUp("Build");
+		launchPopUp().buildWindow();
 	}
 	public void mortgageProperties(){
-		//new PopUpController("Mortgage");
+		launchPopUp().mortgageWindow();
 
 	}
 	

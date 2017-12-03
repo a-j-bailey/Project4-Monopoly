@@ -23,7 +23,8 @@ public class Property extends Location{
 	private int value;
 	
 	private int mortgageValue;
-	private boolean isMortgaged;	
+	private boolean isMortgaged;
+	private boolean tempMortgaged;
 	private boolean isBought;
 	
 	/**

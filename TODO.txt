@@ -10,3 +10,4 @@
 	-	Add Rules
 	-	Player forfeits if ends turn with negative balance
 	-	Declaring a Winner
+	-	Only allow user to add houses if there is a complete set
