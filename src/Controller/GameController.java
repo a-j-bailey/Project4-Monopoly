@@ -32,6 +32,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -200,8 +201,6 @@ public class GameController implements Initializable{
 			this.buyProperty.setOpacity(0);
 			this.propertyInfoText.setText("");
 		}
-		
-		
 	}
 	
 	public TextFlow updatePlayerPropertyList(int pNum){
@@ -210,7 +209,17 @@ public class GameController implements Initializable{
 		
 		for (int i=1; i<=Game.getPlayer(pNum).getProperties().size(); i++){
 			for(Property property : Game.getPlayer(pNum).getProperties().get(i)){
-				Text propName = new Text("\t" + property.getPropertyName() + "\n");
+				String houses = "\n\t";
+				if(property.getPropertyType().equals("Residential")){
+					Residential resProp = (Residential) property;
+					if(resProp.getNumHouses() > 0){
+						for (int j=0; j<resProp.getNumHouses(); j++){
+							houses = houses + "⌂ ";
+						}
+						houses = houses + "\n";
+					}
+				}
+				Text propName = new Text("\t" + property.getPropertyName() + houses);
 				System.out.println("\t" + property.getPropertyName());
 				propName.setFill(Color.web(property.getColor()));
 				list.getChildren().add(propName);
@@ -272,6 +281,10 @@ public class GameController implements Initializable{
 	public void mortgageProperties(){
 		launchPopUp().mortgageWindow();
 
+	}
+	
+	public void constructHouses(String name, int num){
+		
 	}
 	
 	public PopUpController launchPopUp(){

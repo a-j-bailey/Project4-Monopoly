@@ -31,8 +31,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="save" layoutX="204.0" layoutY="363.0" mnemonicParsing="false" prefWidth="100.0" text="SAVE" textFill="#07e100" />
-      <Button fx:id="cancel" layoutX="96.0" layoutY="363.0" mnemonicParsing="false" prefWidth="100.0" text="CANCEL" textFill="RED" />
+      <Button fx:id="save" layoutX="204.0" layoutY="363.0" mnemonicParsing="false" onAction="#save" prefWidth="100.0" text="SAVE" textFill="#07e100" />
+      <Button fx:id="cancel" layoutX="96.0" layoutY="363.0" mnemonicParsing="false" onAction="#cancel" prefWidth="100.0" text="CANCEL" textFill="RED" />
       <TextFlow fx:id="warningArea" layoutX="223.0" layoutY="239.0" prefHeight="91.0" prefWidth="172.0" />
    </children>
 </Pane>

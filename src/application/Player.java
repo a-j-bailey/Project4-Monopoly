@@ -206,7 +206,7 @@ public class Player {
 	 */
 	public void setPos(int num){
 		this.pos = num;
-		Game.getController().moveToken(Game.getCurrPlayerNum(), 25, 422); 
+		Game.getController().moveToken(Game.getCurrPlayerNum(), 45, 400); 
 		//Set X-Y Coord. of NOT just visiting.
 		
 	}
@@ -240,6 +240,7 @@ public class Player {
 	public void changeMoney(double amount){
 		System.out.println("\tChange Money: " + amount);
 		this.money += amount;
+		Game.getController().updatePlayerInfo(Game.getCurrPlayerNum());
 		System.out.println("\t" + this.money);
 	}
 	

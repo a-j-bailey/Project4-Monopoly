@@ -1,13 +1,19 @@
 	-	Property Actions (pay rent, paying tax, draw card)
 	-	Make sure player does not own property before charging them rent
-	[Done]	Award players $200 for passing Go
+[Done]	Award players $200 for passing Go
 	[Steve] Go To Jail (Property, Card, 3x Doubles) 
 				Set the coord. of the in jail space
 				3x doubles is Good
 	-	Trade Properties
-	[ADAM]	Build Houses
+[Done]	Build Houses
 	[ADAM]	Mortgage Properties
 	-	Add Rules
 	-	Player forfeits if ends turn with negative balance
 	-	Declaring a Winner
 	-	Only allow user to add houses if there is a complete set
+	-	Display houses on game board
+	-	Figure out why game occasionally lets user buy property that's already been bought. 
+	-	Allow players to roll to get out of jail when it would be there turn.
+			But don't move their token unless it's doubles.
+	-	Make tokens go to jail as soon as they land on that location. 
+			Currently you have to "roll dice" again

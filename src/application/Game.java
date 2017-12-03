@@ -105,6 +105,8 @@ public class Game{
 				lnScn.close();
 				i++;
 			}
+			Location jail = new Location("Location,In Jail,#000000");
+			locations.put(50, jail);
 			scnr.close();
 		} catch (FileNotFoundException e) {
 			System.err.println("Couldn't open property file");
@@ -153,15 +155,15 @@ public class Game{
 	public static void rollDice(){
 		numOfRolls++;
 		
-		Random rand = new Random();
-		int d1 = rand.nextInt(6)+1;
-		int d2 = rand.nextInt(6)+1;
+		//Random rand = new Random();
+		//int d1 = rand.nextInt(6)+1;
+		//int d2 = rand.nextInt(6)+1;
 		
 		//FOR TROUBLESHOOTING
-		//System.out.println("-- enter dice roll: --");
-		//Scanner input = new Scanner(System.in);
-		//int d1 = input.nextInt();
-		//int d2 = input.nextInt();
+		System.out.println("-- enter dice roll: --");
+		Scanner input = new Scanner(System.in);
+		int d1 = input.nextInt();
+		int d2 = input.nextInt();
 		
 		
 		if (d1 == d2){
@@ -224,9 +226,8 @@ public class Game{
 	 */
 	public static void goToJailSucker(){
 		players.get(currPlayer).changeIncarceration();
-		players.get(currPlayer).setPos(10);
+		players.get(currPlayer).setPos(50);
 		endTurn();
-		
 	}
 	
 	/**

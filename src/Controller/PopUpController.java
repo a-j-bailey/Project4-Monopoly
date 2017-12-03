@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
 import application.Game;
@@ -34,6 +36,7 @@ public class PopUpController implements Initializable{
 	
 	private Property thisProperty;
 	private int money;
+	private HashMap<Residential, Integer> changedProperties = new HashMap<>();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -54,8 +57,10 @@ public class PopUpController implements Initializable{
 	}
 	
 	public void buildWindow(){
+		//⌂
+		//
 		money = 0;
-		popUpTitle.setText("Build Houses");
+		popUpTitle.setText("Build House"); 
 		houseChanger.setOpacity(1);
 		houseChanger.setDisable(false);
 		houseChanger.setValue("0 Houses");
@@ -63,23 +68,24 @@ public class PopUpController implements Initializable{
 		houseChanger.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				HashMap<String, Residential> changedProperties = new HashMap<>();
 				
 				System.out.println("Index: " + newValue);
 				Residential resProperty = (Residential) thisProperty;
+				int oldHouses = 0;
 				int numHouses = (int) newValue;
-				if(changedProperties.containsKey(thisProperty.getPropertyName())){
-					changedProperties.get(thisProperty.getPropertyName()).buildHouse(numHouses);
+				if(changedProperties.containsKey(thisProperty)){
+					oldHouses = changedProperties.get(resProperty);
+					changedProperties.put(resProperty, numHouses);
 				} else {
-					resProperty.buildHouse(numHouses);
-					changedProperties.put(resProperty.getPropertyName(), resProperty);
+					oldHouses = resProperty.getNumHouses();
+					changedProperties.put(resProperty, numHouses);
 				}
-				if(numHouses < resProperty.getNumHouses()){
-					money -= (resProperty.getHouseCost() * numHouses);
+				if(numHouses < changedProperties.get(resProperty)){
+					money -= (resProperty.getHouseCost() * (oldHouses - numHouses));
 				} else {
-					money += (resProperty.getHouseCost() * numHouses);
+					money += (resProperty.getHouseCost() * (numHouses - oldHouses));
 				}
-				cost.setText("$"+money);
+				cost.setText("$"+((-1)*money));
 			}
 		});
 		propertyList.getItems().addAll(loadPropertyList("Build"));
@@ -91,9 +97,23 @@ public class PopUpController implements Initializable{
 				for(int i=1; i<=8; i++){
 					for(int j=0; j<propList.get(i).size(); j++){
 						if(propList.get(i).get(j).getPropertyName().equals(propertyList.getSelectionModel().getSelectedItem())){
-							thisProperty = propList.get(i).get(j);
+							thisProperty = (Residential) propList.get(i).get(j);
 						}
 					}
+				}
+				Residential resProp = (Residential) thisProperty;
+				int numHouses = 0;
+				if(changedProperties.containsKey(resProp)){
+					numHouses = changedProperties.get(resProp);
+				} else {
+					numHouses = resProp.getNumHouses();
+				}
+				if(numHouses == 5){
+					houseChanger.setValue("Hotel");
+				} else if(numHouses == 1) {
+					houseChanger.setValue(numHouses + " House");
+				} else {
+					houseChanger.setValue(numHouses + " Houses");
 				}
 		    }
 		});
@@ -137,9 +157,27 @@ public class PopUpController implements Initializable{
 	private Label cost;
 	@FXML
 	private Button cancel;
+	public void cancel(){
+		Stage stage = (Stage) cancel.getScene().getWindow();
+		stage.close();
+	}
 	@FXML
 	private Button save;
+	public void save(){
+		for(Residential property : changedProperties.keySet()){
+			if (changedProperties.get(property) == 0){
+				Game.getCurrPlayer().changeMoney(property.getHouseCost() * property.getNumHouses());
+			} else if (changedProperties.get(property) < property.getNumHouses()){
+				Game.getCurrPlayer().changeMoney(property.getHouseCost() * (property.getNumHouses() - changedProperties.get(property)));
+			} else if (changedProperties.get(property) > property.getNumHouses()) {
+				Game.getCurrPlayer().changeMoney((-1)*property.getHouseCost() * (changedProperties.get(property) - property.getNumHouses()));
+			}
+			property.buildHouse(changedProperties.get(property));
+		}
+		Stage stage = (Stage) save.getScene().getWindow();
+		stage.close();
+	}
+	
 	@FXML
 	private TextFlow warningArea;
-	
 }

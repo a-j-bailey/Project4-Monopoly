@@ -74,7 +74,7 @@ public class Residential extends Property{
 	 * @return 
 	 */
 	public void buildHouse(int numHousesBuilt) {
-		numHouses += numHousesBuilt;
+		numHouses = numHousesBuilt;
 		if(numHouses == 1) {
 			this.setRent(this.rentHouse1);
 		}
@@ -90,9 +90,6 @@ public class Residential extends Property{
 		else if(numHouses == 5) {
 			this.setRent(this.rentHouse5);
 		}
-
-
-
 	}
 
 
