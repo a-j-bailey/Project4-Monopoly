@@ -27,6 +27,7 @@ public class Game{
 	private static HashMap<Integer, Location> locations = new HashMap<Integer, Location>();
 	private static int[] currentDice = new int[2];
 	private static int numOfRolls;
+	private static boolean rolledDoublesInJail = false;
 	
 	/**
 	 * lanches the GUI
@@ -153,37 +154,68 @@ public class Game{
 	 * @return
 	 */
 	public static void rollDice(){
-		numOfRolls++;
-		
-		//Random rand = new Random();
-		//int d1 = rand.nextInt(6)+1;
-		//int d2 = rand.nextInt(6)+1;
-		
-		//FOR TROUBLESHOOTING
-		System.out.println("-- enter dice roll: --");
-		Scanner input = new Scanner(System.in);
-		int d1 = input.nextInt();
-		int d2 = input.nextInt();
-		
-		
-		if (d1 == d2){
-			canReroll = true;
-		} 
-		else {
-			canReroll = false;
-		}
-		if (numOfRolls == 3) {
-			goToJailSucker();
-			canReroll = false;
+		if (!Game.getCurrPlayer().isIncarcerated()) {
 
 
+			numOfRolls++;
+
+			//Random rand = new Random();
+			//int d1 = rand.nextInt(6)+1;
+			//int d2 = rand.nextInt(6)+1;
+
+			//FOR TROUBLESHOOTING
+			System.out.println("-- enter dice roll: --");
+			Scanner input = new Scanner(System.in);
+			int d1 = input.nextInt();
+			int d2 = input.nextInt();
+
+
+			if (d1 == d2){
+				canReroll = true;
+			} 
+			else {
+				canReroll = false;
+			}
+			if (numOfRolls == 3) {
+				canReroll = false;
+				goToJailSucker();
+			}
+			else {
+				players.get(currPlayer).changePos((players.get(currPlayer).getPos() + d1 + d2) % 40);
+				System.out.println(Game.getCurrPlayer().getPos());
+				currentDice[0] = d1;
+				currentDice[1] = d2;
+				if (Game.getCurrPlayer().getPos() == 30) {
+					canReroll = false;
+					goToJailSucker();
+				}
+			}
 		}
 		else {
-			players.get(currPlayer).changePos((players.get(currPlayer).getPos() + d1 + d2) % 40);
-			System.out.println(Game.getCurrPlayer().getPos());
-			currentDice[0] = d1;
-			currentDice[1] = d2;
+			//Random rand = new Random();
+			//int d1 = rand.nextInt(6)+1;
+			//int d2 = rand.nextInt(6)+1;
+
+			//FOR TROUBLESHOOTING
+			System.out.println("-- enter dice roll: --");
+			Scanner input = new Scanner(System.in);
+			int d1 = input.nextInt();
+			int d2 = input.nextInt();
+
+			canReroll = false;
+			
+			if (d1 == d2){
+				currentDice[0] = d1;
+				currentDice[1] = d2;
+				rolledDoublesInJail = true;
+				getOutOfJailSucker();
+				
+			} 
+			else {
+				endTurn();
+			}
 		}
+		
 	}
 
 	/**
@@ -222,12 +254,28 @@ public class Game{
 	//}
 	
 	/**
+	
 	 * Sends player to jail and LOCKS 'EM UP
 	 */
 	public static void goToJailSucker(){
-		players.get(currPlayer).changeIncarceration();
+		players.get(currPlayer).changeIncarceration(true);
 		players.get(currPlayer).setPos(50);
-		endTurn();
+		canReroll = false;										//Instead of this method ending their turn, We should let them hit the button and let them know theyre in jail
+		
+	}
+	
+	public static void getOutOfJailSucker() {
+																//print something about how you're out of jail
+		players.get(currPlayer).changeIncarceration(false);
+		players.get(currPlayer).setPos(10);
+				
+		if (rolledDoublesInJail) {
+			players.get(currPlayer).changePos((10 + currentDice[0] + currentDice[1]) % 40);
+			rolledDoublesInJail = false;
+		}
+		else {
+			//Just Tell Them They are out of jail and give them the option to end their turn				//HERE HERE HERE HERE
+		}
 	}
 	
 	/**
