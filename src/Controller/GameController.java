@@ -32,6 +32,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 
@@ -113,6 +115,8 @@ public class GameController implements Initializable{
 		updatePropertyInfo();
 		
 		Game.getLocation(Game.getCurrPlayer().getPos());
+		
+		loadRules();
 		
 		System.out.println(" -- Game Initialized -- ");
 	}
@@ -342,5 +346,23 @@ public class GameController implements Initializable{
         }
 		
 		return tc;
+	}
+	
+	@FXML
+	private TextFlow rulesArea;
+	
+	private void loadRules(){
+		File rulesFile = new File("src/Rules.txt");
+		try {
+			Scanner rulesScnr = new Scanner(rulesFile);
+			rulesScnr.useDelimiter("");
+			while(rulesScnr.hasNext()){
+				Text next = new Text(rulesScnr.next());
+				rulesArea.getChildren().add(next);
+			}
+			rulesScnr.close();
+		} catch (FileNotFoundException e) {
+			System.err.println("Error loading rules file");
+		}
 	}
 }
