@@ -23,6 +23,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
@@ -130,17 +132,37 @@ public class PopUpController implements Initializable{
 				} else {
 					val = 0;
 				}
-				Property prop = thisProperty;
-				changedProperties.put(prop, val);
-								
-				if(newValue){
-					System.out.println(money);
-					System.out.println(prop.getPropertyName());
-					money += prop.getMortgageValue();
+				
+				Boolean mortgageable = null;
+				
+				if(thisProperty.getPropertyType().equals("Residential")){
+					Residential resProp = (Residential) thisProperty;
+					if(resProp.getNumHouses() > 0){
+						mortgageable = false;
+					} else {
+						mortgageable = true;
+					}
 				} else {
-					money -= prop.getMortgageValue();
+					mortgageable = true;
 				}
-				cost.setText("$"+money);
+				
+				if(mortgageable){
+					changedProperties.put(thisProperty, val);
+					if(newValue){
+						money += thisProperty.getMortgageValue();
+					} else {
+						money -= thisProperty.getMortgageValue();
+					}
+					cost.setText("$"+money);
+				} else {
+					Text text = new Text("You can't mortgage a property that has houses."
+							+ "\nPlease sell the houses on " + thisProperty.getPropertyName() 
+							+ " before mortgaging this property.");
+					text.setFill(Color.RED);
+					warningArea.getChildren().add(text);
+					warningArea.setOpacity(1);
+					mortgageCheck.setSelected(false);
+				}
 			}
 			
 		});
