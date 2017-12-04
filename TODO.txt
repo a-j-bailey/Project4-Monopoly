@@ -1,24 +1,26 @@
-	-	Property Actions (pay rent, paying tax, draw card)
+	[steve]	Property Actions (pay rent, paying tax, draw card)
+		[Done] Tax
+		Cards are basically done except we need to initialize them in game.java
 	-	Make sure player does not own property before charging them rent
 [Done]	Award players $200 for passing Go
-	[Steve] Go To Jail (Property, Card, 3x Doubles) 
+[Done]	Go To Jail (Property, Card, 3x Doubles) 
 				Set the coord. of the in jail space
 				3x doubles is Good
 	-	Trade Properties
 [Done]	Build Houses
-	[ADAM]	Mortgage Properties
+[Done]	Mortgage Properties
 	-	Add Rules
 	-	Player forfeits if ends turn with negative balance
 	-	Declaring a Winner
 	-	Only allow user to add houses if there is a complete set
 	-	Display houses on game board
 	-	Figure out why game occasionally lets user buy property that's already been bought. 
-	-	Allow players to roll to get out of jail when it would be there turn.
+[Done]	Allow players to roll to get out of jail when it would be there turn.
 			But don't move their token unless it's doubles.
-	-	Make tokens go to jail as soon as they land on that location. 
+[Done]	Make tokens go to jail as soon as they land on that location. 
 			Currently you have to "roll dice" again
 	-	Only refund half the cost of houses if their sold
 	-	When a player goes to jail, the game tells them they're in jail 
 			and then they have to hit the "end turn" Button
-			
 			Also, have a message that tells the player when they go to jail and when they get out of jail
+			Right now, When you don't roll doubles when in jail, you have to click "roll Dice" twice. Make a message for that

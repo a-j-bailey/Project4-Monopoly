@@ -14,6 +14,7 @@ public class Player {
 	private String playerName;
 	private int pos = 0;
 	private boolean isIncarcerated = false;
+	private int numRollsInJail;
 	
 	/**
 	 * Constructs new player from string
@@ -22,6 +23,7 @@ public class Player {
 	public Player(String name){
 		this.playerName = name;
 		this.playerProperties = new HashMap<>();
+		this.numRollsInJail = 0;
 		for(int i=1; i<11; i++){
 			this.playerProperties.put(i, new ArrayList<Property>());
 		}
@@ -339,4 +341,19 @@ public class Player {
 	public HashMap<Integer, ArrayList<Property>> getProperties(){
 		return this.playerProperties;
 	}
+	
+	/**
+	 * Keeps track of how many rolls a playing does in an attempt to get out of jail
+	 * @return
+	 */
+	public int getNumRollsInJail() {
+		return numRollsInJail;
+	}
+	
+	
+	public void addNumRollsInJail() {
+		numRollsInJail++;
+	}
+	
+	
 }

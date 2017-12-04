@@ -29,7 +29,7 @@ public class Tax extends Location{
 	 * @return taxAmount
 	 */
 	public int getTaxAmount() {
-		return this.taxAmount;
+		return -1 * this.taxAmount;
 	}
 	
 	

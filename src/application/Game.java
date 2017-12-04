@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
@@ -27,7 +28,8 @@ public class Game{
 	private static HashMap<Integer, Location> locations = new HashMap<Integer, Location>();
 	private static int[] currentDice = new int[2];
 	private static int numOfRolls;
-	private static boolean rolledDoublesInJail = false;
+	private static int[] actionSpotLocations = new int[] {2, 4, 7, 17, 22, 33, 36, 38};
+	
 	
 	/**
 	 * lanches the GUI
@@ -58,7 +60,8 @@ public class Game{
 	 * @author adambailey
 	 * @param playerNames
 	 */
-	public Game(ArrayList<String> playerNames){
+	public Game(ArrayList<String> playerNames){	
+		
 		for(String name : playerNames){
 			Player thisPlayer = new Player(name);
 			players.add(thisPlayer);
@@ -189,35 +192,86 @@ public class Game{
 					canReroll = false;
 					goToJailSucker();
 				}
+				
+				
+				else {
+					for  (int i = 0; i < 8; i++) {
+						if (Game.getCurrPlayer().getPos() == actionSpotLocations[i]) {
+							actionSpot(Game.getCurrPlayer().getPos());
+						}
+					}
+				}
+				
 			}
 		}
 		else {
-			//Random rand = new Random();
-			//int d1 = rand.nextInt(6)+1;
-			//int d2 = rand.nextInt(6)+1;
 
-			//FOR TROUBLESHOOTING
-			System.out.println("-- enter dice roll: --");
-			Scanner input = new Scanner(System.in);
-			int d1 = input.nextInt();
-			int d2 = input.nextInt();
-
-			canReroll = false;
-			
-			if (d1 == d2){
-				currentDice[0] = d1;
-				currentDice[1] = d2;
-				rolledDoublesInJail = true;
+			if (Game.getCurrPlayer().getNumRollsInJail() == 3) {
+				Game.getCurrPlayer().changeMoney(-50);
+				canReroll = true;
 				getOutOfJailSucker();
 				
-			} 
+			}
+
 			else {
-				endTurn();
+
+				//Random rand = new Random();
+				//int d1 = rand.nextInt(6)+1;
+				//int d2 = rand.nextInt(6)+1;
+
+				//FOR TROUBLESHOOTING
+				System.out.println("-- enter dice roll: --");
+				Scanner input = new Scanner(System.in);
+				int d1 = input.nextInt();
+				int d2 = input.nextInt();
+				
+				Game.getCurrPlayer().addNumRollsInJail();
+				
+				canReroll = false;
+
+
+				if (d1 == d2){
+					currentDice[0] = d1;
+					currentDice[1] = d2;
+					getOutOfJailSucker();
+
+				} 
+				else {
+					endTurn();
+				}
 			}
 		}
-		
+
 	}
 
+	
+	
+	
+	public static void actionSpot(int location) {
+		
+		if (location == 2 || location == 17 || location == 33) {		//Community Chest
+			CommunityChestCards.cardAction();
+		}
+		
+		if (location == 7 || location == 22 || location == 36) {		//Chance
+			ChanceCard.cardAction();
+		}
+		if (location == 4 || location == 38) {							//Tax
+			Game.getCurrPlayer().changeMoney(((Tax) locations.get(location)).getTaxAmount());
+			
+			
+			
+			
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
 	/**
 	 * Is triggered by player selecting "Mortgage Properties" from the action menu.
 	 * takes Stack of locations as input
@@ -269,9 +323,9 @@ public class Game{
 		players.get(currPlayer).changeIncarceration(false);
 		players.get(currPlayer).setPos(10);
 				
-		if (rolledDoublesInJail) {
+		if (currentDice[0] == currentDice[1]) {
 			players.get(currPlayer).changePos((10 + currentDice[0] + currentDice[1]) % 40);
-			rolledDoublesInJail = false;
+			
 		}
 		else {
 			//Just Tell Them They are out of jail and give them the option to end their turn				//HERE HERE HERE HERE
