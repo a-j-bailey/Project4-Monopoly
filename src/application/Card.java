@@ -1,16 +1,14 @@
 package application;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Card {
-	protected static String title;
-	protected static int moveTo;
-	protected static int fine;
-	protected static int get;
-	protected static boolean special;
-	protected static int specialNum;
+	private String title;
+	private int moveTo;
+	private int fine;
+	private int get;
+	private boolean special;
+	private int specialNum;
 	
 	
 	/*
@@ -28,15 +26,16 @@ public class Card {
 
 
 		Scanner scnr = new Scanner(cardLine);
+		scnr.useDelimiter(",");
 
-		this.title = scnr.next();
-		Card.moveTo = scnr.nextInt();
+		this.title =scnr.next();
+		this.moveTo =scnr.nextInt();
 		this.fine = scnr.nextInt();
 		this.get = scnr.nextInt();
 		String isSpecial = scnr.next();
 		if (isSpecial.equals("TRUE")){
 			this.special = true;
-			this.specialNum = scnr.nextInt();
+			this.specialNum =scnr.nextInt();
 		} else {
 			this.special = false;
 		}
@@ -44,6 +43,66 @@ public class Card {
 		scnr.close();
 
 
+	}
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+	public int getMoveTo() {
+		return moveTo;
+	}
+
+
+	public void setMoveTo(int moveTo) {
+		this.moveTo = moveTo;
+	}
+
+
+	public int getFine() {
+		return fine;
+	}
+
+
+	public void setFine(int fine) {
+		this.fine = fine;
+	}
+
+
+	public int getGet() {
+		return get;
+	}
+
+
+	public void setGet(int get) {
+		this.get = get;
+	}
+
+
+	public boolean isSpecial() {
+		return special;
+	}
+
+
+	public void setSpecial(boolean special) {
+		this.special = special;
+	}
+
+
+	public int getSpecialNum() {
+		return specialNum;
+	}
+
+
+	public void setSpecialNum(int specialNum) {
+		this.specialNum = specialNum;
 	}
 
 	//abstract public static void cardAction();

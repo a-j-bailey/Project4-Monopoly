@@ -17,22 +17,22 @@ public class ChanceCard extends Card{
 	 * Completes the action of the card based on the cards member variables.
 	 */
 	public void cardAction(){
-		if (moveTo > -1){
-			Game.moveTo(moveTo);
+		if (getMoveTo() > -1){
+			Game.moveTo(getMoveTo());
 			System.out.println("move to card");
 		}
-		if (fine > -1){
+		if (getFine() > -1){
 			Player currPlayer = Game.getCurrPlayer();
-			currPlayer.changeMoney((-1)*fine);
+			currPlayer.changeMoney((-1)*getFine());
 			System.out.println("Get fined idiot");
 		}
-		if (get > -1){
+		if (getGet() > -1){
 			Player currPlayer = Game.getCurrPlayer();
-			currPlayer.changeMoney(get);
+			currPlayer.changeMoney(getGet());
 			System.out.println("Get Money, jerk");
 		}
-		if (special){
-			switch (specialNum){
+		if (isSpecial()){
+			switch (getSpecialNum()){
 				case 1: 
 					//move player to nearest RR
 					//RRs @: 5, 15, 25, 35

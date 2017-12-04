@@ -9,8 +9,8 @@ public class CommunityChestCards extends Card{
 	 * Creates CommunityChestCard object from String passed to it
 	 * @param cardFile : line from card constructor file
 	 */
-	public CommunityChestCards(String cardFile) {
-		super(cardFile);
+	public CommunityChestCards(String cardLine) {
+		super(cardLine);
 	}
 	
 	
@@ -18,26 +18,26 @@ public class CommunityChestCards extends Card{
 	 * Completes the action of the card based on the cards member variables.
 	 */
 	public void cardAction() {
-		if (moveTo > -1){
-			Game.moveTo(moveTo);
+		if (getMoveTo() > -1){
+			Game.moveTo(getMoveTo());
 			System.out.println("moveTo Card");
-			Game.getController().setAlert(title);
+			Game.getController().setAlert(getTitle());
 		}
-		if (fine > -1){
+		if (getFine() > -1){
 			Player currPlayer = Game.getCurrPlayer();
-			currPlayer.changeMoney((-1)*fine);
+			currPlayer.changeMoney((-1)*getFine());
 			System.out.println("Fine Card");
-			Game.getController().setAlert(title);
+			Game.getController().setAlert(getTitle());
 		}
-		if (get > -1){
+		if (getGet() > -1){
 			Player currPlayer = Game.getCurrPlayer();
-			currPlayer.changeMoney(get);
+			currPlayer.changeMoney(getGet());
 			System.out.println("Got Some Money Card");
-			Game.getController().setAlert(title);
+			Game.getController().setAlert(getTitle());
 		}
 		
-		if (special){
-			switch (specialNum){
+		if (isSpecial()){
+			switch (getSpecialNum()){
 				
 				case 1:
 					Game.getCurrPlayer().addGetOutOfJailFreeCard();						//Get out of jail free

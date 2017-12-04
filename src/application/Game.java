@@ -73,25 +73,24 @@ public class Game{
 			players.put(i, thisPlayer);
 		}
 		
-		//load Those Cards Though
-		//ChanceCard(chanceCardFile);
+		
 		File chanceCards = new File(chanceCardFile);
 		Scanner chanceCardScan = new Scanner(chanceCards);
 		while (chanceCardScan.hasNextLine()) {
 			String line = chanceCardScan.nextLine();
 			
-			ChanceCard chanceCard = new ChanceCard(line);
-			addToChanceDeck(chanceCard);
+			ChanceCard aChanceCard = new ChanceCard(line);
+			addToChanceDeck(aChanceCard);
 		}
 		chanceCardScan.close();
 		
-		File communityCestCards = new File(communityChestCardFile);
-		Scanner communityChestCardScan = new Scanner(communityChestCardFile);
+		File communityCestCardsFile = new File(communityChestCardFile);
+		Scanner communityChestCardScan = new Scanner(communityCestCardsFile);
 		while (communityChestCardScan.hasNextLine()) {
 			String line = communityChestCardScan.nextLine();
 			
-			CommunityChestCards communityChestCard = new CommunityChestCards(line);
-			addToCommunityChestDeck(communityChestCard);
+			CommunityChestCards aCommunityChestCard = new CommunityChestCards(line);
+			addToCommunityChestDeck(aCommunityChestCard);
 			
 		}
 		communityChestCardScan.close();
