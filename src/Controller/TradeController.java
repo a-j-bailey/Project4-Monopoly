@@ -1,21 +1,20 @@
 package Controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 
 import application.Game;
+import application.Player;
 import application.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -24,7 +23,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class TradeController implements Initializable{
-
+	
+	HashSet<Property> currPlayerToTrade = new HashSet<>();
+	HashSet<Property> otherPlayerToTrade = new HashSet<>();
+	Player otherPlayer = null;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -45,6 +48,28 @@ public class TradeController implements Initializable{
 	@FXML
 	private Button save;
 	public void save(){
+		
+		int otherPlayerNum = -1;
+		for(int i=0; i<Game.getNumPlayers(); i++){
+			if(Game.getPlayer(i) == otherPlayer){
+				otherPlayerNum = i+1;
+			}
+		}
+		
+		for(Property property : currPlayerToTrade){
+			Game.getCurrPlayer().removeProperty(property);
+			otherPlayer.addProperty(property);
+			property.changeOwner(otherPlayerNum);
+		}
+		for(Property property : otherPlayerToTrade){
+			otherPlayer.removeProperty(property);
+			Game.getCurrPlayer().addProperty(property);
+			property.changeOwner(Game.getCurrPlayerNum());
+		}
+		
+		Game.getController().updatePlayerInfo(Game.getCurrPlayerNum());
+		Game.getController().updatePlayerInfo(otherPlayerNum);
+		
 		Stage stage = (Stage) save.getScene().getWindow();
 		stage.close();
 	}
@@ -58,12 +83,74 @@ public class TradeController implements Initializable{
 			}
 		}
 		otherPlayerSelector.setItems(playerNames);
+		otherPlayerSelector.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				currPlayerToTrade = new HashSet<>();
+				otherPlayerToTrade = new HashSet<>();
+				
+				for(int i=0; i<Game.getNumPlayers(); i++){
+					if(Game.getPlayer(i).getPlayerName().equals(newValue)){
+						otherPlayer = Game.getPlayer(i);
+					}
+				}
+				HashMap<Integer, ArrayList<Property>> otherPlayerProperties = otherPlayer.getProperties();
+				for (int i=1; i<=10; i++){
+					for(Property property : otherPlayerProperties.get(i)){
+						CheckBox propCheck = new CheckBox(property.getPropertyName());
+						propCheck.selectedProperty().addListener(new ChangeListener<Boolean>() {
+							@Override
+							public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,
+									Boolean newValue) {
+								if(newValue){
+									otherPlayerToTrade.add(property);
+								} else {
+									otherPlayerToTrade.remove(property);
+								}
+							}
+						});
+						otherPlayerListBox.getChildren().add(propCheck);
+					}
+				}
+			}
+			
+		});
 		HashMap<Integer, ArrayList<Property>> currPlayerProperties = Game.getCurrPlayer().getProperties();
 		for (int i=1; i<=10; i++){
 			for(Property property : currPlayerProperties.get(i)){
 				CheckBox propCheck = new CheckBox(property.getPropertyName());
+				propCheck.selectedProperty().addListener(new ChangeListener<Boolean>() {
+					@Override
+					public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,
+							Boolean newValue) {
+						if(newValue){
+							currPlayerToTrade.add(property);
+						} else {
+							currPlayerToTrade.remove(property);
+						}
+					}
+				});
 				currPlayerListBox.getChildren().add(propCheck);
 			}
+		}
+		currPlayerApproval.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				checkEnableTrade();
+			}
+		});
+		otherPlayerApproval.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				checkEnableTrade();
+			}
+		});		
+	}
+	
+	public void checkEnableTrade(){
+		if(currPlayerApproval.isSelected() && otherPlayerApproval.isSelected()){
+			save.setDisable(false);
 		}
 	}
 }

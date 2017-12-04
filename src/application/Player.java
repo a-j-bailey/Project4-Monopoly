@@ -2,10 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Scanner;
-
-import Controller.GameController;
 
 public class Player {
 	private HashMap<Integer, ArrayList<Property>> playerProperties;
@@ -334,8 +331,14 @@ public class Player {
 		}
 	}
 	
-	public void removeProperty(){
-		//TODO;
+	public void removeProperty(Property prop){
+		for(int i=1; i<=10; i++){
+			for(int j=0; j<playerProperties.get(i).size(); j++){
+				if(playerProperties.get(i).get(j) == prop){
+					playerProperties.get(i).remove(j);
+				}
+			}
+		}
 	}
 	
 	public HashMap<Integer, ArrayList<Property>> getProperties(){

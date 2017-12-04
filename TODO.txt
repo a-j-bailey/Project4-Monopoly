@@ -6,10 +6,10 @@
 [Done]	Go To Jail (Property, Card, 3x Doubles) 
 				Set the coord. of the in jail space
 				3x doubles is Good
-	[Adam]	Trade Properties
+[Done]	Trade Properties
 [Done]	Build Houses
 [Done]	Mortgage Properties
-	-	Add Rules
+	[Adam]	Add Rules
 	-	Player forfeits if ends turn with negative balance
 	-	Declaring a Winner
 	-	Only allow user to add houses if there is a complete set
@@ -24,3 +24,5 @@
 			and then they have to hit the "end turn" Button
 			Also, have a message that tells the player when they go to jail and when they get out of jail
 			Right now, When you don't roll doubles when in jail, you have to click "roll Dice" twice. Make a message for that
+	-	Allow players to use a get out of jail free card (if they have it)
+			I'll add a button to "use card" to the GUI (Adam).

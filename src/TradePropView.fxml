@@ -7,8 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TradeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TradeController">
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="100.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,7 +20,7 @@
          </font>
       </Label>
       <Label fx:id="currPlayer" layoutX="56.0" layoutY="126.0" text="Current Player" textAlignment="CENTER" />
-      <CheckBox fx:id="currPlayerApproval" layoutX="29.0" layoutY="435.0" mnemonicParsing="false" text="I approve this trade" />
+      <CheckBox fx:id="currPlayerApproval" layoutX="30.0" layoutY="444.0" mnemonicParsing="false" text="I approve this trade" />
       <Separator layoutX="188.0" layoutY="134.0" orientation="VERTICAL" prefHeight="305.0" prefWidth="25.0" />
       <ChoiceBox fx:id="otherPlayerSelector" layoutX="225.0" layoutY="121.0" prefWidth="150.0" />
       <ScrollPane layoutX="225.0" layoutY="162.0" prefViewportHeight="250.0" prefViewportWidth="150.0">
@@ -33,8 +32,8 @@
             </VBox>
          </content>
       </ScrollPane>
-      <CheckBox fx:id="otherPlayerApproval" layoutX="228.0" layoutY="435.0" mnemonicParsing="false" text="I approve this trade" />
-      <Button fx:id="save" layoutX="172.0" layoutY="458.0" mnemonicParsing="false" onAction="#save" text="SAVE" textAlignment="CENTER" textFill="#00b906">
+      <CheckBox fx:id="otherPlayerApproval" layoutX="228.0" layoutY="444.0" mnemonicParsing="false" text="I approve this trade" />
+      <Button fx:id="save" disable="true" layoutX="167.0" layoutY="478.0" mnemonicParsing="false" onAction="#save" text="TRADE" textAlignment="CENTER" textFill="#00b906">
          <font>
             <Font size="14.0" />
          </font>
