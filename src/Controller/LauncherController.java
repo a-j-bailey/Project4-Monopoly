@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -105,7 +106,11 @@ public class LauncherController implements Initializable{
 			
 			System.out.println(" -- Initializing Game -- ");
 			
-			new Game(playerNames);
+			try {
+				new Game(playerNames);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
