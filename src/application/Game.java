@@ -73,7 +73,7 @@ public class Game{
 			players.put(i, thisPlayer);
 		}
 		
-		
+		//Load chance chards
 		File chanceCards = new File(chanceCardFile);
 		Scanner chanceCardScan = new Scanner(chanceCards);
 		while (chanceCardScan.hasNextLine()) {
@@ -84,6 +84,8 @@ public class Game{
 		}
 		chanceCardScan.close();
 		
+		
+		//Load community chest cards
 		File communityCestCardsFile = new File(communityChestCardFile);
 		Scanner communityChestCardScan = new Scanner(communityCestCardsFile);
 		while (communityChestCardScan.hasNextLine()) {
@@ -223,10 +225,10 @@ public class Game{
 			//int d2 = rand.nextInt(6)+1;
 			
 			//FOR TROUBLESHOOTING
-			//System.out.println("-- enter dice roll: --");
-			//Scanner input = new Scanner(System.in);
-			int d1 = 1; //input.nextInt();
-			int d2 = 0; //input.nextInt();
+			System.out.println("-- enter dice roll: --");
+			Scanner input = new Scanner(System.in);
+			int d1 = input.nextInt();
+			int d2 = input.nextInt();
 			
 			System.out.println("\tDICE: " + d1 + " " + d2);
 
@@ -254,7 +256,7 @@ public class Game{
 				else {
 					for  (int i = 0; i < 8; i++) {
 						if (Game.getCurrPlayer().getPos() == actionSpotLocations[i]) {
-							//actionSpot(Game.getCurrPlayer().getPos());
+							actionSpot(Game.getCurrPlayer().getPos());
 						}
 					}
 				}
@@ -272,15 +274,15 @@ public class Game{
 
 			else {
 
-				Random rand = new Random();
-				int d1 = rand.nextInt(6)+1;
-				int d2 = rand.nextInt(6)+1;
+				//Random rand = new Random();
+				//int d1 = rand.nextInt(6)+1;
+				//int d2 = rand.nextInt(6)+1;
 
 				//FOR TROUBLESHOOTING
-				//System.out.println("-- enter dice roll: --");
-				//Scanner input = new Scanner(System.in);
-				//int d1 = input.nextInt();
-				//int d2 = input.nextInt();
+				System.out.println("-- enter dice roll: --");
+				Scanner input = new Scanner(System.in);
+				int d1 = input.nextInt();
+				int d2 = input.nextInt();
 				
 				Game.getCurrPlayer().addNumRollsInJail();
 				

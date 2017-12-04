@@ -34,8 +34,27 @@ public class ChanceCard extends Card{
 		if (isSpecial()){
 			switch (getSpecialNum()){
 				case 1: 
+					System.out.println("nearest RR Card");
 					//move player to nearest RR
 					//RRs @: 5, 15, 25, 35
+					if(Game.getCurrPlayer().getPos() < 5) {
+						Game.getCurrPlayer().changePos(5);
+					}
+					else if(Game.getCurrPlayer().getPos() < 15) {
+						Game.getCurrPlayer().changePos(15);
+					}
+					else if(Game.getCurrPlayer().getPos() < 15) {
+						Game.getCurrPlayer().changePos(15);
+					}
+					else if(Game.getCurrPlayer().getPos() < 25) {
+						Game.getCurrPlayer().changePos(25);
+					}
+					else if(Game.getCurrPlayer().getPos() < 35) {
+						Game.getCurrPlayer().changePos(35);
+					}
+					else if(Game.getCurrPlayer().getPos() >= 35) {
+						Game.getCurrPlayer().changePos(5);
+					}										
 					break;
 				case 2:
 					Game.getCurrPlayer().addGetOutOfJailFreeCard();						//Get out of jail free

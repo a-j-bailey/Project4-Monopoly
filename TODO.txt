@@ -1,6 +1,4 @@
-	[steve]	Property Actions (pay rent, paying tax, draw card)
-		[Done] Tax
-			Cards are basically done except we need to initialize them in game.java
+[Done]	Property Actions (pay rent, paying tax, draw card)
 	-	Make sure player does not own property before charging them rent
 [Done]	Award players $200 for passing Go
 [Done]	Go To Jail (Property, Card, 3x Doubles) 
@@ -9,7 +7,8 @@
 [Done]	Trade Properties
 [Done]	Build Houses
 [Done]	Mortgage Properties
-[Done]	Add Working Rules Page
+[NOT DONE]	Add Working Rules Page
+				I made a text file with rules that are adjusted for our program. if it's too much to change, don't bother
 	-	Type and finalize game rules into Rules.txt
 [Done]	Player forfeits if ends turn with negative balance
 [Done]	Declaring a Winner

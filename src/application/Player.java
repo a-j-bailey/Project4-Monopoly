@@ -65,7 +65,6 @@ public class Player {
 	 * @param destination : cycles around the board until they get to the new destination
 	 */
 	public void changePos(int destination){
-		int temp = this.pos;
 		while(this.pos != destination) {
 			this.pos++;
 			this.pos = this.pos % 40;
