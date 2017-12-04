@@ -88,13 +88,11 @@ public class Game{
 		Scanner communityChestCardScan = new Scanner(communityCestCardsFile);
 		while (communityChestCardScan.hasNextLine()) {
 			String line = communityChestCardScan.nextLine();
-			
+			System.out.println(line);
 			CommunityChestCards aCommunityChestCard = new CommunityChestCards(line);
 			addToCommunityChestDeck(aCommunityChestCard);
-			
 		}
 		communityChestCardScan.close();
-		
 		
 		numPlayers = playerNames.size();
 		System.out.println("\tLoading Properties");

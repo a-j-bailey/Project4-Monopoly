@@ -23,11 +23,8 @@ public class Card {
 	 * @param cardFile : name of file to read cards from.
 	 */
 	public Card(String cardLine){
-
-
 		Scanner scnr = new Scanner(cardLine);
 		scnr.useDelimiter(",");
-
 		this.title =scnr.next();
 		this.moveTo =scnr.nextInt();
 		this.fine = scnr.nextInt();
@@ -41,10 +38,7 @@ public class Card {
 		}
 
 		scnr.close();
-
-
 	}
-
 
 	public String getTitle() {
 		return title;

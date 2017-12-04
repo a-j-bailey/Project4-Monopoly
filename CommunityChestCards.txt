@@ -3,7 +3,7 @@ Bank Error in Your Favor,-1,-1,200,FALSE
 Doctor's Fees,-1,50,-1,FALSE
 From Sale of Stock You Get $50,-1,-1,50,FALSE
 Get Out of Jail Free,-1,-1,-1,TRUE,1
-Go To Jail, Go Directly To Jail,-1,-1,-1,TRUE,2
+Go To Jail - Go Directly To Jail,-1,-1,-1,TRUE,2
 Grand Opera Night,-1,-1,-1,TRUE,3
 Holiday Fund Matures,-1,-1,100,FALSE
 Income Tax Refund,-1,-1,20,FALSE
