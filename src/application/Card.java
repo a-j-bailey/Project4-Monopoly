@@ -6,11 +6,18 @@ import java.util.Scanner;
 
 public abstract class Card {
 	protected String title;
-	protected int moveTo;
-	protected int fine;
-	protected int get;
-	protected boolean special;
-	protected int specialNum;
+	protected static int moveTo;
+	protected static int fine;
+	protected static int get;
+	protected static boolean special;
+	protected static int specialNum;
+	
+	
+	/*
+	 * This doesn't work. It needs to take in one line at a time and make one card at a time
+	 * then call the method in game that adds it to the chance or community chest desk (stack)
+	 * So we can have an actual deck. 
+	 */
 	
 	
 	/**
@@ -24,7 +31,7 @@ public abstract class Card {
 			Scanner scnr = new Scanner(inputFile);
 			while(scnr.hasNextLine()){
 				this.title = scnr.next();
-				this.moveTo = scnr.nextInt();
+				Card.moveTo = scnr.nextInt();
 				this.fine = scnr.nextInt();
 				this.get = scnr.nextInt();
 				String isSpecial = scnr.next();
@@ -42,7 +49,7 @@ public abstract class Card {
 		
 	}
 	
-	abstract void cardAction();
+	//abstract public static void cardAction();
 	
 	// We need this. Just havent decided if it should be inherited, or abstract.
 	// Depends on how we store cards

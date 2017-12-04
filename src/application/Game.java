@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 public class Game{
 	final static String chanceCardFile = "ChanceCards.txt";
 	final static String communityChestCardFile = "communityChestCards.txt";
+	private static Stack<CommunityChestCards> communityChest = new Stack<CommunityChestCards>();
+	private static Stack<ChanceCard> chance = new Stack<ChanceCard>();
 	private static ArrayList<Player> players = new ArrayList<Player>();
 	private static int numPlayers;
 	private static int currPlayer = 0;
@@ -66,6 +68,10 @@ public class Game{
 			Player thisPlayer = new Player(name);
 			players.add(thisPlayer);
 		}
+		
+		//load Those Cards Though
+		ChanceCard(chanceCardFile);
+		
 		numPlayers = playerNames.size();
 		System.out.println("\tLoading Properties");
 		loadProperties();
@@ -119,6 +125,18 @@ public class Game{
 		
 	}
 	
+	
+	
+	
+	public static void addToChanceDeck(ChanceCard card) {
+		chance.push(card);
+	}
+	public static void addToCommunityChestDeck(CommunityChestCards card) {
+		communityChest.push(card);
+	}
+	
+	
+	
 	/**
 	 * Returns an int that is the number of players for the game
 	 * @author adambailey
@@ -162,15 +180,15 @@ public class Game{
 
 			numOfRolls++;
 
-			Random rand = new Random();
-			int d1 = rand.nextInt(6)+1;
-			int d2 = rand.nextInt(6)+1;
+		//	Random rand = new Random();
+			//int d1 = rand.nextInt(6)+1;
+			//int d2 = rand.nextInt(6)+1;
 
 			//FOR TROUBLESHOOTING
-			//System.out.println("-- enter dice roll: --");
-			//Scanner input = new Scanner(System.in);
-			//int d1 = input.nextInt();
-			//int d2 = input.nextInt();
+			System.out.println("-- enter dice roll: --");
+			Scanner input = new Scanner(System.in);
+			int d1 = input.nextInt();
+			int d2 = input.nextInt();
 
 
 			if (d1 == d2){
@@ -244,9 +262,6 @@ public class Game{
 
 	}
 
-	
-	
-	
 	public static void actionSpot(int location) {
 		
 		if (location == 2 || location == 17 || location == 33) {		//Community Chest
@@ -257,12 +272,7 @@ public class Game{
 			ChanceCard.cardAction();
 		}
 		if (location == 4 || location == 38) {							//Tax
-			Game.getCurrPlayer().changeMoney(((Tax) locations.get(location)).getTaxAmount());
-			
-			
-			
-			
-			
+			Game.getCurrPlayer().changeMoney(((Tax) locations.get(location)).getTaxAmount());		
 		}
 		
 		
@@ -374,5 +384,15 @@ public class Game{
 	public static int[] getCurrentDice() {
 		return currentDice;
 	}
+	
+	/**
+	 * Moves player to the specified destination
+	 * @param moveTo
+	 */
+	public static void moveTo(int moveTo) {
+		players.get(currPlayer).changePos(moveTo);
+		
+	}
+
 	
 }
