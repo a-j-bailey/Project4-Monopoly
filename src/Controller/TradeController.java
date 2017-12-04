@@ -50,9 +50,13 @@ public class TradeController implements Initializable{
 	public void save(){
 		
 		int otherPlayerNum = -1;
+		
+		HashMap<Integer, Player> players = Game.getPlayers();
 		for(int i=0; i<Game.getNumPlayers(); i++){
-			if(Game.getPlayer(i) == otherPlayer){
-				otherPlayerNum = i+1;
+			if(players.containsKey(i)){
+				if(Game.getPlayer(i) == otherPlayer){
+					otherPlayerNum = i+1;
+				}
 			}
 		}
 		
@@ -64,10 +68,10 @@ public class TradeController implements Initializable{
 		for(Property property : otherPlayerToTrade){
 			otherPlayer.removeProperty(property);
 			Game.getCurrPlayer().addProperty(property);
-			property.changeOwner(Game.getCurrPlayerNum());
+			property.changeOwner(Game.getCurrPlayer().getPNum());
 		}
 		
-		Game.getController().updatePlayerInfo(Game.getCurrPlayerNum());
+		Game.getController().updatePlayerInfo(Game.getCurrPlayer().getPNum());
 		Game.getController().updatePlayerInfo(otherPlayerNum);
 		
 		Stage stage = (Stage) save.getScene().getWindow();
@@ -77,9 +81,12 @@ public class TradeController implements Initializable{
 	public void buildWindow(){
 		currPlayer.setText(Game.getCurrPlayer().getPlayerName());
 		ObservableList<String> playerNames = FXCollections.<String>observableArrayList();
+		HashMap<Integer, Player> players = Game.getPlayers();
 		for(int i=0; i<Game.getNumPlayers(); i++){
-			if(Game.getCurrPlayer() != Game.getPlayer(i)){
-				playerNames.add(Game.getPlayer(i).getPlayerName());
+			if(players.containsKey(i)){
+				if(Game.getCurrPlayer() != Game.getPlayer(i)){
+					playerNames.add(Game.getPlayer(i).getPlayerName());
+				}
 			}
 		}
 		otherPlayerSelector.setItems(playerNames);
@@ -89,10 +96,12 @@ public class TradeController implements Initializable{
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				currPlayerToTrade = new HashSet<>();
 				otherPlayerToTrade = new HashSet<>();
-				
+				HashMap<Integer, Player> players = Game.getPlayers();
 				for(int i=0; i<Game.getNumPlayers(); i++){
-					if(Game.getPlayer(i).getPlayerName().equals(newValue)){
-						otherPlayer = Game.getPlayer(i);
+					if(players.containsKey(i)){
+						if(Game.getPlayer(i).getPlayerName().equals(newValue)){
+							otherPlayer = Game.getPlayer(i);
+						}
 					}
 				}
 				HashMap<Integer, ArrayList<Property>> otherPlayerProperties = otherPlayer.getProperties();

@@ -21,7 +21,7 @@ public class Game{
 	final static String communityChestCardFile = "communityChestCards.txt";
 	private static Stack<CommunityChestCards> communityChest = new Stack<CommunityChestCards>();
 	private static Stack<ChanceCard> chance = new Stack<ChanceCard>();
-	private static ArrayList<Player> players = new ArrayList<Player>();
+	private static HashMap<Integer, Player> players = new HashMap<>();
 	private static int numPlayers;
 	private static int currPlayer = 0;
 	private static GameController gc;
@@ -30,6 +30,7 @@ public class Game{
 	private static int[] currentDice = new int[2];
 	private static int numOfRolls;
 	private static int[] actionSpotLocations = new int[] {2, 4, 7, 17, 22, 33, 36, 38};
+	private static Boolean gameOver = false;
 	
 	
 	/**
@@ -63,9 +64,10 @@ public class Game{
 	 */
 	public Game(ArrayList<String> playerNames){	
 		
-		for(String name : playerNames){
-			Player thisPlayer = new Player(name);
-			players.add(thisPlayer);
+		for(int i=0; i<playerNames.size(); i++){
+			Player thisPlayer = new Player(playerNames.get(i));
+			thisPlayer.setPNum(i);
+			players.put(i, thisPlayer);
 		}
 		
 		//load Those Cards Though
@@ -159,11 +161,12 @@ public class Game{
 	 * @return
 	 */
 	public static Player getCurrPlayer(){
-		return players.get(currPlayer);
+		return getPlayer(currPlayer);
 	}
 	
 	public static int getCurrPlayerNum(){
-		return currPlayer + 1;
+		System.out.println("Current Player Num: " + currPlayer);
+		return getPlayer(currPlayer).getPNum() + 1;
 	}
 
 	/**
@@ -180,14 +183,14 @@ public class Game{
 			numOfRolls++;
 
 			Random rand = new Random();
-			int d1 = rand.nextInt(6)+1;
-			int d2 = rand.nextInt(6)+1;
+			//int d1 = rand.nextInt(6)+1;
+			//int d2 = rand.nextInt(6)+1;
 			
 			//FOR TROUBLESHOOTING
 			//System.out.println("-- enter dice roll: --");
 			//Scanner input = new Scanner(System.in);
-			//int d1 = 15; //input.nextInt();
-			//int d2 = 15; //input.nextInt();
+			int d1 = 1; //input.nextInt();
+			int d2 = 0; //input.nextInt();
 			
 			System.out.println("\tDICE: " + d1 + " " + d2);
 
@@ -233,15 +236,15 @@ public class Game{
 
 			else {
 
-				//Random rand = new Random();
-				//int d1 = rand.nextInt(6)+1;
-				//int d2 = rand.nextInt(6)+1;
+				Random rand = new Random();
+				int d1 = rand.nextInt(6)+1;
+				int d2 = rand.nextInt(6)+1;
 
 				//FOR TROUBLESHOOTING
-				System.out.println("-- enter dice roll: --");
-				Scanner input = new Scanner(System.in);
-				int d1 = input.nextInt();
-				int d2 = input.nextInt();
+				//System.out.println("-- enter dice roll: --");
+				//Scanner input = new Scanner(System.in);
+				//int d1 = input.nextInt();
+				//int d2 = input.nextInt();
 				
 				Game.getCurrPlayer().addNumRollsInJail();
 				
@@ -359,12 +362,45 @@ public class Game{
 		return gc;
 	}
 	
+	public static void removePlayer(){
+		System.err.println("--REMOVE PLAYER--\n" + getCurrPlayer().getPlayerName());
+		HashMap<Integer, ArrayList<Property>> playerProperties = getCurrPlayer().getProperties();
+		for(int i=1; i<10; i++){
+			for(int j=0; j<playerProperties.get(i).size(); j++){
+				if(playerProperties.get(i).get(j).getPropertyType().equals("Residential")){
+					Residential resProp = (Residential) playerProperties.get(i).get(j);
+					resProp.buildHouse(0);
+				}
+				playerProperties.get(i).get(j).changeOwner(0);
+			}
+		}
+		gc.removePlayerPanel(getCurrPlayer().getPNum());
+		players.remove(getCurrPlayer().getPNum());
+		
+		if(players.size() == 1){
+			for(int i=0; i<numPlayers; i++){
+				if(players.containsKey(i)){
+					gameOver = true;
+					gc.broadcastWinner(getPlayer(i).getPlayerName());
+				}
+			}
+		}
+	}
+	
 	public static void endTurn(){
-		numOfRolls = 0;
-		currPlayer = (currPlayer + 1) % numPlayers;
-		System.out.println("\tCurr Player " + currPlayer);
-		gc.nextPlayer();
-		gc.clearAlert();
+		if(getCurrPlayer().getMoney() < 0){
+			removePlayer();
+		}
+		
+		if(!gameOver){
+			numOfRolls = 0;
+			do{
+				currPlayer = (currPlayer + 1) % numPlayers;
+			} while(!players.containsKey(currPlayer));
+			System.out.println("\tCurr Player " + currPlayer);
+			gc.nextPlayer();
+			gc.clearAlert();
+		}
 	}
 	
 	public static boolean getCanReroll(){
@@ -394,5 +430,7 @@ public class Game{
 		
 	}
 
-	
+	public static HashMap<Integer, Player> getPlayers(){
+		return players;
+	}
 }

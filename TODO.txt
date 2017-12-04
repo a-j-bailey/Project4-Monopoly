@@ -11,19 +11,22 @@
 [Done]	Mortgage Properties
 [Done]	Add Working Rules Page
 	-	Type and finalize game rules into Rules.txt
-	-	Player forfeits if ends turn with negative balance
-	-	Declaring a Winner
+[Done]	Player forfeits if ends turn with negative balance
+[Done]	Declaring a Winner
 	-	Only allow user to add houses if there is a complete set
-	-	Display houses on game board
 	-	Figure out why game occasionally lets user buy property that's already been bought. 
 [Done]	Allow players to roll to get out of jail when it would be there turn.
 			But don't move their token unless it's doubles.
 [Done]	Make tokens go to jail as soon as they land on that location. 
 			Currently you have to "roll dice" again
+	-	Allow players to use a get out of jail free card (if they have it)
+			I'll add a button to "use card" to the GUI (Adam).
+	-	Change house display to say "Hotel" if the player has 5 houses on a property.
+	
+-- OPTIONAL --
 	-	Only refund half the cost of houses if their sold
 	-	When a player goes to jail, the game tells them they're in jail 
 			and then they have to hit the "end turn" Button
 			Also, have a message that tells the player when they go to jail and when they get out of jail
 			Right now, When you don't roll doubles when in jail, you have to click "roll Dice" twice. Make a message for that
-	-	Allow players to use a get out of jail free card (if they have it)
-			I'll add a button to "use card" to the GUI (Adam).
+	

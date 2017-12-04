@@ -1,10 +1,13 @@
 package Controller;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import application.Game;
 import application.Location;
+import application.Main;
 import application.Property;
 import application.Residential;
 import application.Utility;
@@ -44,11 +47,10 @@ public class GameController implements Initializable{
 	@FXML
 	private Accordion ppAccordion;
 	
-	private ImageView[] playerTokens;
-	private TitledPane[] playerPanes;
-	private Label[] playerMoneyLabels;
-	private TextFlow[] playerPropertyLists;
-		
+	private HashMap<Integer, ImageView> playerTokens;
+	private HashMap<Integer, TitledPane> playerPanes;
+	private HashMap<Integer, Label> playerMoneyLabels;
+	private HashMap<Integer, TextFlow> playerPropertyLists;
 
 	
 	@Override
@@ -58,7 +60,7 @@ public class GameController implements Initializable{
 		int playerNum = Game.getNumPlayers();
 		System.out.println("\tNum Players: " + playerNum);
 		
-		playerTokens = new ImageView[playerNum];
+		playerTokens = new HashMap<>();
 		
 		for(int i=playerNum -1; i >= 0; i--){
 			ImageView token = new ImageView();
@@ -70,12 +72,12 @@ public class GameController implements Initializable{
 			token.setFitHeight(40);
 			token.toFront();
 			boardGame.getChildren().add(token);
-			this.playerTokens[i] = token;
+			playerTokens.put(i, token);
 		}
 		
-		playerPanes = new TitledPane[playerNum];
-		playerMoneyLabels = new Label[playerNum];
-		playerPropertyLists = new TextFlow[playerNum];
+		playerPanes = new HashMap<>();
+		playerMoneyLabels = new HashMap<>();
+		playerPropertyLists = new HashMap<>();
 		for (int i=0; i<playerNum; i++){
 			
 			//Token
@@ -85,14 +87,14 @@ public class GameController implements Initializable{
 			token.setFitHeight(50);
 			//Label (Money)
 			Label money = new Label(" $" + Game.getPlayer(i).getMoney());
-			playerMoneyLabels[i] = money;
+			playerMoneyLabels.put(i, money);
 			//Properties Title
 			Label properties = new Label(" Properties:");
 			//PropertiesTextArea
 			TextFlow propText = new TextFlow();
 			propText.setPrefWidth(150);
 			propText.setPrefHeight(280);
-			playerPropertyLists[i] = propText;
+			playerPropertyLists.put(i, propText);
 			ScrollPane sP = new ScrollPane(propText);
 			sP.setPrefWidth(200);
 			
@@ -106,10 +108,12 @@ public class GameController implements Initializable{
 			
 			//Add VBOX to pane
 			TitledPane pane = new TitledPane(Game.getPlayer(i).getPlayerName(), vbox);
-			playerPanes[i] = pane;
+			playerPanes.put(i, pane);
+			ppAccordion.getPanes().add(pane);
 		}
-		ppAccordion.getPanes().addAll(playerPanes);
-		ppAccordion.setExpandedPane(playerPanes[0]);
+
+		//ppAccordion.getPanes().addAll(playerPanes);
+		//ppAccordion.setExpandedPane(playerPanes);
 		
 		this.currentTurn.setText(Game.getPlayer(0).getPlayerName() + "'s Turn");
 		updatePropertyInfo();
@@ -129,8 +133,8 @@ public class GameController implements Initializable{
 	 */
 	public void moveToken(int player, int x, int y){
 		player--;
-		playerTokens[player].setX(x);
-		playerTokens[player].setY(y);
+		playerTokens.get(player).setX(x);
+		playerTokens.get(player).setY(y);
 		
 		if (!Game.getCanReroll()){
 			rollDiceButton.setDisable(true);
@@ -233,10 +237,14 @@ public class GameController implements Initializable{
 	
 	public void updatePlayerInfo(int pNum){
 		System.out.println("\tUpdate Player Info " + pNum);
-		pNum--;
-		playerMoneyLabels[pNum].setText("$" + Game.getPlayer(pNum).getMoney());
-		playerPropertyLists[pNum].getChildren().clear();
-		playerPropertyLists[pNum].getChildren().addAll(updatePlayerPropertyList(pNum));
+		playerMoneyLabels.get(pNum).setText("$" + Game.getPlayer(pNum).getMoney());
+		playerPropertyLists.get(pNum).getChildren().clear();
+		playerPropertyLists.get(pNum).getChildren().addAll(updatePlayerPropertyList(pNum));
+		if(Game.getCurrPlayer().getMoney() < 0){
+			setAlert("If you end your turn with a negative balance you will automatically forfeit the game.");
+		} else {
+			clearAlert();
+		}
 	}
 	
 	//RIGHT SIDEBAR
@@ -306,7 +314,7 @@ public class GameController implements Initializable{
 	@FXML
 	private Button endTurnButton;
 	public void endTurn(){
-		updatePlayerInfo(Game.getCurrPlayerNum());
+		updatePlayerInfo(Game.getCurrPlayer().getPNum());
 		Game.endTurn();
 		updatePropertyInfo();
 	}
@@ -364,5 +372,37 @@ public class GameController implements Initializable{
 		} catch (FileNotFoundException e) {
 			System.err.println("Error loading rules file");
 		}
+	}
+	
+	public void removePlayerPanel(int pNum){
+		System.out.println("REMOVE PLAYER PANEL " + pNum);
+		ppAccordion.getPanes().remove(playerPanes.get(pNum));
+		playerTokens.get(pNum).setOpacity(0);
+		playerTokens.remove(pNum);
+		playerPanes.remove(pNum);
+		playerMoneyLabels.remove(pNum);
+		playerPropertyLists.remove(pNum);
+		System.out.println("PLAYER PANEL REMOVED " + pNum);
+	}
+	
+	@FXML
+	private TitledPane winnerBanner;
+	@FXML
+	private Label winnerLabel;
+	@FXML
+	private Button closeButton;
+	public void close(){		
+		Stage stage = (Stage) closeButton.getScene().getWindow();
+		stage.close();
+	}
+	
+	public void broadcastWinner(String name){
+		winnerLabel.setText(name + " won!");
+		winnerBanner.setOpacity(1);
+		winnerBanner.setDisable(false);
+	}
+	
+	public void removePlayer(){
+		Game.removePlayer();
 	}
 }

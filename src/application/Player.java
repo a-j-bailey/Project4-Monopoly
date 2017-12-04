@@ -12,6 +12,7 @@ public class Player {
 	private int pos = 0;
 	private boolean isIncarcerated = false;
 	private int numRollsInJail;
+	private int pNum = -1;
 	
 	/**
 	 * Constructs new player from string
@@ -245,7 +246,7 @@ public class Player {
 	public void changeMoney(double amount){
 		System.out.println("\tChange Money: " + amount);
 		this.money += amount;
-		Game.getController().updatePlayerInfo(Game.getCurrPlayerNum());
+		Game.getController().updatePlayerInfo(pNum);
 		System.out.println("\t" + this.money);
 	}
 	
@@ -356,6 +357,14 @@ public class Player {
 	
 	public void addNumRollsInJail() {
 		numRollsInJail++;
+	}
+	
+	public void setPNum(int num){
+		pNum = num;
+	}
+	
+	public int getPNum(){
+		return pNum;
 	}
 	
 	
