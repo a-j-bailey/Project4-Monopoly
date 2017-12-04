@@ -4,13 +4,17 @@ public abstract class ChanceCard extends Card{
 	
 	//final static String cardFile = "ChanceCards.txt";
 	
+	/**
+	 * Constructs ChanceCard object from the string that is passed to it.
+	 * @param cardFile : line from card constructor file.
+	 */
 	public ChanceCard(String cardFile) {
 		super(cardFile);
 	}
 	
 	
 	/**
-	 * does the specified action of a card
+	 * Completes the action of the card based on the cards member variables.
 	 */
 	public static void cardAction(){
 		if (moveTo > -1){

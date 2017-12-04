@@ -34,7 +34,7 @@ public class Game{
 	
 	
 	/**
-	 * lanches the GUI
+	 * Launches the GUI window for the Monopoly game
 	 */
 	public void launchGUI(){
 		try {
@@ -84,7 +84,7 @@ public class Game{
 	
 	
 	/**
-	 * initializes properties into a HashMap
+	 * Initializes Locations from "Properties.txt" and adds them to a HashMap
 	 */
 	public static void loadProperties(){
 		try{
@@ -128,10 +128,18 @@ public class Game{
 	
 	
 	
-	
+	/**
+	 * Adds the Chance card passed to it to the game's deck of Chance Cards
+	 * @param card : Chance Card
+	 */
 	public static void addToChanceDeck(ChanceCard card) {
 		chance.push(card);
 	}
+	
+	/**
+	 * Adds the Community Chest card passed to it to the game's deck of Chance Cards
+	 * @param card : Community Chest Card
+	 */
 	public static void addToCommunityChestDeck(CommunityChestCards card) {
 		communityChest.push(card);
 	}
@@ -139,7 +147,8 @@ public class Game{
 	
 	
 	/**
-	 * Returns an int that is the number of players for the game
+	 * Returns an int that is the number of players the game started with
+	 * (Does not change after players are removed from the game)
 	 * @author adambailey
 	 * @return
 	 */
@@ -148,7 +157,7 @@ public class Game{
 	}
 	
 	/**
-	 * 
+	 * Returns player at index i.
 	 * @param index
 	 * @return the player with respect to an index
 	 */
@@ -157,13 +166,19 @@ public class Game{
 	}
 	
 	/**
-	 * Returns current player.
+	 * Returns the player object for the player who's turn it currently is.
 	 * @return
 	 */
 	public static Player getCurrPlayer(){
 		return getPlayer(currPlayer);
 	}
 	
+	/**
+	 * Returns the number of the current player.
+	 * i.e 1 - 6 (or numPlayers)
+	 * NOT INDEX
+	 * @return int for the number of the current player
+	 */
 	public static int getCurrPlayerNum(){
 		System.out.println("Current Player Num: " + currPlayer);
 		return getPlayer(currPlayer).getPNum() + 1;
@@ -264,7 +279,12 @@ public class Game{
 		}
 
 	}
-
+	
+	/**
+	 * Receives the current players location and checks to see if they should 
+	 * be taxed or draw a card based on their location.
+	 * @param location : index of location
+	 */
 	public static void actionSpot(int location) {
 		
 		if (location == 2 || location == 17 || location == 33) {		//Community Chest
@@ -285,9 +305,9 @@ public class Game{
 	
 	
 	/**
-	 * Is triggered by player selecting "Mortgage Properties" from the action menu.
-	 * takes Stack of locations as input
-	 * 
+	 * Cycles through the properties that were mortgaged/unMortgaged in the popup. 
+	 * Changes their isMortgaged Boolean and adds or subtracts from the player's money.
+	 * @param propertiesToDo
 	 */
 	public static void mortgageProperties(Stack<Integer> propertiesToDo){
 
@@ -320,8 +340,7 @@ public class Game{
 	//}
 	
 	/**
-	
-	 * Sends player to jail and LOCKS 'EM UP
+	 * Sends current player to jail and LOCKS 'EM UP
 	 */
 	public static void goToJailSucker(){
 		players.get(currPlayer).changeIncarceration(true);
@@ -330,24 +349,28 @@ public class Game{
 		gc.setAlert("You're in jail.\nRoll doubles to get out of jail.");
 	}
 	
+	/**
+	 * Sets player into the "visiting jail" position, 
+	 * If they rolled doubles, it lets them roll again and move.
+	 */
 	public static void getOutOfJailSucker() {
-																//print something about how you're out of jail
+		//print something about how you're out of jail
 		players.get(currPlayer).changeIncarceration(false);
 		players.get(currPlayer).setPos(10);
-				
+		
 		if (currentDice[0] == currentDice[1]) {
 			players.get(currPlayer).changePos((10 + currentDice[0] + currentDice[1]) % 40);
 			gc.setAlert("You've made it out of jail! #FreeBird");
 		}
 		else {
-			gc.setAlert("You're in jail.\nRoll doubles to get out of jail.");//Just Tell Them They are out of jail and give them the option to end their turn				//HERE HERE HERE HERE
+			gc.setAlert("You made it out of jail!");//Just Tell Them They are out of jail and give them the option to end their turn				//HERE HERE HERE HERE
 		}
 	}
 	
 	/**
 	 * Use a negative amount if the current player is gaining money. 
-	 * And a positive amount if the current player is losing money
-	 * @param amount
+	 * Use a positive amount if the current player is losing money.
+	 * @param amount : amount that the other player's money should change by.
 	 */
 	public static void manageAllPlayersMoney(int amount){
 		for(int i=0; i<numPlayers; i++){
@@ -358,10 +381,19 @@ public class Game{
 		}
 	}
 	
+	/**
+	 * 
+	 * @return : instance of GameController
+	 */
 	public static GameController getController(){
 		return gc;
 	}
 	
+	/**
+	 * Removes the current player from the game. 
+	 * Checks to see if there is only one player left in the game. 
+	 * If so, declares the last player as the winner.
+	 */
 	public static void removePlayer(){
 		System.err.println("--REMOVE PLAYER--\n" + getCurrPlayer().getPlayerName());
 		HashMap<Integer, ArrayList<Property>> playerProperties = getCurrPlayer().getProperties();
@@ -387,6 +419,12 @@ public class Game{
 		}
 	}
 	
+	/**
+	 * Ends the current player's turn. 
+	 * If they have less than $0, removes them from the game. 
+	 * Otherwise, if the game isnt over, it que's up the next player 
+	 * and increments the currPlayer integer.
+	 */
 	public static void endTurn(){
 		if(getCurrPlayer().getMoney() < 0){
 			removePlayer();
@@ -403,13 +441,15 @@ public class Game{
 		}
 	}
 	
+	/**
+	 * @return boolean for whether the current player can re-roll the dice.
+	 */
 	public static boolean getCanReroll(){
 		return canReroll;
 	}
 	
 	/**
 	 * Returns location based on position passed to it,
-	 * 
 	 * @param pos
 	 * @return
 	 */
@@ -417,19 +457,26 @@ public class Game{
 		return locations.get(pos);
 	}
 	
+	/**
+	 * Returns the int array of the two dice values.
+	 * @return
+	 */
 	public static int[] getCurrentDice() {
 		return currentDice;
 	}
 	
 	/**
 	 * Moves player to the specified destination
-	 * @param moveTo
+	 * @param moveTo : index of new position.
 	 */
 	public static void moveTo(int moveTo) {
 		players.get(currPlayer).changePos(moveTo);
 		
 	}
 
+	/**
+	 * @return : HashMap<Integer, Player> of game players.
+	 */
 	public static HashMap<Integer, Player> getPlayers(){
 		return players;
 	}

@@ -15,8 +15,8 @@ public class Player {
 	private int pNum = -1;
 	
 	/**
-	 * Constructs new player from string
-	 * @param name
+	 * Constructs new player with the name passed to it. 
+	 * @param name : player's name
 	 */
 	public Player(String name){
 		this.playerName = name;
@@ -37,7 +37,7 @@ public class Player {
 	}
 
 	/**
-	 * returns the number of get out of jail free cards a player has
+	 * Returns the number of get out of jail free cards a player has
 	 * @author adambailey
 	 * @return
 	 */
@@ -62,7 +62,7 @@ public class Player {
 	/**
 	 * Changes position by num passed to it
 	 * can be positive or negative
-	 * @param num
+	 * @param destination : cycles around the board until they get to the new destination
 	 */
 	public void changePos(int destination){
 		int temp = this.pos;
@@ -202,7 +202,7 @@ public class Player {
 	
 	/**
 	 * Sets position to given location
-	 * only InJail and JustVisiting
+	 * only needed for InJail and JustVisiting
 	 * @param num
 	 */
 	public void setPos(int num){
@@ -226,20 +226,6 @@ public class Player {
 	}
 	
 	/**
-	 * Removes amount of money from player
-	 * @param amount
-	 */
-	/*
-	public void fine(int amount){
-		if (amount > this.money){
-			this.money -= amount;
-		} else {
-			//TODO: Prompt user to do something about this so they don't go broke
-			System.err.println("You'd go broke");
-		}
-	}
-	*/
-	/**
 	 * Adds a specific amount of money to player's money
 	 * @param amount
 	 */
@@ -250,7 +236,9 @@ public class Player {
 		System.out.println("\t" + this.money);
 	}
 	
-	//Returns First Name Only
+	/**
+	 * @return first name of player
+	 */
 	public String getPlayerName() {
 		String name = playerName;
 		Scanner scan = new Scanner(name);
@@ -294,8 +282,6 @@ public class Player {
 		}
 		return totalHotels;
 	}
-		
-
 	
 	/**
 	 * Returns whether or not the player is in jail
@@ -313,7 +299,7 @@ public class Player {
 	}
 	
 	/**
-	 * Adds properties 
+	 * Adds property to player's HashMap of properties.
 	 */
 	public void addProperty(Property prop){
 		if(prop.getPropertyType().equals("Utility")){
@@ -332,6 +318,10 @@ public class Player {
 		}
 	}
 	
+	/**
+	 * Finds and removes prop from player's HashMap of properties.
+	 * @param prop
+	 */
 	public void removeProperty(Property prop){
 		for(int i=1; i<=10; i++){
 			for(int j=0; j<playerProperties.get(i).size(); j++){
@@ -342,30 +332,42 @@ public class Player {
 		}
 	}
 	
+	/**
+	 * return's the properties a player owns.
+	 * @return
+	 */
 	public HashMap<Integer, ArrayList<Property>> getProperties(){
 		return this.playerProperties;
 	}
 	
 	/**
-	 * Keeps track of how many rolls a playing does in an attempt to get out of jail
+	 * Returns the number of times the player has rolled while in jail.
 	 * @return
 	 */
 	public int getNumRollsInJail() {
 		return numRollsInJail;
 	}
 	
-	
+	/**
+	 * Increments the number of times a player has rolled while in jail by one
+	 */
 	public void addNumRollsInJail() {
 		numRollsInJail++;
 	}
 	
+	/**
+	 * Sets initial index value of player
+	 * @param num
+	 */
 	public void setPNum(int num){
 		pNum = num;
 	}
 	
+	/**
+	 * Returns initial index value of player.
+	 * @return
+	 */
 	public int getPNum(){
 		return pNum;
 	}
-	
-	
 }

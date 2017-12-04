@@ -18,11 +18,8 @@ public class Location {
 	private String propertyName;
 	
 	/**
-	 * 
-	 * @param color
-	 * @param name
-	 * @param Type
-	 * Constructor for location
+	 * Constructs location from String passed to it.
+	 * @param inputLine
 	 */
 	public Location(String inputLine) {
 		Scanner lnScn = new Scanner(inputLine);
@@ -42,13 +39,15 @@ public class Location {
 	}
 	
 	/**
-	 * 
-	 * @return property Name
+	 * @return propertyName : String name of Location
 	 */
 	public String getPropertyName() {
 		return propertyName;
 	}
 	
+	/**
+	 * @return propertyType : String type of Location
+	 */
 	public String getPropertyType(){
 		return type;
 	}

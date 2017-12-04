@@ -17,24 +17,9 @@ public class Residential extends Property{
 	
 	
 	/**
-	 * 
-	 * @param location
-	 * @param Color
-	 * @param name
-	 * @param tax
-	 * @param price
-	 * @param mortgage
-	 * @param houseCost
-	 * @param rent
-	 * @param rentHouse1
-	 * @param rentHouse2
-	 * @param rentHouse3
-	 * @param rentHouse4
-	 * @param rentHouse5
-	 * Constructor for Residential Properties
+	 * Constructs Residential property from the string that is passed to it
+	 * @param inputLine
 	 */
-	
-	
 	public Residential(String inputLine){
 		super(inputLine);
 		
@@ -70,8 +55,8 @@ public class Residential extends Property{
 	}
 	
 	/**
-	 * build a house and change rent value
-	 * @return 
+	 * Build houses 
+	 * @param numHousesBuilt
 	 */
 	public void buildHouse(int numHousesBuilt) {
 		numHouses = numHousesBuilt;

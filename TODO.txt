@@ -22,6 +22,7 @@
 	-	Allow players to use a get out of jail free card (if they have it)
 			I'll add a button to "use card" to the GUI (Adam).
 	-	Change house display to say "Hotel" if the player has 5 houses on a property.
+	-	JAVADOCS AND COMMENTS
 	
 -- OPTIONAL --
 	-	Only refund half the cost of houses if their sold

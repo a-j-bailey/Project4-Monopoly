@@ -106,7 +106,7 @@ public class Property extends Location{
 	
 	
 	/**
-	 * returns owners
+	 * returns owner of player
 	 */
 	public int getOwner() {
 		return owner;

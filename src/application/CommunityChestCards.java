@@ -4,7 +4,11 @@ public class CommunityChestCards extends Card{
 	
 	
 	//final static String cardFile = "CommunityChestCards.txt";
-
+	
+	/**
+	 * Creates CommunityChestCard object from String passed to it
+	 * @param cardFile : line from card constructor file
+	 */
 	public CommunityChestCards(String cardFile) {
 		super(cardFile);
 		
@@ -12,7 +16,7 @@ public class CommunityChestCards extends Card{
 	
 	
 	/**
-	 * Does the specified action of a card 
+	 * Completes the action of the card based on the cards member variables.
 	 */
 	public static void cardAction() {
 		if (moveTo > -1){

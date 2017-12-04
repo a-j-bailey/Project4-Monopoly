@@ -21,9 +21,8 @@ public abstract class Card {
 	
 	
 	/**
-	 * 
-	 * @param cardFile
-	 * initializes all the cards in community chest and chance
+	 * Builds cards
+	 * @param cardFile : name of file to read cards from.
 	 */
 	public Card(String cardFile){
 		try {
