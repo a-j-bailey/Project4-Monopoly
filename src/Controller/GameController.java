@@ -98,7 +98,7 @@ public class GameController implements Initializable{
 			Label properties = new Label(" Properties:");
 			//PropertiesTextArea
 			TextFlow propText = new TextFlow();
-			propText.setPrefWidth(160);
+			propText.setPrefWidth(150);
 			propText.setPrefHeight(280);
 			playerPropertyLists[i] = propText;
 			ScrollPane sP = new ScrollPane(propText);
@@ -143,12 +143,14 @@ public class GameController implements Initializable{
 			endTurnButton.setDisable(false);
 		}
 		manageProperties.setDisable(false);
+		tradeButton.setDisable(false);
 		updatePropertyInfo();
 	}
 	
 	public void nextPlayer(){
 		rollDiceButton.setDisable(false);
 		manageProperties.setDisable(true);
+		tradeButton.setDisable(true);
 		endTurnButton.setDisable(true);
 		
 		//TODO: THIS WILL BE REMOVED
@@ -209,10 +211,11 @@ public class GameController implements Initializable{
 		
 		for (int i=1; i<=Game.getPlayer(pNum).getProperties().size(); i++){
 			for(Property property : Game.getPlayer(pNum).getProperties().get(i)){
-				String houses = "\n\t";
+				String houses = "\n";
 				if(property.getPropertyType().equals("Residential")){
 					Residential resProp = (Residential) property;
 					if(resProp.getNumHouses() > 0){
+						houses = houses + "\t";
 						for (int j=0; j<resProp.getNumHouses(); j++){
 							houses = houses + "⌂ ";
 						}
@@ -286,10 +289,6 @@ public class GameController implements Initializable{
 
 	}
 	
-	public void constructHouses(String name, int num){
-		
-	}
-	
 	public PopUpController launchPopUp(){
 		
 		PopUpController pc = new PopUpController();
@@ -316,5 +315,42 @@ public class GameController implements Initializable{
 		updatePlayerInfo(Game.getCurrPlayerNum());
 		Game.endTurn();
 		updatePropertyInfo();
+	}
+	
+	@FXML
+	private Label alerts;
+	public void setAlert(String msg){
+		alerts.setText(msg);
+		alerts.setDisable(false);
+	}
+	public void clearAlert(){
+		alerts.setText("No Alerts:");
+		alerts.setDisable(true);
+	}
+	
+	@FXML
+	private Button tradeButton;
+	public void trade(){
+		launchTrade().buildWindow();
+	}
+	
+	public TradeController launchTrade(){
+		
+		TradeController tc = new TradeController();
+		
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/TradePropView.fxml"));
+			Parent root = loader.load();
+            Stage stage = new Stage();
+            tc = loader.getController();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		return tc;
 	}
 }

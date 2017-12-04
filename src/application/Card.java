@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public abstract class Card {
-	protected String title;
+	protected static String title;
 	protected static int moveTo;
 	protected static int fine;
 	protected static int get;

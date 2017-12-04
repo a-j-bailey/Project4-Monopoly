@@ -1,12 +1,12 @@
 	[steve]	Property Actions (pay rent, paying tax, draw card)
 		[Done] Tax
-		Cards are basically done except we need to initialize them in game.java
+			Cards are basically done except we need to initialize them in game.java
 	-	Make sure player does not own property before charging them rent
 [Done]	Award players $200 for passing Go
 [Done]	Go To Jail (Property, Card, 3x Doubles) 
 				Set the coord. of the in jail space
 				3x doubles is Good
-	-	Trade Properties
+	[Adam]	Trade Properties
 [Done]	Build Houses
 [Done]	Mortgage Properties
 	-	Add Rules

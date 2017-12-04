@@ -40,19 +40,6 @@ public class PopUpController implements Initializable{
 		System.out.println(" -- PopUp Initialized -- ");
 	}
 	
-	public void launch(){
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/PopUp.fxml"));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
-	
 	public void buildWindow(){
 		//⌂
 		//
@@ -164,7 +151,6 @@ public class PopUpController implements Initializable{
 					mortgageCheck.setSelected(false);
 				}
 			}
-			
 		});
 		propertyList.getItems().addAll(loadPropertyList("Mortgage"));
 		propertyList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {

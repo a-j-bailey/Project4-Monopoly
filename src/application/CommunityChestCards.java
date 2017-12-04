@@ -18,16 +18,19 @@ public class CommunityChestCards extends Card{
 		if (moveTo > -1){
 			Game.moveTo(moveTo);
 			System.out.println("moveTo Card");
+			Game.getController().setAlert(title);
 		}
 		if (fine > -1){
 			Player currPlayer = Game.getCurrPlayer();
 			currPlayer.changeMoney((-1)*fine);
 			System.out.println("Fine Card");
+			Game.getController().setAlert(title);
 		}
 		if (get > -1){
 			Player currPlayer = Game.getCurrPlayer();
 			currPlayer.changeMoney(get);
 			System.out.println("Got Some Money Card");
+			Game.getController().setAlert(title);
 		}
 		
 		if (special){

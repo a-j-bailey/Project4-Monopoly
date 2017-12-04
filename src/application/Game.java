@@ -70,7 +70,7 @@ public class Game{
 		}
 		
 		//load Those Cards Though
-		ChanceCard(chanceCardFile);
+		//ChanceCard(chanceCardFile);
 		
 		numPlayers = playerNames.size();
 		System.out.println("\tLoading Properties");
@@ -180,16 +180,17 @@ public class Game{
 
 			numOfRolls++;
 
-		//	Random rand = new Random();
-			//int d1 = rand.nextInt(6)+1;
-			//int d2 = rand.nextInt(6)+1;
-
+			Random rand = new Random();
+			int d1 = rand.nextInt(6)+1;
+			int d2 = rand.nextInt(6)+1;
+			
 			//FOR TROUBLESHOOTING
-			System.out.println("-- enter dice roll: --");
-			Scanner input = new Scanner(System.in);
-			int d1 = input.nextInt();
-			int d2 = input.nextInt();
-
+			//System.out.println("-- enter dice roll: --");
+			//Scanner input = new Scanner(System.in);
+			//int d1 = 15; //input.nextInt();
+			//int d2 = 15; //input.nextInt();
+			
+			System.out.println("\tDICE: " + d1 + " " + d2);
 
 			if (d1 == d2){
 				canReroll = true;
@@ -215,7 +216,7 @@ public class Game{
 				else {
 					for  (int i = 0; i < 8; i++) {
 						if (Game.getCurrPlayer().getPos() == actionSpotLocations[i]) {
-							actionSpot(Game.getCurrPlayer().getPos());
+							//actionSpot(Game.getCurrPlayer().getPos());
 						}
 					}
 				}
@@ -267,7 +268,6 @@ public class Game{
 		if (location == 2 || location == 17 || location == 33) {		//Community Chest
 			CommunityChestCards.cardAction();
 		}
-		
 		if (location == 7 || location == 22 || location == 36) {		//Chance
 			ChanceCard.cardAction();
 		}
@@ -325,7 +325,7 @@ public class Game{
 		players.get(currPlayer).changeIncarceration(true);
 		players.get(currPlayer).setPos(50);
 		canReroll = false;										//Instead of this method ending their turn, We should let them hit the button and let them know theyre in jail
-		
+		gc.setAlert("You're in jail.\nRoll doubles to get out of jail.");
 	}
 	
 	public static void getOutOfJailSucker() {
@@ -335,10 +335,10 @@ public class Game{
 				
 		if (currentDice[0] == currentDice[1]) {
 			players.get(currPlayer).changePos((10 + currentDice[0] + currentDice[1]) % 40);
-			
+			gc.setAlert("You've made it out of jail! #FreeBird");
 		}
 		else {
-			//Just Tell Them They are out of jail and give them the option to end their turn				//HERE HERE HERE HERE
+			gc.setAlert("You're in jail.\nRoll doubles to get out of jail.");//Just Tell Them They are out of jail and give them the option to end their turn				//HERE HERE HERE HERE
 		}
 	}
 	
@@ -365,6 +365,7 @@ public class Game{
 		currPlayer = (currPlayer + 1) % numPlayers;
 		System.out.println("\tCurr Player " + currPlayer);
 		gc.nextPlayer();
+		gc.clearAlert();
 	}
 	
 	public static boolean getCanReroll(){
