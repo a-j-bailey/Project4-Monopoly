@@ -5,8 +5,8 @@ public class CommunityChestCards extends Card{
 	
 	//final static String cardFile = "CommunityChestCards.txt";
 
-	public CommunityChestCards(String cardFile) {
-		super(cardFile);
+	public CommunityChestCards(String cardLine) {
+		super(cardLine);
 		
 	}
 	
@@ -14,7 +14,7 @@ public class CommunityChestCards extends Card{
 	/**
 	 * Does the specified action of a card 
 	 */
-	public static void cardAction() {
+	public void cardAction() {
 		if (moveTo > -1){
 			Game.moveTo(moveTo);
 			System.out.println("moveTo Card");

@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
@@ -19,8 +21,8 @@ import javafx.stage.Stage;
 public class Game{
 	final static String chanceCardFile = "ChanceCards.txt";
 	final static String communityChestCardFile = "communityChestCards.txt";
-	private static Stack<CommunityChestCards> communityChest = new Stack<CommunityChestCards>();
-	private static Stack<ChanceCard> chance = new Stack<ChanceCard>();
+	private static Queue<CommunityChestCards> communityChest = new LinkedList<>();
+	private static Queue<ChanceCard> chance = new LinkedList<>();
 	private static HashMap<Integer, Player> players = new HashMap<>();
 	private static int numPlayers;
 	private static int currPlayer = 0;
@@ -61,8 +63,9 @@ public class Game{
 	 * 
 	 * @author adambailey
 	 * @param playerNames
+	 * @throws FileNotFoundException 
 	 */
-	public Game(ArrayList<String> playerNames){	
+	public Game(ArrayList<String> playerNames) throws FileNotFoundException{	
 		
 		for(int i=0; i<playerNames.size(); i++){
 			Player thisPlayer = new Player(playerNames.get(i));
@@ -72,6 +75,27 @@ public class Game{
 		
 		//load Those Cards Though
 		//ChanceCard(chanceCardFile);
+		File chanceCards = new File(chanceCardFile);
+		Scanner chanceCardScan = new Scanner(chanceCards);
+		while (chanceCardScan.hasNextLine()) {
+			String line = chanceCardScan.nextLine();
+			
+			ChanceCard chanceCard = new ChanceCard(line);
+			addToChanceDeck(chanceCard);
+		}
+		chanceCardScan.close();
+		
+		File communityCestCards = new File(communityChestCardFile);
+		Scanner communityChestCardScan = new Scanner(communityChestCardFile);
+		while (communityChestCardScan.hasNextLine()) {
+			String line = communityChestCardScan.nextLine();
+			
+			CommunityChestCards communityChestCard = new CommunityChestCards(line);
+			addToCommunityChestDeck(communityChestCard);
+			
+		}
+		communityChestCardScan.close();
+		
 		
 		numPlayers = playerNames.size();
 		System.out.println("\tLoading Properties");
@@ -128,12 +152,20 @@ public class Game{
 	
 	
 	
-	
+	/**
+	 * Adds chance card to deck stack
+	 * @param card
+	 */
 	public static void addToChanceDeck(ChanceCard card) {
-		chance.push(card);
+		chance.add(card);
 	}
+	
+	/**
+	 * Adds community chest card to deck stack
+	 * @param card
+	 */
 	public static void addToCommunityChestDeck(CommunityChestCards card) {
-		communityChest.push(card);
+		communityChest.add(card);
 	}
 	
 	
@@ -268,13 +300,15 @@ public class Game{
 	public static void actionSpot(int location) {
 		
 		if (location == 2 || location == 17 || location == 33) {		//Community Chest
-			CommunityChestCards.cardAction();
+			communityChest.peek().cardAction();
+			communityChest.add(communityChest.remove());
 		}
 		if (location == 7 || location == 22 || location == 36) {		//Chance
-			ChanceCard.cardAction();
+			chance.peek().cardAction();
+			chance.add(chance.remove());
 		}
 		if (location == 4 || location == 38) {							//Tax
-			Game.getCurrPlayer().changeMoney(((Tax) locations.get(location)).getTaxAmount());		
+			players.get(currPlayer).changeMoney(((Tax) locations.get(location)).getTaxAmount());
 		}
 		
 		

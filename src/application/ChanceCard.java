@@ -1,18 +1,18 @@
 package application;
 
-public abstract class ChanceCard extends Card{
+public class ChanceCard extends Card{
 	
 	//final static String cardFile = "ChanceCards.txt";
 	
-	public ChanceCard(String cardFile) {
-		super(cardFile);
+	public ChanceCard(String cardLine) {
+		super(cardLine);
 	}
 	
 	
 	/**
 	 * does the specified action of a card
 	 */
-	public static void cardAction(){
+	public void cardAction(){
 		if (moveTo > -1){
 			Game.moveTo(moveTo);
 			System.out.println("move to card");

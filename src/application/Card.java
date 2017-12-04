@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public abstract class Card {
+public class Card {
 	protected static String title;
 	protected static int moveTo;
 	protected static int fine;
@@ -25,30 +25,28 @@ public abstract class Card {
 	 * @param cardFile
 	 * initializes all the cards in community chest and chance
 	 */
-	public Card(String cardFile){
-		try {
-			File inputFile = new File(cardFile);
-			Scanner scnr = new Scanner(inputFile);
-			while(scnr.hasNextLine()){
-				this.title = scnr.next();
-				Card.moveTo = scnr.nextInt();
-				this.fine = scnr.nextInt();
-				this.get = scnr.nextInt();
-				String isSpecial = scnr.next();
-				if (isSpecial.equals("TRUE")){
-					this.special = true;
-					this.specialNum = scnr.nextInt();
-				} else {
-					this.special = false;
-				}
-			}
-			scnr.close();
-		} catch (FileNotFoundException e) {
-			System.err.println("Couldnt load card file");
+	public Card(String cardLine){
+
+
+		Scanner scnr = new Scanner(cardLine);
+
+		this.title = scnr.next();
+		Card.moveTo = scnr.nextInt();
+		this.fine = scnr.nextInt();
+		this.get = scnr.nextInt();
+		String isSpecial = scnr.next();
+		if (isSpecial.equals("TRUE")){
+			this.special = true;
+			this.specialNum = scnr.nextInt();
+		} else {
+			this.special = false;
 		}
-		
+
+		scnr.close();
+
+
 	}
-	
+
 	//abstract public static void cardAction();
 	
 	// We need this. Just havent decided if it should be inherited, or abstract.
