@@ -1,6 +1,6 @@
 package application;
 
-public abstract class ChanceCard extends Card{
+public class ChanceCard extends Card{
 	
 	//final static String cardFile = "ChanceCards.txt";
 	
@@ -16,7 +16,7 @@ public abstract class ChanceCard extends Card{
 	/**
 	 * Completes the action of the card based on the cards member variables.
 	 */
-	public static void cardAction(){
+	public void cardAction(){
 		if (moveTo > -1){
 			Game.moveTo(moveTo);
 			System.out.println("move to card");

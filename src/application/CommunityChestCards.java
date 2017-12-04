@@ -11,14 +11,13 @@ public class CommunityChestCards extends Card{
 	 */
 	public CommunityChestCards(String cardFile) {
 		super(cardFile);
-		
 	}
 	
 	
 	/**
 	 * Completes the action of the card based on the cards member variables.
 	 */
-	public static void cardAction() {
+	public void cardAction() {
 		if (moveTo > -1){
 			Game.moveTo(moveTo);
 			System.out.println("moveTo Card");
