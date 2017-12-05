@@ -145,7 +145,8 @@ public class GameController implements Initializable{
 		manageProperties.setDisable(true);
 		tradeButton.setDisable(true);
 		endTurnButton.setDisable(true);
-		buyProperty.setOpacity(0);		
+		buyProperty.setOpacity(0);
+		buyProperty.setDisable(true);
 		
 		if(Game.getCurrPlayer().isIncarcerated() && (Game.getCurrPlayer().getGetOutOfJailFreeCards() > 0)){
 			useGetOutOfJailCard.setVisible(true);
@@ -168,6 +169,7 @@ public class GameController implements Initializable{
 			Property property = (Property) thisLocation;
 			if(property.isBought()){
 				this.buyProperty.setOpacity(0);
+				this.buyProperty.setDisable(true);
 				int rent = 0;
 				if(property.getPropertyType().equals("Utility")){
 					Utility util = (Utility) property;
@@ -192,11 +194,13 @@ public class GameController implements Initializable{
 						"\nYou paid " + rent + " in rent.");
 			} else {
 				this.buyProperty.setOpacity(1);
+				this.buyProperty.setDisable(false);
 				this.propertyInfoText.setText("This property is for sale!"
 						+ "\nYou can buy it for $" + property.getValue());
 			}
 		} else {
 			this.buyProperty.setOpacity(0);
+			this.buyProperty.setDisable(true);
 			this.propertyInfoText.setText("");
 		}
 	}
@@ -262,6 +266,7 @@ public class GameController implements Initializable{
 		System.out.println("\tBought Property:"
 				+ "\n\t$" + Game.getCurrPlayer().getMoney());
 		buyProperty.setOpacity(0);
+		buyProperty.setDisable(true);
 	}
 	
 	//GAME BOARD
@@ -374,7 +379,7 @@ public class GameController implements Initializable{
 	public void removePlayerPanel(int pNum){
 		System.out.println("REMOVE PLAYER PANEL " + pNum);
 		ppAccordion.getPanes().remove(playerPanes.get(pNum));
-		playerTokens.get(pNum).setOpacity(0);
+		playerTokens.get(pNum-1).setOpacity(0);
 		playerTokens.remove(pNum);
 		playerPanes.remove(pNum);
 		playerMoneyLabels.remove(pNum);

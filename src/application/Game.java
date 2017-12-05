@@ -78,7 +78,6 @@ public class Game{
 		Scanner chanceCardScan = new Scanner(chanceCards);
 		while (chanceCardScan.hasNextLine()) {
 			String line = chanceCardScan.nextLine();
-			
 			ChanceCard aChanceCard = new ChanceCard(line);
 			addToChanceDeck(aChanceCard);
 		}
@@ -90,7 +89,6 @@ public class Game{
 		Scanner communityChestCardScan = new Scanner(communityCestCardsFile);
 		while (communityChestCardScan.hasNextLine()) {
 			String line = communityChestCardScan.nextLine();
-			System.out.println(line);
 			CommunityChestCards aCommunityChestCard = new CommunityChestCards(line);
 			addToCommunityChestDeck(aCommunityChestCard);
 		}
@@ -101,8 +99,7 @@ public class Game{
 		numPlayers = playerNames.size();
 		System.out.println("\tLoading Properties");
 		loadProperties();
-		System.out.println("\tProperties Loaded"
-				+ "\nLoading Cards");
+		System.out.println("\tProperties Loaded");
 		
 		launchGUI();
 	}
@@ -117,7 +114,6 @@ public class Game{
 			Scanner scnr = new Scanner(propertyFile);
 			int i = 0;
 			while (scnr.hasNextLine()){
-				System.out.print("\t" + i);
 				String nextLine = scnr.nextLine();
 				Scanner lnScn = new Scanner(nextLine);
 				lnScn.useDelimiter(",");
@@ -423,7 +419,13 @@ public class Game{
 		gc.removePlayerPanel(getCurrPlayer().getPNum());
 		players.remove(getCurrPlayer().getPNum());
 		
+<<<<<<< HEAD
 		if(players.size() == 1){						//if only one player is left, they win
+=======
+		System.err.println(players.size());
+		
+		if(players.size() == 1){
+>>>>>>> branch 'current_build' of https://github.com/adamjbailey/Project4-Monopoly.git
 			for(int i=0; i<numPlayers; i++){
 				if(players.containsKey(i)){
 					gameOver = true;

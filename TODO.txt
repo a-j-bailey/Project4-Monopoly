@@ -16,15 +16,12 @@
 [Done]	Change house display to say "Hotel" if the player has 5 houses on a property.
 	-	COMMENTS
 [Done]	Alert isn't working on tax location
+	-	Add property description if player owns property.
 	
-	
+
 -- OPTIONAL --
 [Done]	Only refund half the cost of houses if their sold
-	-	When a player goes to jail, the game tells them they're in jail 
-			and then they have to hit the "end turn" Button
-			Also, have a message that tells the player when they go to jail and when they get out of jail
-			Right now, When you don't roll doubles when in jail, you have to click "roll Dice" twice. Make a message for that
+[Done]	When a player goes to jail, the game tells them they're in jail 
 [Done]	Adjust the wording on some rules. (I don't know if he'll grade for this, but better safe than sorry)
-			i.e. Bankruptcy: Everything goes to the bank, not the debtor. 
-	-	Fix having to "Roll Dice" twice while in jail
+[Done]	Fix having to "Roll Dice" twice while in jail
 [Done]	Figure out why game occasionally lets user buy property that's already been bought. 
