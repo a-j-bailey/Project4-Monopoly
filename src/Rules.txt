@@ -44,7 +44,7 @@ It is even more advantageous to have houses or hotels on properties because rent
 
 CHANCE AND COMMUNITY CHEST:
 
-When you land on either of these spaces, you will draw a card, follow the instructions The "Get Out of Jail Free" card is held until used when needed. If the player who draws it does not wish to use it, then they may sell it, at any time, to another player at a price agreeable to both.
+When you land on either of these spaces, you will draw a card, follow the instructions The "Get Out of Jail Free" card is held until used when needed. Both decks of cards will be put in a specific order in the beginning of the game.
 
 
 INCOME TAX:
@@ -114,6 +114,11 @@ No rent can be collected on mortgaged properties or utilities, but rent can be c
 In order to lift the mortgage, the owner must pay the Bank the amount of mortgage. When all the properties of a color-group are no longer mortgaged, the owner may begin to buy back houses at full price.
 
 The player who mortgages property retains possession of it and no other player may secure it by lifting the mortgage from the Bank. However, the owner may sell this mortgaged property to another player at any agreed price. If you are the new owner, you may lift the mortgage at once if you wish by paying off the mortgage plus 10% interest to the Bank.
+
+
+TRADING
+
+You can only trade properties. Both player must agree. 
 
 
 BANKRUPTCY

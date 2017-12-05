@@ -65,27 +65,27 @@ public class Player {
 	 * @param destination : cycles around the board until they get to the new destination
 	 */
 	public void changePos(int destination){
-		while(this.pos != destination) {
+		while(this.pos != destination) {			//moves player one space at a time to check if they pass go
 			this.pos++;
 			this.pos = this.pos % 40;
 			
-			if (this.pos == 0) {
+			if (this.pos == 0) {					//if they pass (or land on) go
 				this.changeMoney(200);
 			}
 		}
 		
-		if(Game.getLocation(destination).getPropertyType().equals("Residential")){
+		if(Game.getLocation(destination).getPropertyType().equals("Residential")){		//If they land on a residential property
 			Residential prop = (Residential) Game.getLocation(destination);
-			if(prop.isBought()){
+			if(prop.isBought()){		
 				this.changeMoney((-1)*prop.getRent());
 				Game.getPlayer(prop.getOwner()).changeMoney((-1)*prop.getRent());
 			}
-		} else if (Game.getLocation(destination).getPropertyType().equals("Utility")) {
+		} else if (Game.getLocation(destination).getPropertyType().equals("Utility")) {			//if they land on a untility
 			Utility util = (Utility) Game.getLocation(destination);
 			if(util.isBought()){
 				String name = util.getPropertyName();
 				Scanner nameScn = new Scanner(name);
-				if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){
+				if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){			//charges rent to player that landed on utility
 					int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(10).size();
 					int dice = Game.getCurrentDice()[0] + Game.getCurrentDice()[1];
 					this.changeMoney((-1)*util.calcUtilityRent(dice, numOwned));
