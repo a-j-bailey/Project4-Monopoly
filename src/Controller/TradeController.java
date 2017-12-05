@@ -53,7 +53,7 @@ public class TradeController implements Initializable{
 		
 		HashMap<Integer, Player> players = Game.getPlayers();
 		for(int i=1; i<=Game.getNumPlayers(); i++){
-			if(players.containsKey(i)){
+			if(players.containsKey(i)){							//Assigns the "other" player 
 				if(Game.getPlayer(i) == otherPlayer){
 					otherPlayerNum = i;
 				}
