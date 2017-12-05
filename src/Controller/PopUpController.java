@@ -36,16 +36,20 @@ public class PopUpController implements Initializable{
 		System.out.println(" -- PopUp Initialized -- ");
 	}
 	
+	/**
+	 * Launches window for building houses
+	 */
 	public void buildWindow(){
-		//⌂
-		//
 		money = 0;
 		popUpTitle.setText("Build House"); 
 		type = "Build";
+		//Formats houseChanger
 		houseChanger.setOpacity(1);
 		houseChanger.setDisable(false);
 		houseChanger.setValue("0 Houses");
+		//Adds house options to house changer
 		houseChanger.setItems(FXCollections.observableArrayList("0 Houses","1 House", "2 Houses", "3 Houses", "4 Houses", "Hotel"));
+		//Adds selection listener
 		houseChanger.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -54,41 +58,52 @@ public class PopUpController implements Initializable{
 				Residential resProperty = (Residential) thisProperty;
 				int oldHouses = 0;
 				int numHouses = (int) newValue;
+				//Checks to see if property already exists, if so, replaces it.
 				if(changedProperties.containsKey(thisProperty)){
 					oldHouses = changedProperties.get(resProperty);
 					changedProperties.put(resProperty, numHouses);
 				} else {
+					//if it doesnt exists it gets old houses from property itself, and puts it in HashMap
 					oldHouses = resProperty.getNumHouses();
 					changedProperties.put(resProperty, numHouses);
 				}
+				//Adds or subtracts money from total money for display
 				if(numHouses < changedProperties.get(resProperty)){
 					money -= ((0.5)*resProperty.getHouseCost() * (oldHouses - numHouses));
 				} else {
 					money += (resProperty.getHouseCost() * (numHouses - oldHouses));
 				}
+				//sets display
 				cost.setText("$"+((-1)*money));
 			}
 		});
+		//adds properties that can be built on
 		propertyList.getItems().addAll(loadPropertyList("Build"));
+		//adds event listener
 		propertyList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			HashMap<Integer, ArrayList<Property>> propList = Game.getCurrPlayer().getProperties();
 		    @Override
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 		        System.out.println("Selected item: " + newValue);
+		        //finds property that matches the selected String
 				for(int i=1; i<=8; i++){
 					for(int j=0; j<propList.get(i).size(); j++){
 						if(propList.get(i).get(j).getPropertyName().equals(propertyList.getSelectionModel().getSelectedItem())){
+							//sets property to thisProperty.
 							thisProperty = (Residential) propList.get(i).get(j);
 						}
 					}
 				}
+				
 				Residential resProp = (Residential) thisProperty;
 				int numHouses = 0;
+				//Checks to see if this property has already been changed and gets numHouses from that
 				if(changedProperties.containsKey(resProp)){
 					numHouses = changedProperties.get(resProp);
 				} else {
 					numHouses = resProp.getNumHouses();
 				}
+				//Sets houseChanger display to match the numHouses already on the property.
 				if(numHouses == 5){
 					houseChanger.setValue("Hotel");
 				} else if(numHouses == 1) {
@@ -100,15 +115,20 @@ public class PopUpController implements Initializable{
 		});
 	}
 
+	/**
+	 * Builds window for mortgaging properties
+	 */
 	public void mortgageWindow(){
 		popUpTitle.setText("Mortgage Houses");
 		type = "Mortgage";
+		//Sets up mortgageCheck
 		mortgageCheck.setOpacity(1);
 		mortgageCheck.setDisable(false);
 		mortgageCheck.selectedProperty().addListener(new ChangeListener<Boolean>(){
 
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				//sets val based on boolen so that we can use the same ChangedProperties HashMap
 				int val = -1;
 				if(newValue){
 					val = 1;
@@ -118,6 +138,7 @@ public class PopUpController implements Initializable{
 				
 				Boolean mortgageable = null;
 				
+				//Makes sure there arent any houses on the proerty before mortgaging it
 				if(thisProperty.getPropertyType().equals("Residential")){
 					Residential resProp = (Residential) thisProperty;
 					if(resProp.getNumHouses() > 0){
@@ -128,6 +149,7 @@ public class PopUpController implements Initializable{
 				} else {
 					mortgageable = true;
 				}
+				
 				
 				if(mortgageable){
 					changedProperties.put(thisProperty, val);
