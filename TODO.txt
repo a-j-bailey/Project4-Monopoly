@@ -14,7 +14,7 @@
 [Done]	Make tokens go to jail as soon as they land on that location. 
 [Done]	Allow players to use a get out of jail free card (if they have it)
 [Done]	Change house display to say "Hotel" if the player has 5 houses on a property.
-	-	COMMENTS
+[Done]	COMMENTS
 [Done]	Alert isn't working on tax location
 [Done]	Add property description if player owns property.
 	
