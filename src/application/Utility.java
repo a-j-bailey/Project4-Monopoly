@@ -22,7 +22,6 @@ public class Utility extends Property{
 	public Utility(String inputLine) {
 		super(inputLine);
 		
-
 	}
 	
 	/**

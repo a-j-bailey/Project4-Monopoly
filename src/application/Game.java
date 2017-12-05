@@ -204,7 +204,7 @@ public class Game{
 	 */
 	public static int getCurrPlayerNum(){
 		System.out.println("Current Player Num: " + currPlayer);
-		return getPlayer(currPlayer).getPNum() + 1;
+		return getPlayer(currPlayer+1).getPNum();
 	}
 
 	/**
@@ -312,11 +312,9 @@ public class Game{
 		}
 		if (location == 4 || location == 38) {							//Tax
 			int tax = ((Tax) locations.get(location)).getTaxAmount();
-			gc.setAlert("You were taxed:\n" + tax);
-			players.get(currPlayer).changeMoney(tax);
+			gc.setAlert("You were taxed:\n$" + tax);
+			players.get(currPlayer+1).changeMoney(tax);
 		}
-		
-		
 	}
 	
 	
@@ -453,7 +451,7 @@ public class Game{
 			numOfRolls = 0;
 			do{
 				currPlayer = (currPlayer + 1) % numPlayers;
-			} while(!players.containsKey(currPlayer));
+			} while(!players.containsKey(currPlayer+1));
 			System.out.println("\tCurr Player " + currPlayer);
 			gc.nextPlayer();
 			gc.clearAlert();
@@ -489,7 +487,7 @@ public class Game{
 	 * @param moveTo : index of new position.
 	 */
 	public static void moveTo(int moveTo) {
-		players.get(currPlayer).changePos(moveTo);
+		players.get(currPlayer+1).changePos(moveTo);
 		
 	}
 

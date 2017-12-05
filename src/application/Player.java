@@ -76,20 +76,24 @@ public class Player {
 		
 		if(Game.getLocation(destination).getPropertyType().equals("Residential")){
 			Residential prop = (Residential) Game.getLocation(destination);
-			this.changeMoney(prop.getRent());
+			if(prop.isBought()){
+				this.changeMoney(prop.getRent());
+			}
 		} else if (Game.getLocation(destination).getPropertyType().equals("Utility")) {
 			Utility util = (Utility) Game.getLocation(destination);
-			String name = util.getPropertyName();
-			Scanner nameScn = new Scanner(name);
-			if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){
-				int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(10).size();
-				int dice = Game.getCurrentDice()[0] + Game.getCurrentDice()[1];
-				this.changeMoney(util.calcUtilityRent(dice, numOwned));
-			} else {
-				int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(9).size();
-				this.changeMoney(util.calcRailroadRent(numOwned));
+			if(util.isBought()){
+				String name = util.getPropertyName();
+				Scanner nameScn = new Scanner(name);
+				if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){
+					int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(10).size();
+					int dice = Game.getCurrentDice()[0] + Game.getCurrentDice()[1];
+					this.changeMoney(util.calcUtilityRent(dice, numOwned));
+				} else {
+					int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(9).size();
+					this.changeMoney(util.calcRailroadRent(numOwned));
+				}
+				nameScn.close();
 			}
-			nameScn.close();
 		}
 
 		switch (pos){

@@ -80,7 +80,7 @@ public class GameController implements Initializable{
 			
 			//Token
 			ImageView token = new ImageView();
-			token.setImage(new Image("imgs/player" + (i+1) + "_token.png"));
+			token.setImage(new Image("imgs/player" + i + "_token.png"));
 			token.setFitWidth(50);
 			token.setFitHeight(50);
 			//Label (Money)
@@ -109,9 +109,6 @@ public class GameController implements Initializable{
 			playerPanes.put(i, pane);
 			ppAccordion.getPanes().add(pane);
 		}
-
-		//ppAccordion.getPanes().addAll(playerPanes);
-		//ppAccordion.setExpandedPane(playerPanes);
 		
 		this.currentTurn.setText(Game.getPlayer(1).getPlayerName() + "'s Turn");
 		updatePropertyInfo();
@@ -177,11 +174,11 @@ public class GameController implements Initializable{
 					String name = util.getPropertyName();
 					Scanner nameScn = new Scanner(name);
 					if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){
-						int numOwned = Game.getPlayer(util.getOwner() - 1).getProperties().get(10).size();
+						int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(10).size();
 						int dice = Game.getCurrentDice()[0] + Game.getCurrentDice()[1];
 						rent = util.calcUtilityRent(dice, numOwned);
 					} else {
-						int numOwned = Game.getPlayer(util.getOwner() - 1).getProperties().get(9).size();
+						int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(9).size();
 						rent = util.calcRailroadRent(numOwned);
 						System.out.println("\tRR Rent: " + rent);
 					}
@@ -246,8 +243,6 @@ public class GameController implements Initializable{
 		playerPropertyLists.get(pNum).getChildren().addAll(updatePlayerPropertyList(pNum));
 		if(Game.getCurrPlayer().getMoney() < 0){
 			setAlert("If you end your turn with a negative balance you will automatically forfeit the game.");
-		} else {
-			clearAlert();
 		}
 	}
 	
