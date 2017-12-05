@@ -18,18 +18,18 @@ public class CommunityChestCards extends Card{
 	 * Completes the action of the card based on the cards member variables.
 	 */
 	public void cardAction() {
-		if (getMoveTo() > -1){
+		if (getMoveTo() > -1){								//if the card is a "move to" card
 			Game.moveTo(getMoveTo());
 			System.out.println("moveTo Card");
 			Game.getController().setAlert(getTitle());
 		}
-		if (getFine() > -1){
+		if (getFine() > -1){								//If the card is a fine
 			Player currPlayer = Game.getCurrPlayer();
 			currPlayer.changeMoney((-1)*getFine());
 			System.out.println("Fine Card");
 			Game.getController().setAlert(getTitle());
 		}
-		if (getGet() > -1){
+		if (getGet() > -1){									//If the card pays the player money
 			Player currPlayer = Game.getCurrPlayer();
 			currPlayer.changeMoney(getGet());
 			System.out.println("Got Some Money Card");
