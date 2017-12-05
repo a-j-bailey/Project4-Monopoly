@@ -31,7 +31,7 @@ public class Game{
 	private static HashMap<Integer, Location> locations = new HashMap<Integer, Location>();
 	private static int[] currentDice = new int[2];
 	private static int numOfRolls;
-	private static int[] actionSpotLocations = new int[] {2, 4, 7, 17, 22, 33, 36, 38};
+	final static int[] actionSpotLocations = new int[] {2, 4, 7, 17, 22, 33, 36, 38};
 	private static Boolean gameOver = false;
 	
 	
