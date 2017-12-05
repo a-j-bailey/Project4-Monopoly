@@ -76,13 +76,13 @@ public class Player {
 		
 		if(Game.getLocation(destination).getPropertyType().equals("Residential")){		//If they land on a residential property
 			Residential prop = (Residential) Game.getLocation(destination);
-			if(prop.isBought()){		
+			if(prop.isBought() && (prop.getOwner() != pNum)){		
 				this.changeMoney((-1)*prop.getRent());
-				Game.getPlayer(prop.getOwner()).changeMoney((-1)*prop.getRent());
+				Game.getPlayer(prop.getOwner()).changeMoney(prop.getRent());
 			}
 		} else if (Game.getLocation(destination).getPropertyType().equals("Utility")) {			//if they land on a untility
 			Utility util = (Utility) Game.getLocation(destination);
-			if(util.isBought()){
+			if(util.isBought() && (util.getOwner() != pNum)){
 				String name = util.getPropertyName();
 				Scanner nameScn = new Scanner(name);
 				if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){			//charges rent to player that landed on utility
