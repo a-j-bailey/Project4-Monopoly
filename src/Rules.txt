@@ -1,46 +1,132 @@
-Here's a bunch of Lorem Ipsum dummy text till stephan actually writes the rules...
+OBJECT:
 
-Let
-It
-Begin:
+The object of the game is to become the wealthiest player through buying, renting and selling of property.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum pellentesque odio nec maximus. Praesent malesuada, orci a lobortis suscipit, neque ipsum blandit nisl, eu molestie dolor diam sit amet ipsum. Sed vel massa congue, fringilla nunc non, molestie sem. Vestibulum fermentum quis mi id tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nulla libero, semper vel posuere vel, sollicitudin sed neque. Donec vel augue imperdiet, elementum leo vitae, bibendum augue. Sed sodales ornare nibh vitae accumsan. Curabitur eu dictum lacus. Pellentesque viverra ligula quis urna euismod tincidunt. Sed et nunc risus. Cras bibendum porttitor volutpat. Morbi sollicitudin odio eget magna iaculis, vestibulum ultrices nisl condimentum. Ut laoreet vulputate urna, eget faucibus ipsum sollicitudin vel.
 
-Aliquam pretium justo a est interdum posuere. Fusce pellentesque elementum dictum. Praesent in porttitor tortor, ut accumsan tellus. Curabitur tincidunt consectetur massa, eu rhoncus mi ultrices volutpat. Duis et pulvinar massa. Nulla commodo nisi leo, eget hendrerit magna faucibus at. Suspendisse ornare eget turpis in auctor. Maecenas non ex neque. Quisque ut sem ex.
+EQUIPMENT:
 
-Cras semper dui mi, id vestibulum nisl placerat eget. Morbi condimentum elit odio. Morbi condimentum, purus eget laoreet dapibus, augue orci lobortis ex, ornare gravida tortor massa a libero. Donec consectetur magna id metus dignissim, sed pharetra sapien condimentum. Integer porta finibus pulvinar. Cras ullamcorper turpis dictum odio imperdiet facilisis. Nullam vulputate nulla augue, ut tristique diam commodo in. Donec metus libero, placerat nec tellus pellentesque, aliquam tempor nunc. Praesent volutpat pellentesque sem, sed facilisis ipsum pellentesque luctus. Suspendisse potenti. Suspendisse aliquam nisi at vestibulum dapibus. Integer et leo tellus. Cras nunc dui, suscipit et cursus sed, iaculis et neque. Fusce commodo finibus lorem, et semper sapien lobortis vitae.
+A computer that can run a java program
 
-Sed volutpat nunc a augue lobortis pharetra. Phasellus nec ipsum sed elit ultrices cursus. Vivamus sagittis imperdiet lacus a sollicitudin. Phasellus a justo scelerisque orci fermentum ultrices. Phasellus non iaculis enim, at lobortis ex. Quisque sed felis quis quam pulvinar sodales euismod eget diam. Integer magna enim, eleifend at nisi nec, pulvinar mattis ex. Mauris semper, nibh consectetur blandit commodo, enim nisi semper lorem, ac ultrices erat est sed urna. Curabitur eu erat vitae elit semper consequat. Praesent scelerisque tempus venenatis. Suspendisse libero lacus, feugiat feugiat sodales et, consequat sed mi. Nulla finibus neque mollis nulla tincidunt mattis. Praesent tristique sem quam, porta fermentum erat ullamcorper a.
 
-Nullam ac orci leo. Morbi hendrerit urna libero, quis ornare mi rutrum a. Nam accumsan dui enim, id viverra nibh pretium blandit. Nam ut dolor consequat, dapibus lacus ut, tempor turpis. Ut non magna elementum, aliquam erat et, fringilla dui. Curabitur consequat ligula sed luctus varius. Vivamus eget tincidunt mi. Aliquam erat volutpat. In hac habitasse platea dictumst. Nam ipsum augue, dictum ut libero dictum, interdum maximus purus. Donec erat augue, mollis id leo et, hendrerit auctor libero. Maecenas vel tellus euismod velit facilisis dignissim id quis nibh. In sagittis mi augue. In quis convallis ex. Fusce metus tortor, pretium ac mollis consectetur, porttitor non ante.
+THE BANK:
 
-Pellentesque leo purus, gravida vitae aliquet non, elementum viverra ipsum. Pellentesque in risus cursus, facilisis massa quis, tristique ligula. Cras dictum sollicitudin lacus. Nulla in ligula aliquam, efficitur quam eget, pulvinar ex. Cras vestibulum feugiat elit sed hendrerit. Fusce blandit, augue molestie pretium vulputate, dolor arcu gravida nisl, in fermentum lacus sem a massa. Nullam sed massa lectus. Aliquam vitae nibh tincidunt, pretium arcu ac, ultrices augue. Donec ac felis condimentum, ullamcorper tortor eget, venenatis massa. Mauris vel magna aliquet, facilisis sem pharetra, laoreet est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque et arcu efficitur, sodales nunc et, posuere ex.
+Besides the Bank's money, the Bank holds the Title Deeds, and the houses and hotels prior to purchase by the players. The Bank pays salaries and bonuses. It sells properties and hands out the proper Title Deed cards when purchased by a player, it also sells houses and hotels to the players and loans money when required on mortgages.
+The Bank collects all taxes, fines, loans and interest, and the price of all properties which it sells.
 
-Sed auctor sollicitudin massa, non facilisis leo mattis a. Nam feugiat est id urna interdum viverra. Curabitur ut metus eleifend, efficitur felis sed, aliquet augue. Quisque sollicitudin tellus erat, at cursus quam porta a. Phasellus sit amet dolor congue, rhoncus augue ut, luctus libero. Ut id tortor at magna ultricies aliquam nec sed sem. Maecenas sollicitudin arcu ac quam faucibus, vitae gravida tortor convallis. Duis ut nisl porta, malesuada sem et, vulputate dolor. Fusce in enim mauris. Phasellus ac vehicula tortor, rutrum gravida est. Morbi sed nisi vitae orci iaculis maximus nec at massa. Nam ultrices sapien sem, in dapibus leo accumsan vel. Sed vel mattis eros. Sed in turpis tempor, aliquam eros in, ornare odio. Cras urna eros, volutpat vel urna vitae, condimentum aliquet dolor. Donec scelerisque ut nunc et placerat.
 
-Fusce sed libero nunc. Phasellus iaculis euismod velit, vel finibus mi ornare sed. Nunc auctor suscipit ipsum. Sed placerat, libero non blandit suscipit, libero mauris sollicitudin metus, id aliquet urna odio ut diam. Duis venenatis sem ac augue mollis, quis convallis felis dapibus. Donec commodo facilisis ligula, at vehicula tellus hendrerit non. Nullam vitae sodales velit, quis pretium sapien. Nam vehicula ultricies dignissim. Quisque sit amet dictum sem. Integer bibendum metus metus, at ultrices turpis interdum eget.
+THE PLAY:
 
-Ut elementum laoreet ex et lobortis. Aenean condimentum urna a enim fringilla euismod. Sed pharetra, diam sit amet malesuada pulvinar, odio urna mollis ligula, id bibendum lorem augue id neque. Donec sed sapien a dui rhoncus viverra eu a turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque eget molestie erat, eget aliquet lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+Player one goes first. Roll the dice and your token will move clockwise around the board.
+After you have completed your play, click "end turn." The tokens remain on the spaces occupied and proceed from that point on the player's next turn. Two or more tokens may rest on the same space at the same time. 
+Depending on the space your token reaches, you may be entitled to buy real estate or other properties, or be obliged to pay rent, pay taxes, draw a Chance or Community Chest card, Go To Jail, or etc...
 
-Cras id tincidunt leo. Fusce ut sodales quam. Aenean a placerat erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed consequat, felis et imperdiet molestie, odio urna scelerisque urna, et egestas mi ligula a quam. Proin non velit eget velit scelerisque pharetra. Suspendisse ullamcorper a ante sit amet rhoncus. Proin sit amet sapien non odio egestas tincidunt vitae et diam.
+If you throw doubles, your token will move as usual, the sum of the two dice, and you are subject to any privileges or penalties pertaining to the space on which you land. Retaining the dice, roll again and your token will move as before. If you throw doubles three times in succession, your token will immediately go to the space marked "In Jail".
 
-Nullam vulputate leo id mauris euismod molestie. Aliquam fermentum sodales mauris id gravida. Integer a ipsum quam. Nunc fermentum sem at neque fringilla dignissim. Proin finibus nunc sed turpis finibus, at porta ex rutrum. In ante ipsum, aliquam vel facilisis posuere, finibus quis sem. Etiam pulvinar aliquet sapien vel maximus.
 
-Nullam eleifend vestibulum risus id ornare. Donec sed aliquet tortor. Donec porta justo quis nibh finibus ullamcorper. Donec euismod, arcu ac fermentum fermentum, sem ex cursus lorem, sed luctus justo massa et tortor. Nulla hendrerit in nisi in elementum. Etiam facilisis lacus sit amet ex fringilla, nec fermentum purus malesuada. Etiam nec suscipit nulla. Suspendisse semper nunc in nulla feugiat, vitae iaculis ligula congue. Fusce ac interdum elit. Cras ut nisl tincidunt, hendrerit mauris non, vulputate quam. In auctor tempor turpis, eget scelerisque velit congue eu. Sed a risus felis.
+GO:
 
-Ut semper nunc nisl, quis varius sapien vestibulum non. Vivamus condimentum sodales velit, vitae tincidunt nibh euismod et. Nulla elementum rhoncus accumsan. Mauris eros justo, malesuada nec leo a, finibus luctus nisi. Sed facilisis ante massa, vel sodales ante tempor id. Fusce ipsum sapien, rutrum ornare ante vitae, cursus pretium risus. Nunc at eros nisl.
+Each time a player's token lands on or passes over GO, whether by throwing the dice or drawing a card, the Banker pays that player a $200 salary.
+The $200 is paid only once each time around the board. However, if a player passing GO on the throw of the dice lands 2 spaces beyond it on Community Chest, or 7 spaces beyond it on Chance, and draws the "Advance to GO" card, they collect $200 for passing GO the first time, and another $200 for Advancing to it the second time by the instructions on the card.
 
-Cras et ultrices enim. Ut dictum ipsum et nibh posuere congue. Etiam feugiat convallis justo non porta. Donec nec lacus eget nisl sodales egestas. Vestibulum rhoncus enim a felis blandit ultricies. Sed vitae felis nibh. Proin fermentum venenatis erat, porttitor commodo mauris.
 
-Pellentesque iaculis ut mi non sodales. Quisque accumsan gravida finibus. Curabitur ex sapien, ultricies at velit in, consectetur varius libero. Mauris in justo in arcu sagittis dignissim faucibus vel odio. Cras sed placerat lacus, nec venenatis diam. Praesent eget lacinia neque. Aliquam ullamcorper aliquet massa a volutpat. Suspendisse vitae ligula metus. Suspendisse tincidunt mauris id ullamcorper congue. Quisque et laoreet risus, vitae blandit ipsum. In at ornare ex. Nulla facilisi. Aenean condimentum laoreet turpis non vulputate.
+BUYING PROPERTY:
 
-Sed varius fermentum turpis in viverra. Integer sed tellus dolor. Nunc iaculis nibh congue bibendum ornare. Integer vitae tellus convallis, cursus massa vel, luctus felis. Nunc a ligula velit. Nulla et purus id leo hendrerit rhoncus at at velit. Donec id tellus finibus, facilisis lacus vel, imperdiet nisi. Donec id elit et nibh accumsan iaculis. Suspendisse imperdiet ante id odio pretium, in commodo nisl rutrum. Etiam consectetur pharetra tempus. Donec porta, purus quis faucibus cursus, felis diam elementum purus, quis ultricies lorem metus in dolor. Etiam sit amet cursus arcu. Praesent at mi et orci porttitor fermentum. Aenean et pulvinar est.
+Whenever you land on an unowned property you may buy that property from the Bank at its printed price. You receive the Title Deed card showing ownership.
 
-Proin pellentesque, nibh ac sollicitudin rhoncus, leo ipsum placerat erat, et tristique felis tellus eu augue. Praesent eget tempor nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam ac luctus dolor. Donec sit amet orci nunc. Suspendisse pretium, lacus id rhoncus semper, magna dolor euismod ipsum, vitae mattis sem elit hendrerit orci. Nullam faucibus, eros nec eleifend congue, diam odio commodo erat, feugiat laoreet justo lorem vel ipsum. Maecenas ac risus rhoncus, tristique dolor quis, semper dui. Phasellus fringilla gravida pharetra.
 
-Morbi sed mi at eros pretium cursus sed non mauris. Vestibulum et placerat dui. Proin nec odio elit. Praesent egestas dui accumsan, ultrices libero vel, dignissim nibh. Donec gravida lectus ut dictum vestibulum. Donec venenatis enim tellus. Morbi non elit nec diam sollicitudin efficitur. Proin a est ipsum. Donec aliquam interdum tempor. Pellentesque porta eleifend nunc, ac varius ante sagittis maximus. Fusce ut faucibus ligula. Pellentesque nisi nulla, facilisis eget volutpat non, aliquam ut ipsum. Ut ut tempor sem.
+PAYING RENT:
 
-Fusce ut ornare sapien. In vehicula egestas accumsan. Mauris eget orci luctus, aliquet felis vitae, facilisis nunc. Quisque a mauris id dui tempor tempor. Quisque ultrices vitae tellus in elementum. Maecenas a nisi varius massa ullamcorper mattis nec a ex. Ut mauris diam, porta in nulla ac, eleifend rutrum ligula. Pellentesque in dignissim magna. Proin tincidunt aliquam cursus. In ultricies sit amet nibh et efficitur. Donec non porttitor massa. Proin ac enim non ante pellentesque lobortis. Aenean eu ex sem. Ut ut lorem in orci lobortis cursus. Vivamus mollis in lectus id pharetra. Fusce feugiat nunc augue, at bibendum magna scelerisque vitae.
+When you land on a property that is owned by another player, the owner collects rent from you in accordance with the list printed on its Title Deed card.
+If the property is mortgaged, no rent can be collected. 
+It is an advantage to hold all the Title Deed cards in a color-group (i.e., Boardwalk and Park Place, or Connecticut, Vermont and Oriental Avenues) because the owner may then charge double rent for unimproved properties in that color-group. This rule applies to unmortgaged properties even if another property in that color-group is mortgaged.
+It is even more advantageous to have houses or hotels on properties because rents are much higher than for unimproved properties. 
 
-Nunc efficitur elementum libero, non iaculis sem commodo sed. Ut porttitor pretium velit a tincidunt. Integer non euismod dui. Curabitur sed enim arcu. Pellentesque ut euismod justo. Nulla dignissim efficitur erat sed pulvinar. Aenean rutrum molestie metus eget luctus.
+
+CHANCE AND COMMUNITY CHEST:
+
+When you land on either of these spaces, you will draw a card, follow the instructions The "Get Out of Jail Free" card is held until used when needed. If the player who draws it does not wish to use it, then they may sell it, at any time, to another player at a price agreeable to both.
+
+
+INCOME TAX:
+
+If you land here you have one option: Pay $200.
+
+
+JAIL 
+
+You land in Jail when...
+(1)	Your token lands on the space marked "Go to Jail",
+(2)	You draw a card marked "Go to Jail" or
+(3)	You throw doubles three times in succession.
+When you are sent to Jail you cannot collect your $200 salary in that move since, regardless of where your token is on the board, you must move directly into Jail. Your turn ends when you are sent to Jail.
+If you are not "sent to jail" but in the ordinary course of play lands on that space, you are
+"Just Visiting", you incur no penalty, and you move ahead in the usual manner on your next turn.
+You still are able to collect rent on your properties because you are "Just Visiting".
+
+A player gets out of Jail by...
+(1) Throwing doubles on any of your next three turns,
+if you succeed in doing this you immediately move forward the number of spaces shown by your doubles throw. Even though you had thrown doubles, you do not take another turn.
+(2) Using the "Get Out of Jail Free Card"
+(3) Purchasing the "Get Out of Jail Free Card" from another player and playing it.
+(4) Paying a fine of $50 before you roll the dice on either of your next two turns. If you do not throw doubles by your third turn, you must pay the $50 fine. You then get out of Jail and immediately move forward the number of spaces shown by your throw.
+Even though you are in Jail, you may buy and sell property, buy and sell houses and hotels and collect rents.
+
+
+FREE PARKING
+
+A player landing on this place does not receive any money, property or reward of any kind.
+This is just a "free" resting-place.
+
+
+HOUSES
+
+When a player owns all the properties in a color-group they may buy houses from the Bank
+and erect them on those properties.
+If you buy one house, you may put it on any one of those properties. The next house you buy must be erected on one of the unimproved properties of this or any other complete color-group you may own. The price you must pay the Bank for each house is shown on your Title Deed card for the property on which you erect the house. The owner still collects double rent from an opponent who lands on the unimproved properties of there complete color-group.
+Following the above rules, you may buy and erect at any time as many houses as your judgement and financial standing will allow. But you must build evenly, i.e., you cannot erect more than one house on any one property of any color-group until you have built one house on every property of that group. You may then begin on the second row of houses, and so on, up to a limit of four houses to a property. For example, you cannot build three Houses on one property if you have only one house on another property of that group.
+As you build evenly, you must also break down evenly if you sell houses back to the Bank (see SELLING PROPERTY).
+
+
+HOTELS
+
+When a player has four houses on each property of a complete color-group, they may buy a hotel from the Bank and erect it on any property of the color-group. They return the four houses from that property to the Bank and pay the price for the hotel as shown on the Title Deed card. Only one hotel may be erected on any one property.
+
+
+BUILDING SHORTAGES
+
+When the Bank has no houses to sell, players wishing to build must wait for some player to return or sell their houses to the Bank before building. If there are a limited number of houses and hotels available and two or more players wish to buy more than the Bank has, the houses or hotels must be sold at auction to the highest bidder.
+
+
+SELLING PROPERTY
+
+Unimproved properties, railroads and utilities (but not buildings) may be sold to any player as a private transaction for any amount the owner can get. However, no property can be sold to another player if buildings are standing on any properties of that color-group. Any buildings so located must be sold back to the Bank before the owner can sell any property of that color-group.
+
+Houses and Hotels may be sold back to the Bank at any time for one-half the price paid for them. All houses on one color-group may be sold at once, or they may be sold one house at a time (one hotel equals five houses), evenly, in reverse of the manner in which they were erected.
+It is up to the players to decided to follow the rule of building houses and hotels evenly across a set. This rule will not be enforced by the program. 
+
+
+MORTGAGES
+
+Unimproved properties can be mortgaged through the Bank at any time. Before an improved property can be mortgaged, all the buildings on all the properties of its color-group must be sold back to the Bank at half price. The mortgage value is printed on each Title Deed card.
+
+No rent can be collected on mortgaged properties or utilities, but rent can be collected on un-mortgaged properties in the same group.
+
+In order to lift the mortgage, the owner must pay the Bank the amount of mortgage. When all the properties of a color-group are no longer mortgaged, the owner may begin to buy back houses at full price.
+
+The player who mortgages property retains possession of it and no other player may secure it by lifting the mortgage from the Bank. However, the owner may sell this mortgaged property to another player at any agreed price. If you are the new owner, you may lift the mortgage at once if you wish by paying off the mortgage plus 10% interest to the Bank.
+
+
+BANKRUPTCY
+
+You are declared bankrupt if you owe more than you can pay either to another player or to the Bank. If your debt is to another player, you must turn over to that player all that you have of value and retire from the game.
+In making this settlement, if you own houses or hotels, you must return these to the Bank in exchange for money to the extent of one-half the amount paid for them.
+This cash is given to the creditor. If you have mortgaged property you also turn this property over to your creditor.
+The new owner who does this may then, at their option, pay the principal or hold the property until some later turn, then lift the mortgage.
+Should you owe the Bank, instead of another player, more than you can pay (because of taxes or penalties) even by selling off buildings and mortgaging property, you must turn over all assets to the Bank. A bankrupt player must immediately retire from the game. The last player left in the game wins.
+
+
+MISCELLANEOUS
+
+Money can be loaned to a player only by the Bank and then only by mortgaging property. No player may borrow from or lend money to another player. 
+
 

@@ -69,8 +69,8 @@ public class Game{
 		
 		for(int i=0; i<playerNames.size(); i++){
 			Player thisPlayer = new Player(playerNames.get(i));
-			thisPlayer.setPNum(i);
-			players.put(i, thisPlayer);
+			thisPlayer.setPNum(i+1);
+			players.put(i+1, thisPlayer);
 		}
 		
 		//Load chance chards
@@ -193,7 +193,7 @@ public class Game{
 	 * @return
 	 */
 	public static Player getCurrPlayer(){
-		return getPlayer(currPlayer);
+		return getPlayer(currPlayer+1);
 	}
 	
 	/**
@@ -215,20 +215,20 @@ public class Game{
 	 * @return
 	 */
 	public static void rollDice(){
+		
 		if (!Game.getCurrPlayer().isIncarcerated()) {
-
-
+		
 			numOfRolls++;
-
+			
 			Random rand = new Random();
-			//int d1 = rand.nextInt(6)+1;
-			//int d2 = rand.nextInt(6)+1;
+			int d1 = rand.nextInt(6)+1;
+			int d2 = rand.nextInt(6)+1;
 			
 			//FOR TROUBLESHOOTING
-			System.out.println("-- enter dice roll: --");
-			Scanner input = new Scanner(System.in);
-			int d1 = input.nextInt();
-			int d2 = input.nextInt();
+			//System.out.println("-- enter dice roll: --");
+			//Scanner input = new Scanner(System.in);
+			//int d1 = input.nextInt();
+			//int d2 = input.nextInt();
 			
 			System.out.println("\tDICE: " + d1 + " " + d2);
 
@@ -243,7 +243,7 @@ public class Game{
 				goToJailSucker();
 			}
 			else {
-				players.get(currPlayer).changePos((players.get(currPlayer).getPos() + d1 + d2) % 40);
+				players.get(currPlayer+1).changePos((players.get(currPlayer+1).getPos() + d1 + d2) % 40);
 				System.out.println(Game.getCurrPlayer().getPos());
 				currentDice[0] = d1;
 				currentDice[1] = d2;
@@ -251,8 +251,6 @@ public class Game{
 					canReroll = false;
 					goToJailSucker();
 				}
-				
-				
 				else {
 					for  (int i = 0; i < 8; i++) {
 						if (Game.getCurrPlayer().getPos() == actionSpotLocations[i]) {
@@ -260,47 +258,39 @@ public class Game{
 						}
 					}
 				}
-				
 			}
 		}
 		else {
-
 			if (Game.getCurrPlayer().getNumRollsInJail() == 3) {
 				Game.getCurrPlayer().changeMoney(-50);
 				canReroll = true;
-				getOutOfJailSucker();
-				
+				getOutOfJailSucker(false);
 			}
-
 			else {
-
-				//Random rand = new Random();
-				//int d1 = rand.nextInt(6)+1;
-				//int d2 = rand.nextInt(6)+1;
-
+				Random rand = new Random();
+				int d1 = rand.nextInt(6)+1;
+				int d2 = rand.nextInt(6)+1;
+				
 				//FOR TROUBLESHOOTING
-				System.out.println("-- enter dice roll: --");
-				Scanner input = new Scanner(System.in);
-				int d1 = input.nextInt();
-				int d2 = input.nextInt();
+				//System.out.println("-- enter dice roll: --");
+				//Scanner input = new Scanner(System.in);
+				//int d1 = input.nextInt();
+				//int d2 = input.nextInt();
 				
 				Game.getCurrPlayer().addNumRollsInJail();
 				
 				canReroll = false;
 
-
 				if (d1 == d2){
 					currentDice[0] = d1;
 					currentDice[1] = d2;
-					getOutOfJailSucker();
-
+					getOutOfJailSucker(false);
 				} 
 				else {
 					endTurn();
 				}
 			}
 		}
-
 	}
 	
 	/**
@@ -312,14 +302,18 @@ public class Game{
 		
 		if (location == 2 || location == 17 || location == 33) {		//Community Chest
 			communityChest.peek().cardAction();
+			gc.setAlert("You drew a Community Chest card:\n" + communityChest.peek().getTitle());
 			communityChest.add(communityChest.remove());
 		}
 		if (location == 7 || location == 22 || location == 36) {		//Chance
 			chance.peek().cardAction();
+			gc.setAlert("You drew a Chance card:\n" + chance.peek().getTitle());
 			chance.add(chance.remove());
 		}
 		if (location == 4 || location == 38) {							//Tax
-			players.get(currPlayer).changeMoney(((Tax) locations.get(location)).getTaxAmount());
+			int tax = ((Tax) locations.get(location)).getTaxAmount();
+			gc.setAlert("You were taxed:\n" + tax);
+			players.get(currPlayer).changeMoney(tax);
 		}
 		
 		
@@ -378,12 +372,12 @@ public class Game{
 	 * Sets player into the "visiting jail" position, 
 	 * If they rolled doubles, it lets them roll again and move.
 	 */
-	public static void getOutOfJailSucker() {
+	public static void getOutOfJailSucker(Boolean canRoll) {
 		//print something about how you're out of jail
 		players.get(currPlayer).changeIncarceration(false);
 		players.get(currPlayer).setPos(10);
 		
-		if (currentDice[0] == currentDice[1]) {
+		if ((currentDice[0] == currentDice[1]) || canRoll) {
 			players.get(currPlayer).changePos((10 + currentDice[0] + currentDice[1]) % 40);
 			gc.setAlert("You've made it out of jail! #FreeBird");
 		}

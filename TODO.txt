@@ -1,32 +1,30 @@
 [Done]	Property Actions (pay rent, paying tax, draw card)
-	-	Make sure player does not own property before charging them rent
+	[Adam]	Make sure player does not own property before charging them rent
 [Done]	Award players $200 for passing Go
 [Done]	Go To Jail (Property, Card, 3x Doubles) 
-				Set the coord. of the in jail space
-				3x doubles is Good
 [Done]	Trade Properties
 [Done]	Build Houses
 [Done]	Mortgage Properties
-[NOT DONE]	Add Working Rules Page
-				I made a text file with rules that are adjusted for our program. if it's too much to change, don't bother
-	-	Type and finalize game rules into Rules.txt
+[Done]	Add Working Rules Page
+[Done]	Type and finalize game rules into Rules.txt
 [Done]	Player forfeits if ends turn with negative balance
 [Done]	Declaring a Winner
 	-	Only allow user to add houses if there is a complete set
-	-	Figure out why game occasionally lets user buy property that's already been bought. 
 [Done]	Allow players to roll to get out of jail when it would be there turn.
-			But don't move their token unless it's doubles.
 [Done]	Make tokens go to jail as soon as they land on that location. 
-			Currently you have to "roll dice" again
-	-	Allow players to use a get out of jail free card (if they have it)
-			I'll add a button to "use card" to the GUI (Adam).
-	-	Change house display to say "Hotel" if the player has 5 houses on a property.
+[Done]	Allow players to use a get out of jail free card (if they have it)
+[Done]	Change house display to say "Hotel" if the player has 5 houses on a property.
 	-	COMMENTS
+	-	Alert isn't working on tax location
+	
 	
 -- OPTIONAL --
-	-	Only refund half the cost of houses if their sold
+[Done]	Only refund half the cost of houses if their sold
 	-	When a player goes to jail, the game tells them they're in jail 
 			and then they have to hit the "end turn" Button
 			Also, have a message that tells the player when they go to jail and when they get out of jail
 			Right now, When you don't roll doubles when in jail, you have to click "roll Dice" twice. Make a message for that
-	
+	-	Adjust the wording on some rules. (I don't know if he'll grade for this, but better safe than sorry)
+			i.e. Bankruptcy: Everything goes to the bank, not the debtor. 
+	-	Fix having to "Roll Dice" twice while in jail
+[Done]	Figure out why game occasionally lets user buy property that's already been bought. 

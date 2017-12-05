@@ -73,8 +73,25 @@ public class Player {
 				this.changeMoney(200);
 			}
 		}
-		//this.pos = (this.pos + destination) % 40;		//this is from when the method took a dice roll rather than a destination
-		//this.pos = destination;
+		
+		if(Game.getLocation(destination).getPropertyType().equals("Residential")){
+			Residential prop = (Residential) Game.getLocation(destination);
+			this.changeMoney(prop.getRent());
+		} else if (Game.getLocation(destination).getPropertyType().equals("Utility")) {
+			Utility util = (Utility) Game.getLocation(destination);
+			String name = util.getPropertyName();
+			Scanner nameScn = new Scanner(name);
+			if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){
+				int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(10).size();
+				int dice = Game.getCurrentDice()[0] + Game.getCurrentDice()[1];
+				this.changeMoney(util.calcUtilityRent(dice, numOwned));
+			} else {
+				int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(9).size();
+				this.changeMoney(util.calcRailroadRent(numOwned));
+			}
+			nameScn.close();
+		}
+
 		switch (pos){
 			case 0:
 				Game.getController().moveToken(Game.getCurrPlayerNum(), 426, 408);
@@ -241,8 +258,10 @@ public class Player {
 	public String getPlayerName() {
 		String name = playerName;
 		Scanner scan = new Scanner(name);
+		String rtrnName = scan.next();
 		scan.useDelimiter(" ");
-		return scan.next();
+		scan.close();
+		return rtrnName;
 	}
 	
 	/**

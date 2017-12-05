@@ -62,7 +62,7 @@ public class PopUpController implements Initializable{
 					changedProperties.put(resProperty, numHouses);
 				}
 				if(numHouses < changedProperties.get(resProperty)){
-					money -= (resProperty.getHouseCost() * (oldHouses - numHouses));
+					money -= ((0.5)*resProperty.getHouseCost() * (oldHouses - numHouses));
 				} else {
 					money += (resProperty.getHouseCost() * (numHouses - oldHouses));
 				}
@@ -214,7 +214,7 @@ public class PopUpController implements Initializable{
 				if (changedProperties.get(property) == 0){
 					Game.getCurrPlayer().changeMoney(resProp.getHouseCost() * resProp.getNumHouses());
 				} else if (changedProperties.get(property) < resProp.getNumHouses()){
-					Game.getCurrPlayer().changeMoney(resProp.getHouseCost() * (resProp.getNumHouses() - changedProperties.get(property)));
+					Game.getCurrPlayer().changeMoney((0.5)*resProp.getHouseCost() * (resProp.getNumHouses() - changedProperties.get(property)));
 				} else if (changedProperties.get(property) > resProp.getNumHouses()) {
 					Game.getCurrPlayer().changeMoney((-1)*resProp.getHouseCost() * (changedProperties.get(property) - resProp.getNumHouses()));
 				}

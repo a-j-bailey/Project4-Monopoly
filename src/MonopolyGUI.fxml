@@ -147,6 +147,7 @@
                                     </Button>
                                  </children>
                               </VBox>
+                              <Button fx:id="useGetOutOfJailCard" alignment="CENTER" disable="true" layoutX="11.0" layoutY="353.0" mnemonicParsing="false" onAction="#useGetOutOfJailCard" prefHeight="53.0" prefWidth="178.0" text="Use Get Out of Jail Free Card" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" />
                            </children>
                         </AnchorPane>
                     </content>

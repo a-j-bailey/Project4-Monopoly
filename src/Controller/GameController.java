@@ -1,13 +1,11 @@
 package Controller;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import application.Game;
 import application.Location;
-import application.Main;
 import application.Property;
 import application.Residential;
 import application.Utility;
@@ -78,7 +76,7 @@ public class GameController implements Initializable{
 		playerPanes = new HashMap<>();
 		playerMoneyLabels = new HashMap<>();
 		playerPropertyLists = new HashMap<>();
-		for (int i=0; i<playerNum; i++){
+		for (int i=1; i<=playerNum; i++){
 			
 			//Token
 			ImageView token = new ImageView();
@@ -115,7 +113,7 @@ public class GameController implements Initializable{
 		//ppAccordion.getPanes().addAll(playerPanes);
 		//ppAccordion.setExpandedPane(playerPanes);
 		
-		this.currentTurn.setText(Game.getPlayer(0).getPlayerName() + "'s Turn");
+		this.currentTurn.setText(Game.getPlayer(1).getPlayerName() + "'s Turn");
 		updatePropertyInfo();
 		
 		Game.getLocation(Game.getCurrPlayer().getPos());
@@ -150,9 +148,12 @@ public class GameController implements Initializable{
 		manageProperties.setDisable(true);
 		tradeButton.setDisable(true);
 		endTurnButton.setDisable(true);
+		buyProperty.setOpacity(0);		
 		
-		//TODO: THIS WILL BE REMOVED
-		buyProperty.setOpacity(0);
+		if(Game.getCurrPlayer().isIncarcerated() && (Game.getCurrPlayer().getGetOutOfJailFreeCards() > 0)){
+			useGetOutOfJailCard.setVisible(true);
+			useGetOutOfJailCard.setDisable(false);
+		}
 		
 		this.currentTurn.setText(Game.getCurrPlayer().getPlayerName() + "'s Turn");
 	}
@@ -162,7 +163,6 @@ public class GameController implements Initializable{
 		//Sets pane title based on current player
 		this.propertyInfo.setText(thisLocation.getPropertyName() + ":");
 		
-		System.out.println("\tCurrent Player: " + Game.getCurrPlayer().getPlayerName());
 		System.out.println("\tCurrent Property: " + thisLocation.getPropertyName());
 		
 		//Populates Property Info table with information:
@@ -170,6 +170,7 @@ public class GameController implements Initializable{
 				thisLocation.getPropertyType().equals("Utility")){
 			Property property = (Property) thisLocation;
 			if(property.isBought()){
+				this.buyProperty.setOpacity(0);
 				int rent = 0;
 				if(property.getPropertyType().equals("Utility")){
 					Utility util = (Utility) property;
@@ -186,8 +187,10 @@ public class GameController implements Initializable{
 					}
 					nameScn.close();
 				} else {
+				
 					Residential prop = (Residential) property;
 					rent = prop.getRent();
+				
 				}
 				this.propertyInfoText.setText("This property is owned by " + 
 						Game.getPlayer(property.getOwner() - 1).getPlayerName() + 
@@ -212,8 +215,10 @@ public class GameController implements Initializable{
 				String houses = "\n";
 				if(property.getPropertyType().equals("Residential")){
 					Residential resProp = (Residential) property;
-					if(resProp.getNumHouses() > 0){
-						houses = houses + "\t";
+					if (resProp.getNumHouses() == 5){
+						houses = houses + "\t\tHOTEL";
+					} else if(resProp.getNumHouses() > 0){
+						houses = houses + "\t\t";
 						for (int j=0; j<resProp.getNumHouses(); j++){
 							houses = houses + "⌂ ";
 						}
@@ -221,7 +226,6 @@ public class GameController implements Initializable{
 					}
 				}
 				Text propName = new Text("\t" + property.getPropertyName() + houses);
-				System.out.println("\t" + property.getPropertyName());
 				propName.setFill(Color.web(property.getColor()));
 				if(property.isMortgaged()){
 					propName.setOpacity(0.5);
@@ -404,5 +408,11 @@ public class GameController implements Initializable{
 	
 	public void removePlayer(){
 		Game.removePlayer();
+	}
+	
+	@FXML
+	private Button useGetOutOfJailCard;
+	public void useGetOutOfJailCard(){
+		Game.getOutOfJailSucker(true);
 	}
 }
