@@ -96,6 +96,8 @@ public class Game{
 		}
 		communityChestCardScan.close();
 		
+		
+		
 		numPlayers = playerNames.size();
 		System.out.println("\tLoading Properties");
 		loadProperties();
@@ -120,8 +122,8 @@ public class Game{
 				Scanner lnScn = new Scanner(nextLine);
 				lnScn.useDelimiter(",");
 				String id = lnScn.next();
-				if (id.equals("Residential")){
-					Residential property = new Residential(nextLine);
+				if (id.equals("Residential")){								//Each if statement determines the type of property
+					Residential property = new Residential(nextLine);		//		of each line in the text file 
 					locations.put(i, property);
 				} else if (id.equals("Tax")){
 					Tax tax = new Tax(nextLine);
@@ -139,7 +141,7 @@ public class Game{
 				lnScn.close();
 				i++;
 			}
-			Location jail = new Location("Location,In Jail,#000000");
+			Location jail = new Location("Location,In Jail,#000000");		//Sets "in jail" as a position not on the board (so you can not happen to land on a space that is "in jail")
 			locations.put(50, jail);
 			scnr.close();
 		} catch (FileNotFoundException e) {
@@ -216,11 +218,11 @@ public class Game{
 	 */
 	public static void rollDice(){
 		
-		if (!Game.getCurrPlayer().isIncarcerated()) {
+		if (!Game.getCurrPlayer().isIncarcerated()) {			//If you are now in jail, do this
 		
-			numOfRolls++;
+			numOfRolls++;							//To keep track of how many times a player rolls each turn 
 			
-			Random rand = new Random();
+			Random rand = new Random();				//Rolls the dice and assigns each value to d1 and d2
 			int d1 = rand.nextInt(6)+1;
 			int d2 = rand.nextInt(6)+1;
 			
@@ -231,42 +233,42 @@ public class Game{
 			//int d2 = input.nextInt();
 			
 			System.out.println("\tDICE: " + d1 + " " + d2);
-
-			if (d1 == d2){
+			
+			if (d1 == d2){							//if you roll doubles, you can go again
 				canReroll = true;
 			} 
 			else {
 				canReroll = false;
 			}
-			if (numOfRolls == 3) {
-				canReroll = false;
+			if (numOfRolls == 3) {					//If you roll doubles three times, go to jail
+				canReroll = false;	
 				goToJailSucker();
 			}
-			else {
+			else {									//normal roll (move the number of spaces, etc.)
 				players.get(currPlayer+1).changePos((players.get(currPlayer+1).getPos() + d1 + d2) % 40);
 				System.out.println(Game.getCurrPlayer().getPos());
 				currentDice[0] = d1;
 				currentDice[1] = d2;
-				if (Game.getCurrPlayer().getPos() == 30) {
+				if (Game.getCurrPlayer().getPos() == 30) {				//if you land on the jail spot, you go to jail
 					canReroll = false;
 					goToJailSucker();
 				}
 				else {
 					for  (int i = 0; i < 8; i++) {
-						if (Game.getCurrPlayer().getPos() == actionSpotLocations[i]) {
+						if (Game.getCurrPlayer().getPos() == actionSpotLocations[i]) {		//if the player's current position is a tax, chance, or community chest space do this
 							actionSpot(Game.getCurrPlayer().getPos());
 						}
 					}
 				}
 			}
 		}
-		else {
-			if (Game.getCurrPlayer().getNumRollsInJail() == 3) {
+		else {										//If the player is in jail
+			if (Game.getCurrPlayer().getNumRollsInJail() == 3) {		//if the player has been in jail for three turns without rolling doubles
 				Game.getCurrPlayer().changeMoney(-50);
 				canReroll = true;
 				getOutOfJailSucker(false);
 			}
-			else {
+			else {														//Roll for doubles to try to get out
 				Random rand = new Random();
 				int d1 = rand.nextInt(6)+1;
 				int d2 = rand.nextInt(6)+1;
@@ -281,12 +283,12 @@ public class Game{
 				
 				canReroll = false;
 
-				if (d1 == d2){
+				if (d1 == d2){											//If you do roll doubles
 					currentDice[0] = d1;
 					currentDice[1] = d2;
 					getOutOfJailSucker(false);
 				} 
-				else {
+				else {													//if you don't roll doubles while in jail
 					gc.setAlert("You did not roll doubles. Your turn is over");
 					players.get(currPlayer+1).setPos(50);
 					//endTurn();
@@ -331,14 +333,14 @@ public class Game{
 	public static void mortgageProperties(Stack<Integer> propertiesToDo){
 
 		while(!propertiesToDo.isEmpty()) {
-			if(((Property) locations.get(propertiesToDo.peek())).isMortgaged()) {  //Look, I have no idea what the (Property) thing is at the bigging of this if statement. It fixed my problems though
-				((Property) locations.get(propertiesToDo.peek())).setIsMortgaged(false);		//I'm pretty sure its specifying the location type
+			if(((Property) locations.get(propertiesToDo.peek())).isMortgaged()) {  				//unmortgages property
+				((Property) locations.get(propertiesToDo.peek())).setIsMortgaged(false);		
 				int temp = ((Property) locations.get(propertiesToDo.pop())).getMortgageValue();
 				getCurrPlayer().changeMoney((-1)*temp);
 
 
 			}
-			else if(!((Property) locations.get(propertiesToDo.peek())).isMortgaged()) {  
+			else if(!((Property) locations.get(propertiesToDo.peek())).isMortgaged()) {  		//mortgages property
 				((Property) locations.get(propertiesToDo.peek())).setIsMortgaged(true);	
 				int temp = ((Property) locations.get(propertiesToDo.pop())).getMortgageValue();
 				getCurrPlayer().changeMoney(temp);
@@ -350,21 +352,14 @@ public class Game{
 
 
 	}
-
-	/**
-	 * Moves current player to given position.
-	 */
-	//public static void moveTo(int newPos){			This is now in Player.java
-	//	currPlayer.changePos(newPos);
-	//}
 	
 	/**
 	 * Sends current player to jail and LOCKS 'EM UP
 	 */
-	public static void goToJailSucker(){
+	public static void goToJailSucker(){				
 		players.get(currPlayer+1).changeIncarceration(true);
 		players.get(currPlayer+1).setPos(50);
-		canReroll = false;										//Instead of this method ending their turn, We should let them hit the button and let them know theyre in jail
+		canReroll = false;										
 		gc.setAlert("You're in jail.\nRoll doubles to get out of jail.");
 	}
 	
@@ -373,7 +368,7 @@ public class Game{
 	 * If they rolled doubles, it lets them roll again and move.
 	 */
 	public static void getOutOfJailSucker(Boolean canRoll) {
-		//print something about how you're out of jail
+		
 		players.get(currPlayer + 1).changeIncarceration(false);
 		players.get(currPlayer + 1).setPos(10);
 		
@@ -382,7 +377,7 @@ public class Game{
 			gc.setAlert("You've made it out of jail! #FreeBird");
 		}
 		else {
-			gc.setAlert("You made it out of jail!");//Just Tell Them They are out of jail and give them the option to end their turn				//HERE HERE HERE HERE
+			gc.setAlert("You made it out of jail!");
 		}
 	}
 	
@@ -391,7 +386,7 @@ public class Game{
 	 * Use a positive amount if the current player is losing money.
 	 * @param amount : amount that the other player's money should change by.
 	 */
-	public static void manageAllPlayersMoney(int amount){
+	public static void manageAllPlayersMoney(int amount){			//used for cards the collect money from every player or give money to every player
 		for(int i=0; i<numPlayers; i++){
 			if(i != currPlayer + 1){
 				players.get(i).changeMoney(amount);
@@ -417,8 +412,8 @@ public class Game{
 		System.err.println("--REMOVE PLAYER--\n" + getCurrPlayer().getPlayerName());
 		HashMap<Integer, ArrayList<Property>> playerProperties = getCurrPlayer().getProperties();
 		for(int i=1; i<10; i++){
-			for(int j=0; j<playerProperties.get(i).size(); j++){
-				if(playerProperties.get(i).get(j).getPropertyType().equals("Residential")){
+			for(int j=0; j<playerProperties.get(i).size(); j++){								//returns all properties to the bank
+				if(playerProperties.get(i).get(j).getPropertyType().equals("Residential")){		
 					Residential resProp = (Residential) playerProperties.get(i).get(j);
 					resProp.buildHouse(0);
 				}
@@ -428,7 +423,7 @@ public class Game{
 		gc.removePlayerPanel(getCurrPlayer().getPNum());
 		players.remove(getCurrPlayer().getPNum());
 		
-		if(players.size() == 1){
+		if(players.size() == 1){						//if only one player is left, they win
 			for(int i=0; i<numPlayers; i++){
 				if(players.containsKey(i)){
 					gameOver = true;
