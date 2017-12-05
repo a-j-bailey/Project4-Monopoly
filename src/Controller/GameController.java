@@ -114,11 +114,11 @@ public class GameController implements Initializable{
 			ppAccordion.getPanes().add(pane);
 		}
 		
+		//Sets the label for whos turn it currently is
 		this.currentTurn.setText(Game.getPlayer(1).getPlayerName() + "'s Turn");
 		updatePropertyInfo();
 		
-		Game.getLocation(Game.getCurrPlayer().getPos());
-		
+		//Loads rule page from rule file
 		loadRules();
 		
 		System.out.println(" -- Game Initialized -- ");
@@ -132,18 +132,25 @@ public class GameController implements Initializable{
 	 */
 	public void moveToken(int player, int x, int y){
 		player--;
+		//Sets player's token to the X Y coordinates
 		playerTokens.get(player).setX(x);
 		playerTokens.get(player).setY(y);
 		
+		//Hides dice button 
 		if (!Game.getCanReroll()){
 			rollDiceButton.setDisable(true);
 			endTurnButton.setDisable(false);
 		}
+		
+		//shows buttons for trading and managing properties
 		manageProperties.setDisable(false);
 		tradeButton.setDisable(false);
 		updatePropertyInfo();
 	}
 	
+	/**
+	 * Sets up gui for next player
+	 */
 	public void nextPlayer(){
 		rollDiceButton.setDisable(false);
 		manageProperties.setDisable(true);
@@ -160,6 +167,9 @@ public class GameController implements Initializable{
 		this.currentTurn.setText(Game.getCurrPlayer().getPlayerName() + "'s Turn");
 	}
 	
+	/**
+	 * Updates information for right panel based on current property.
+	 */
 	public void updatePropertyInfo(){
 		Location thisLocation = Game.getLocation(Game.getCurrPlayer().getPos());
 		//Sets pane title based on current player
@@ -170,52 +180,75 @@ public class GameController implements Initializable{
 		//Populates Property Info table with information:
 		if(thisLocation.getPropertyType().equals("Residential") ||
 				thisLocation.getPropertyType().equals("Utility")){
+			//Creates property instance of location
 			Property property = (Property) thisLocation;
 			if(property.isBought()){
+				//hides buy button
 				this.buyProperty.setOpacity(0);
 				this.buyProperty.setDisable(true);
 				int rent = 0;
 				if(property.getPropertyType().equals("Utility")){
+					//If it's a utility, creates Utility instance
 					Utility util = (Utility) property;
 					String name = util.getPropertyName();
 					Scanner nameScn = new Scanner(name);
+					//Get's first part of name so we know whether it's Water Works or Electric Company
 					if (nameScn.next().equals("Water") || nameScn.next().equals("Electric")){
+						//Calculates the number of utilities the player owns
 						int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(10).size();
+						//Gets dice roll
 						int dice = Game.getCurrentDice()[0] + Game.getCurrentDice()[1];
+						//Calculates rent
 						rent = util.calcUtilityRent(dice, numOwned);
 					} else {
+						//RAILROAD
+						//Gets number of railroads the player owns
 						int numOwned = Game.getPlayer(util.getOwner()).getProperties().get(9).size();
+						//Calculates rent
 						rent = util.calcRailroadRent(numOwned);
-						System.out.println("\tRR Rent: " + rent);
 					}
 					nameScn.close();
 				} else {
+					//Not utility, but property, therefore it's a Residential
 					Residential prop = (Residential) property;
 					rent = prop.getRent();
 				}
-				this.propertyInfoText.setText("This property is owned by " + 
-						Game.getPlayer(property.getOwner()).getPlayerName() + 
-						"\nYou paid " + rent + " in rent.");
+				if(Game.getCurrPlayer() != Game.getPlayer(property.getOwner())){
+					this.propertyInfoText.setText("This property is owned by " + 
+							Game.getPlayer(property.getOwner()).getPlayerName() + 
+							"\nYou paid " + rent + " in rent.");
+				} else {
+					this.propertyInfoText.setText("You own this property.");
+				}
 			} else {
+				//Not owned, enable UI for buying the property.
 				this.buyProperty.setOpacity(1);
 				this.buyProperty.setDisable(false);
 				this.propertyInfoText.setText("This property is for sale!"
 						+ "\nYou can buy it for $" + property.getValue());
 			}
 		} else {
+			//Not a property that can be owned
 			this.buyProperty.setOpacity(0);
 			this.buyProperty.setDisable(true);
 			this.propertyInfoText.setText("");
 		}
 	}
 	
+	/**
+	 * Updates the property list for the pNum passed to it.
+	 * @param pNum
+	 * @return
+	 */
 	public TextFlow updatePlayerPropertyList(int pNum){
 		TextFlow list = new TextFlow();
-		//pNum--;
 		
+		//Iterates through HashMap and constructs the TextFlow to display
+		//Also displays houses and "HOTEL"
 		for (int i=1; i<=Game.getPlayer(pNum).getProperties().size(); i++){
 			for(Property property : Game.getPlayer(pNum).getProperties().get(i)){
 				String houses = "\n";
+				//
 				if(property.getPropertyType().equals("Residential")){
 					Residential resProp = (Residential) property;
 					if (resProp.getNumHouses() == 5){
@@ -228,10 +261,12 @@ public class GameController implements Initializable{
 						houses = houses + "\n";
 					}
 				}
+				//Constructs property string
 				Text propName = new Text("\t" + property.getPropertyName() + houses);
+				//Sets color based on property member variable
 				propName.setFill(Color.web(property.getColor()));
 				if(property.isMortgaged()){
-					propName.setOpacity(0.5);
+					propName.setFill(Color.web("#78909C"));
 				}
 				list.getChildren().add(propName);
 			}
@@ -242,11 +277,20 @@ public class GameController implements Initializable{
 		return list;
 	}
 	
+	/**
+	 * Updates player Titled Pane on left side for the pNum passed to it
+	 * @param pNum
+	 */
 	public void updatePlayerInfo(int pNum){
 		System.out.println("\tUpdate Player Info " + pNum);
+		//MONEY
 		playerMoneyLabels.get(pNum).setText("$" + Game.getPlayer(pNum).getMoney());
+		//PROPERTIES - CLEAR
 		playerPropertyLists.get(pNum).getChildren().clear();
+		//PROPERTIES - POPULATE
 		playerPropertyLists.get(pNum).getChildren().addAll(updatePlayerPropertyList(pNum));
+		
+		//Makes sure player doesnt have less than $0
 		if(Game.getCurrPlayer().getMoney() < 0){
 			setAlert("If you end your turn with a negative balance you will automatically forfeit the game.");
 		}
@@ -261,14 +305,21 @@ public class GameController implements Initializable{
 	private TextArea propertyInfoText;
 	@FXML 
 	private Button buyProperty;
+	/**
+	 * Gets called by pressing the "Buy Property" button 
+	 * Buys property and charges player
+	 */
 	public void buyProperty(){
 		Property location = (Property) Game.getLocation(Game.getCurrPlayer().getPos());
 		int propValue = location.getValue();
+		//Purchases property
 		Game.getCurrPlayer().addProperty(location);
 		Game.getCurrPlayer().changeMoney(-propValue);
+		
 		location.changeOwner(Game.getCurrPlayerNum());
 		System.out.println("\tBought Property:"
 				+ "\n\t$" + Game.getCurrPlayer().getMoney());
+		//Hides button
 		buyProperty.setOpacity(0);
 		buyProperty.setDisable(true);
 	}
@@ -296,7 +347,10 @@ public class GameController implements Initializable{
 		launchPopUp().mortgageWindow();
 
 	}
-	
+	/**
+	 * Launches popup window for either Mortgaging property or building houses
+	 * @return
+	 */
 	public PopUpController launchPopUp(){
 		
 		PopUpController pc = new PopUpController();
@@ -319,6 +373,9 @@ public class GameController implements Initializable{
 	
 	@FXML
 	private Button endTurnButton;
+	/**
+	 * Calls methods for ending a players turn and transitioning to the next player
+	 */
 	public void endTurn(){
 		useGetOutOfJailCard.setVisible(false);
 		useGetOutOfJailCard.setDisable(true);
@@ -329,10 +386,18 @@ public class GameController implements Initializable{
 	
 	@FXML
 	private Label alerts;
+	/**
+	 * Sets alert text right above "End Turn" button.
+	 * @param msg
+	 */
 	public void setAlert(String msg){
 		alerts.setText(msg);
 		alerts.setDisable(false);
 	}
+	
+	/**
+	 * Clears any message from the alert text area
+	 */
 	public void clearAlert(){
 		alerts.setText("No Alerts:");
 		alerts.setDisable(true);
@@ -340,10 +405,17 @@ public class GameController implements Initializable{
 	
 	@FXML
 	private Button tradeButton;
+	/**
+	 * Calls method to launch Trade Window
+	 */
 	public void trade(){
 		launchTrade().buildWindow();
 	}
 	
+	/**
+	 * Launches window for Trade PopUp
+	 * @return
+	 */
 	public TradeController launchTrade(){
 		
 		TradeController tc = new TradeController();
@@ -367,6 +439,9 @@ public class GameController implements Initializable{
 	@FXML
 	private TextFlow rulesArea;
 	
+	/**
+	 * Loads text for Rules pane from Rules.txt
+	 */
 	private void loadRules(){
 		File rulesFile = new File("src/Rules.txt");
 		try {
@@ -382,13 +457,23 @@ public class GameController implements Initializable{
 		}
 	}
 	
+	/**
+	 * Removes player's existence from the board.
+	 * @param pNum
+	 */
 	public void removePlayerPanel(int pNum){
 		System.out.println("REMOVE PLAYER PANEL " + pNum);
+		//Removes pane
 		ppAccordion.getPanes().remove(playerPanes.get(pNum));
+		//Hides token
 		playerTokens.get(pNum-1).setOpacity(0);
+		//Removes reference to token
 		playerTokens.remove(pNum);
+		//Removes reference to pane
 		playerPanes.remove(pNum);
+		//Removes reference to money label
 		playerMoneyLabels.remove(pNum);
+		//Removes reference to property list
 		playerPropertyLists.remove(pNum);
 		System.out.println("PLAYER PANEL REMOVED " + pNum);
 	}
@@ -399,24 +484,39 @@ public class GameController implements Initializable{
 	private Label winnerLabel;
 	@FXML
 	private Button closeButton;
+	/**
+	 * Ends game and closes window.
+	 */
 	public void close(){		
 		Stage stage = (Stage) closeButton.getScene().getWindow();
 		stage.close();
 	}
 	
+	/*
+	 * Shows the winner dialogue box. 
+	 * Declares who won the game
+	 */
 	public void broadcastWinner(String name){
 		winnerLabel.setText(name + " won!");
 		winnerBanner.setOpacity(1);
 		winnerBanner.setDisable(false);
 	}
 	
+	/**
+	 * Initializes remove player sequence. 
+	 * Called when player forfeits game.
+	 */
 	public void removePlayer(){
 		Game.removePlayer();
 	}
 	
 	@FXML
 	private Button useGetOutOfJailCard;
+	/**
+	 * Allows player to use getOutOfJailFreeCard
+	 */
 	public void useGetOutOfJailCard(){
+		Game.getCurrPlayer().removeGetOutOfJailFreeCard();
 		useGetOutOfJailCard.setVisible(false);
 		useGetOutOfJailCard.setDisable(true);
 		Game.getOutOfJailSucker(true);

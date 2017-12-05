@@ -289,6 +289,12 @@ public class Game{
 					players.get(currPlayer+1).setPos(50);
 					//endTurn();
 				}
+				
+				for  (int i = 0; i < 8; i++) {
+					if (Game.getCurrPlayer().getPos() == actionSpotLocations[i]) {		//if the player's current position is a tax, chance, or community chest space do this
+						actionSpot(Game.getCurrPlayer().getPos());
+					}
+				}
 			}
 		}
 	}
