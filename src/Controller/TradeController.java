@@ -23,16 +23,16 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class TradeController implements Initializable{
-	
+
 	HashSet<Property> currPlayerToTrade = new HashSet<>();
 	HashSet<Property> otherPlayerToTrade = new HashSet<>();
 	Player otherPlayer = null;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 	}
-	
+
 	@FXML
 	private Label currPlayer;
 	@FXML
@@ -47,10 +47,15 @@ public class TradeController implements Initializable{
 	private CheckBox otherPlayerApproval;
 	@FXML
 	private Button save;
+
+
+	/**
+	 * What happens when the "save" botton is pushed
+	 */
 	public void save(){
-		
+
 		int otherPlayerNum = -1;
-		
+
 		HashMap<Integer, Player> players = Game.getPlayers();
 		for(int i=1; i<=Game.getNumPlayers(); i++){
 			if(players.containsKey(i)){							//Assigns the "other" player 
@@ -59,26 +64,30 @@ public class TradeController implements Initializable{
 				}
 			}
 		}
-		
-		for(Property property : currPlayerToTrade){				//
-			Game.getCurrPlayer().removeProperty(property);
+
+		for(Property property : currPlayerToTrade){				//Finds the property that will be traded. 
+			Game.getCurrPlayer().removeProperty(property);		//	and changes the owner
 			otherPlayer.addProperty(property);
 			property.changeOwner(otherPlayerNum);
 		}
-		for(Property property : otherPlayerToTrade){
-			otherPlayer.removeProperty(property);
+		for(Property property : otherPlayerToTrade){			//Finds the property from the "other" player that will be traded
+			otherPlayer.removeProperty(property);				//	and changes the owner
 			Game.getCurrPlayer().addProperty(property);
 			property.changeOwner(Game.getCurrPlayer().getPNum());
 		}
-		
+
 		Game.getController().updatePlayerInfo(Game.getCurrPlayer().getPNum());
 		Game.getController().updatePlayerInfo(otherPlayerNum);
-		
+
 		Stage stage = (Stage) save.getScene().getWindow();
 		stage.close();
 	}
-	
-	public void buildWindow(){
+
+
+	/**
+	 * Method that builds the trade window
+	 */
+	public void buildWindow(){												//Builds the trade window
 		currPlayer.setText(Game.getCurrPlayer().getPlayerName());
 		ObservableList<String> playerNames = FXCollections.<String>observableArrayList();
 		HashMap<Integer, Player> players = Game.getPlayers();
@@ -91,7 +100,7 @@ public class TradeController implements Initializable{
 		}
 		otherPlayerSelector.setItems(playerNames);
 		otherPlayerSelector.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-			
+
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				currPlayerToTrade = new HashSet<>();
@@ -124,7 +133,7 @@ public class TradeController implements Initializable{
 				}
 			}
 		});
-		HashMap<Integer, ArrayList<Property>> currPlayerProperties = Game.getCurrPlayer().getProperties();
+		HashMap<Integer, ArrayList<Property>> currPlayerProperties = Game.getCurrPlayer().getProperties();	//Lists the possible properties a player can trade
 		for (int i=1; i<=10; i++){
 			for(Property property : currPlayerProperties.get(i)){
 				CheckBox propCheck = new CheckBox(property.getPropertyName());
@@ -155,9 +164,12 @@ public class TradeController implements Initializable{
 			}
 		});		
 	}
-	
-	public void checkEnableTrade(){
-		if(currPlayerApproval.isSelected() && otherPlayerApproval.isSelected()
+
+	/**
+	 * Checks to see if both players are trading a property and both players approve
+	 */
+	public void checkEnableTrade(){													//Checks for player approval
+		if(currPlayerApproval.isSelected() && otherPlayerApproval.isSelected()		//	and that each player is trading something
 				&& (currPlayerToTrade.size() > 0) && (otherPlayerToTrade.size() > 0)){
 			save.setDisable(false);
 		}
