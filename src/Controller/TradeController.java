@@ -55,7 +55,7 @@ public class TradeController implements Initializable{
 		for(int i=1; i<=Game.getNumPlayers(); i++){
 			if(players.containsKey(i)){							//Assigns the "other" player 
 				if(Game.getPlayer(i) == otherPlayer){
-					otherPlayerNum = i+1;
+					otherPlayerNum = i;
 				}
 			}
 		}
