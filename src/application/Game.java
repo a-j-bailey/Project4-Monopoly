@@ -220,15 +220,15 @@ public class Game{
 		
 			numOfRolls++;
 			
-			//Random rand = new Random();
-			//int d1 = rand.nextInt(6)+1;
-			//int d2 = rand.nextInt(6)+1;
+			Random rand = new Random();
+			int d1 = rand.nextInt(6)+1;
+			int d2 = rand.nextInt(6)+1;
 			
 			//FOR TROUBLESHOOTING
-			System.out.println("-- enter dice roll: --");
-			Scanner input = new Scanner(System.in);
-			int d1 = input.nextInt();
-			int d2 = input.nextInt();
+			//System.out.println("-- enter dice roll: --");
+			//Scanner input = new Scanner(System.in);
+			//int d1 = input.nextInt();
+			//int d2 = input.nextInt();
 			
 			System.out.println("\tDICE: " + d1 + " " + d2);
 
@@ -287,7 +287,9 @@ public class Game{
 					getOutOfJailSucker(false);
 				} 
 				else {
-					endTurn();
+					gc.setAlert("You did not roll doubles. Your turn is over");
+					players.get(currPlayer+1).setPos(50);
+					//endTurn();
 				}
 			}
 		}
@@ -372,11 +374,11 @@ public class Game{
 	 */
 	public static void getOutOfJailSucker(Boolean canRoll) {
 		//print something about how you're out of jail
-		players.get(currPlayer).changeIncarceration(false);
-		players.get(currPlayer).setPos(10);
+		players.get(currPlayer + 1).changeIncarceration(false);
+		players.get(currPlayer + 1).setPos(10);
 		
 		if ((currentDice[0] == currentDice[1]) || canRoll) {
-			players.get(currPlayer).changePos((10 + currentDice[0] + currentDice[1]) % 40);
+			players.get(currPlayer + 1).changePos((10 + currentDice[0] + currentDice[1]) % 40);
 			gc.setAlert("You've made it out of jail! #FreeBird");
 		}
 		else {
@@ -391,10 +393,10 @@ public class Game{
 	 */
 	public static void manageAllPlayersMoney(int amount){
 		for(int i=0; i<numPlayers; i++){
-			if(i != currPlayer){
+			if(i != currPlayer + 1){
 				players.get(i).changeMoney(amount);
 			}
-			players.get(currPlayer).changeMoney((-1)*amount*numPlayers);
+			players.get(currPlayer + 1).changeMoney((-1)*amount*numPlayers);
 		}
 	}
 	
