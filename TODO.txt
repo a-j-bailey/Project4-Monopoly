@@ -15,6 +15,8 @@
 [Done]	Allow players to use a get out of jail free card (if they have it)
 [Done]	Change house display to say "Hotel" if the player has 5 houses on a property.
 	-	COMMENTS
+			Main
+			Contoller Classes
 [Done]	Alert isn't working on tax location
 	-	Add property description if player owns property.
 	
