@@ -26,7 +26,6 @@ public class Location {
 		lnScn.useDelimiter(",");
 		this.type = lnScn.next();
 		this.propertyName = lnScn.next();
-		System.out.println("\t" + propertyName);
 		this.color = lnScn.next();
 		lnScn.close();
 	}
