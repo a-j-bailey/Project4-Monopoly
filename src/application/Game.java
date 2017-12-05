@@ -427,7 +427,7 @@ public class Game{
 		System.err.println(players.size());
 		
 		if(players.size() == 1){
-			for(int i=0; i<numPlayers; i++){
+			for(int i=1; i<=numPlayers; i++){
 				if(players.containsKey(i)){
 					gameOver = true;
 					gc.broadcastWinner(getPlayer(i).getPlayerName());
