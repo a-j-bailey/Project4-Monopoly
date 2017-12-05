@@ -360,8 +360,8 @@ public class Game{
 	 * Sends current player to jail and LOCKS 'EM UP
 	 */
 	public static void goToJailSucker(){
-		players.get(currPlayer).changeIncarceration(true);
-		players.get(currPlayer).setPos(50);
+		players.get(currPlayer+1).changeIncarceration(true);
+		players.get(currPlayer+1).setPos(50);
 		canReroll = false;										//Instead of this method ending their turn, We should let them hit the button and let them know theyre in jail
 		gc.setAlert("You're in jail.\nRoll doubles to get out of jail.");
 	}

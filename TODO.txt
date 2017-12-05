@@ -1,5 +1,5 @@
 [Done]	Property Actions (pay rent, paying tax, draw card)
-	[Adam]	Make sure player does not own property before charging them rent
+[Done]	Make sure player does not own property before charging them rent
 [Done]	Award players $200 for passing Go
 [Done]	Go To Jail (Property, Card, 3x Doubles) 
 [Done]	Trade Properties
@@ -9,13 +9,13 @@
 [Done]	Type and finalize game rules into Rules.txt
 [Done]	Player forfeits if ends turn with negative balance
 [Done]	Declaring a Winner
-	[Steve]	Only allow user to add houses if there is a complete set
+[Done]	Only allow user to add houses if there is a complete set
 [Done]	Allow players to roll to get out of jail when it would be there turn.
 [Done]	Make tokens go to jail as soon as they land on that location. 
 [Done]	Allow players to use a get out of jail free card (if they have it)
 [Done]	Change house display to say "Hotel" if the player has 5 houses on a property.
 	-	COMMENTS
-	-	Alert isn't working on tax location
+[Done]	Alert isn't working on tax location
 	
 	
 -- OPTIONAL --

@@ -184,13 +184,11 @@ public class GameController implements Initializable{
 					}
 					nameScn.close();
 				} else {
-				
 					Residential prop = (Residential) property;
 					rent = prop.getRent();
-				
 				}
 				this.propertyInfoText.setText("This property is owned by " + 
-						Game.getPlayer(property.getOwner() - 1).getPlayerName() + 
+						Game.getPlayer(property.getOwner()).getPlayerName() + 
 						"\nYou paid " + rent + " in rent.");
 			} else {
 				this.buyProperty.setOpacity(1);
