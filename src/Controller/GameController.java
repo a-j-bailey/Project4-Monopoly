@@ -219,7 +219,7 @@ public class GameController implements Initializable{
 				if(property.getPropertyType().equals("Residential")){
 					Residential resProp = (Residential) property;
 					if (resProp.getNumHouses() == 5){
-						houses = houses + "\t\tHOTEL";
+						houses = houses + "\t\tHOTEL\n";
 					} else if(resProp.getNumHouses() > 0){
 						houses = houses + "\t\t";
 						for (int j=0; j<resProp.getNumHouses(); j++){
