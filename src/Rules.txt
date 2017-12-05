@@ -118,11 +118,7 @@ The player who mortgages property retains possession of it and no other player m
 
 BANKRUPTCY
 
-You are declared bankrupt if you owe more than you can pay either to another player or to the Bank. If your debt is to another player, you must turn over to that player all that you have of value and retire from the game.
-In making this settlement, if you own houses or hotels, you must return these to the Bank in exchange for money to the extent of one-half the amount paid for them.
-This cash is given to the creditor. If you have mortgaged property you also turn this property over to your creditor.
-The new owner who does this may then, at their option, pay the principal or hold the property until some later turn, then lift the mortgage.
-Should you owe the Bank, instead of another player, more than you can pay (because of taxes or penalties) even by selling off buildings and mortgaging property, you must turn over all assets to the Bank. A bankrupt player must immediately retire from the game. The last player left in the game wins.
+When a player ends their turn with a negative balance, they go bankrupt. When a player goes bankrupt, all their remaining assets are given to the bank. Properties they had will be put up for sale. 
 
 
 MISCELLANEOUS

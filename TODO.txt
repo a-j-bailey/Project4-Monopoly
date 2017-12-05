@@ -9,7 +9,7 @@
 [Done]	Type and finalize game rules into Rules.txt
 [Done]	Player forfeits if ends turn with negative balance
 [Done]	Declaring a Winner
-	-	Only allow user to add houses if there is a complete set
+	[Steve]	Only allow user to add houses if there is a complete set
 [Done]	Allow players to roll to get out of jail when it would be there turn.
 [Done]	Make tokens go to jail as soon as they land on that location. 
 [Done]	Allow players to use a get out of jail free card (if they have it)

@@ -312,7 +312,7 @@ public class Game{
 		}
 		if (location == 4 || location == 38) {							//Tax
 			int tax = ((Tax) locations.get(location)).getTaxAmount();
-			gc.setAlert("You were taxed:\n$" + tax);
+			gc.setAlert("You were taxed:\n" + -1 * tax);
 			players.get(currPlayer+1).changeMoney(tax);
 		}
 	}
