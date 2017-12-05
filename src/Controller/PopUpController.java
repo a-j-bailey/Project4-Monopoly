@@ -234,9 +234,16 @@ public class PopUpController implements Initializable{
 				resProp.buildHouse(changedProperties.get(property));
 			}
 		} else if(type.equals("Mortgage")){
-			
+			for(Property property : changedProperties.keySet()){
+				if(changedProperties.get(property) == 0){
+					property.setIsMortgaged(false);
+					Game.getCurrPlayer().changeMoney((-1)*property.getMortgageValue());
+				} else {
+					property.setIsMortgaged(true);
+					Game.getCurrPlayer().changeMoney(property.getMortgageValue());
+				}
+			}
 		}
-		
 		Stage stage = (Stage) save.getScene().getWindow();
 		stage.close();
 	}
