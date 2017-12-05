@@ -116,6 +116,11 @@ In order to lift the mortgage, the owner must pay the Bank the amount of mortgag
 The player who mortgages property retains possession of it and no other player may secure it by lifting the mortgage from the Bank. However, the owner may sell this mortgaged property to another player at any agreed price. If you are the new owner, you may lift the mortgage at once if you wish by paying off the mortgage plus 10% interest to the Bank.
 
 
+TRADING
+
+You can only trade properties. Both player must agree. 
+
+
 BANKRUPTCY
 
 When a player ends their turn with a negative balance, they go bankrupt. When a player goes bankrupt, all their remaining assets are given to the bank. Properties they had will be put up for sale. 
