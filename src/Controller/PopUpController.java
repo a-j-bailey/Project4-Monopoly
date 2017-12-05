@@ -138,6 +138,7 @@ public class PopUpController implements Initializable{
 					}
 					cost.setText("$"+money);
 				} else {
+					warningArea.getChildren().clear();
 					Text text = new Text("You can't mortgage a property that has houses."
 							+ "\nPlease sell the houses on " + thisProperty.getPropertyName() 
 							+ " before mortgaging this property.");
