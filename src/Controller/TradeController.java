@@ -52,7 +52,7 @@ public class TradeController implements Initializable{
 		int otherPlayerNum = -1;
 		
 		HashMap<Integer, Player> players = Game.getPlayers();
-		for(int i=0; i<Game.getNumPlayers(); i++){
+		for(int i=1; i<=Game.getNumPlayers(); i++){
 			if(players.containsKey(i)){
 				if(Game.getPlayer(i) == otherPlayer){
 					otherPlayerNum = i+1;
@@ -82,7 +82,7 @@ public class TradeController implements Initializable{
 		currPlayer.setText(Game.getCurrPlayer().getPlayerName());
 		ObservableList<String> playerNames = FXCollections.<String>observableArrayList();
 		HashMap<Integer, Player> players = Game.getPlayers();
-		for(int i=0; i<Game.getNumPlayers(); i++){
+		for(int i=1; i<=Game.getNumPlayers(); i++){
 			if(players.containsKey(i)){
 				if(Game.getCurrPlayer() != Game.getPlayer(i)){
 					playerNames.add(Game.getPlayer(i).getPlayerName());
@@ -97,7 +97,7 @@ public class TradeController implements Initializable{
 				currPlayerToTrade = new HashSet<>();
 				otherPlayerToTrade = new HashSet<>();
 				HashMap<Integer, Player> players = Game.getPlayers();
-				for(int i=0; i<Game.getNumPlayers(); i++){
+				for(int i=1; i<=Game.getNumPlayers(); i++){
 					if(players.containsKey(i)){
 						if(Game.getPlayer(i).getPlayerName().equals(newValue)){
 							otherPlayer = Game.getPlayer(i);
@@ -123,7 +123,6 @@ public class TradeController implements Initializable{
 					}
 				}
 			}
-			
 		});
 		HashMap<Integer, ArrayList<Property>> currPlayerProperties = Game.getCurrPlayer().getProperties();
 		for (int i=1; i<=10; i++){
@@ -158,7 +157,8 @@ public class TradeController implements Initializable{
 	}
 	
 	public void checkEnableTrade(){
-		if(currPlayerApproval.isSelected() && otherPlayerApproval.isSelected()){
+		if(currPlayerApproval.isSelected() && otherPlayerApproval.isSelected()
+				&& (currPlayerToTrade.size() > 0) && (otherPlayerToTrade.size() > 0)){
 			save.setDisable(false);
 		}
 	}
