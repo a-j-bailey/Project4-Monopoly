@@ -65,18 +65,18 @@ public class Player {
 	 * @param destination : cycles around the board until they get to the new destination
 	 */
 	public void changePos(int destination){
-		while(this.pos != destination) {
+		while(this.pos != destination) {			//moves player one space at a time to check if they pass go
 			this.pos++;
 			this.pos = this.pos % 40;
 			
-			if (this.pos == 0) {
+			if (this.pos == 0) {					//if they pass (or land on) go
 				this.changeMoney(200);
 			}
 		}
 		
-		if(Game.getLocation(destination).getPropertyType().equals("Residential")){
+		if(Game.getLocation(destination).getPropertyType().equals("Residential")){		//If they land on a residential property
 			Residential prop = (Residential) Game.getLocation(destination);
-			if(prop.isBought()){
+			if(prop.isBought()){		
 				this.changeMoney((-1)*prop.getRent());
 				Game.getPlayer(prop.getOwner()).changeMoney((-1)*prop.getRent());
 			}
