@@ -60,6 +60,8 @@ public class GameController implements Initializable{
 		
 		playerTokens = new HashMap<>();
 		
+		//Loads token image for each player
+		// and adds them to the playerTokens HashMap
 		for(int i=playerNum -1; i >= 0; i--){
 			ImageView token = new ImageView();
 			Image image = new Image("imgs/player" + (i+1) + "_token.png");
@@ -73,11 +75,13 @@ public class GameController implements Initializable{
 			playerTokens.put(i, token);
 		}
 		
+		//Initializes HashMaps for other elements
 		playerPanes = new HashMap<>();
 		playerMoneyLabels = new HashMap<>();
 		playerPropertyLists = new HashMap<>();
+		
+		//Loads other elements for players.
 		for (int i=1; i<=playerNum; i++){
-			
 			//Token
 			ImageView token = new ImageView();
 			token.setImage(new Image("imgs/player" + i + "_token.png"));
@@ -316,6 +320,8 @@ public class GameController implements Initializable{
 	@FXML
 	private Button endTurnButton;
 	public void endTurn(){
+		useGetOutOfJailCard.setVisible(false);
+		useGetOutOfJailCard.setDisable(true);
 		updatePlayerInfo(Game.getCurrPlayer().getPNum());
 		Game.endTurn();
 		updatePropertyInfo();
@@ -411,6 +417,8 @@ public class GameController implements Initializable{
 	@FXML
 	private Button useGetOutOfJailCard;
 	public void useGetOutOfJailCard(){
+		useGetOutOfJailCard.setVisible(false);
+		useGetOutOfJailCard.setDisable(true);
 		Game.getOutOfJailSucker(true);
 	}
 }
