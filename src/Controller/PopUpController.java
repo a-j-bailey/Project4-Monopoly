@@ -175,9 +175,22 @@ public class PopUpController implements Initializable{
 		HashMap<Integer, ArrayList<Property>> playerProperties = Game.getCurrPlayer().getProperties();
 		if (type.equals("Build")){
 			for (int i=1; i<=8; i++){
-				for(Property property : playerProperties.get(i)){
-					propList.add(property.getPropertyName());
+				
+				if((i == 1 && playerProperties.get(i).size() == 2) || 
+						(i == 2 && playerProperties.get(i).size() == 3) || 
+						(i == 3 && playerProperties.get(i).size() == 3) ||
+						(i == 4 && playerProperties.get(i).size() == 3) || 
+						(i == 5 && playerProperties.get(i).size() == 3) || 
+						(i == 6 && playerProperties.get(i).size() == 3) ||
+						(i == 7 && playerProperties.get(i).size() == 3) ||
+						(i == 8 && playerProperties.get(i).size() == 2)) {
+					
+					for(Property property : playerProperties.get(i)){
+						propList.add(property.getPropertyName());
+					}
+					
 				}
+				
 			}
 		} else {
 			for (int i=1; i<=10; i++){
