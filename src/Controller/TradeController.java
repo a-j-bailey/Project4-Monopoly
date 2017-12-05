@@ -60,7 +60,7 @@ public class TradeController implements Initializable{
 			}
 		}
 		
-		for(Property property : currPlayerToTrade){
+		for(Property property : currPlayerToTrade){				//
 			Game.getCurrPlayer().removeProperty(property);
 			otherPlayer.addProperty(property);
 			property.changeOwner(otherPlayerNum);
