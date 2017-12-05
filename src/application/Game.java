@@ -424,6 +424,8 @@ public class Game{
 		gc.removePlayerPanel(getCurrPlayer().getPNum());
 		players.remove(getCurrPlayer().getPNum());
 		
+		System.err.println(players.size());
+		
 		if(players.size() == 1){
 			for(int i=0; i<numPlayers; i++){
 				if(players.containsKey(i)){

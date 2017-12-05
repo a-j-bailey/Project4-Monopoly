@@ -16,8 +16,9 @@
 [Done]	Change house display to say "Hotel" if the player has 5 houses on a property.
 	-	COMMENTS
 [Done]	Alert isn't working on tax location
+	-	Add property description if player owns property.
 	
-	
+
 -- OPTIONAL --
 [Done]	Only refund half the cost of houses if their sold
 [Done]	When a player goes to jail, the game tells them they're in jail 
