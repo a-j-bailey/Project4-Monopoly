@@ -220,15 +220,15 @@ public class Game{
 		
 			numOfRolls++;
 			
-			Random rand = new Random();
-			int d1 = rand.nextInt(6)+1;
-			int d2 = rand.nextInt(6)+1;
+			//Random rand = new Random();
+			//int d1 = rand.nextInt(6)+1;
+			//int d2 = rand.nextInt(6)+1;
 			
 			//FOR TROUBLESHOOTING
-			//System.out.println("-- enter dice roll: --");
-			//Scanner input = new Scanner(System.in);
-			//int d1 = input.nextInt();
-			//int d2 = input.nextInt();
+			System.out.println("-- enter dice roll: --");
+			Scanner input = new Scanner(System.in);
+			int d1 = input.nextInt();
+			int d2 = input.nextInt();
 			
 			System.out.println("\tDICE: " + d1 + " " + d2);
 
