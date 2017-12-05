@@ -99,7 +99,7 @@ public class Player {
 			}
 		}
 
-		switch (pos){
+		switch (pos){					//moves player token
 			case 0:
 				Game.getController().moveToken(Game.getCurrPlayerNum(), 426, 408);
 				break;
@@ -228,8 +228,8 @@ public class Player {
 	 * only needed for InJail and JustVisiting
 	 * @param num
 	 */
-	public void setPos(int num){
-		if (num == 50) {
+	public void setPos(int num){				//changes player location without testing if they pass go 
+		if (num == 50) {		
 			this.pos = num;
 			Game.getController().moveToken(Game.getCurrPlayerNum(), 45, 400); 
 		}
@@ -275,7 +275,7 @@ public class Player {
 	 * Returns the total number of houses on all of a player's properties
 	 * @return
 	 */
-	public int getNumHouses(){
+	public int getNumHouses(){				//used for cards that charge a player based on the total number of houses they have
 		int totalHouses = 0;
 			
 		for(int i = 1; i <= 8; i++) {
@@ -294,7 +294,7 @@ public class Player {
 	 * Returns the total number of hotels on all of a player's properties
 	 * @return
 	 */
-	public int getNumHotels(){
+	public int getNumHotels(){				//Used for cards that charge a player based on the total number of hotels they have
 		int totalHotels = 0;		
 		for(int i = 1; i <= 8; i++) {
 			for(int j = 0; j < playerProperties.get(i).size(); j++) {
@@ -319,8 +319,8 @@ public class Player {
 	/**
 	 * Changes the players status from in to out of jail
 	 */
-	public void changeIncarceration(boolean maybe){
-		this.isIncarcerated = maybe;
+	public void changeIncarceration(boolean theTruth){
+		this.isIncarcerated = theTruth;
 	}
 	
 	/**
