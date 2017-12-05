@@ -1,5 +1,6 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Residential extends Property{
@@ -8,12 +9,9 @@ public class Residential extends Property{
 	private int numHouses;
 	
 	private int numSet;
+	private ArrayList<Integer> rentList;
 	private int rent;
-	private int rentHouse1;
-	private int rentHouse2;
-	private int rentHouse3;
-	private int rentHouse4;
-	private int rentHouse5;
+	
 	
 	
 	/**
@@ -22,6 +20,7 @@ public class Residential extends Property{
 	 */
 	public Residential(String inputLine){
 		super(inputLine);
+		rentList = new ArrayList<Integer>();
 		
 		Scanner lnScn = new Scanner(inputLine);
 		lnScn.useDelimiter(",");
@@ -39,15 +38,17 @@ public class Residential extends Property{
 		
 		
 		this.houseCost = lnScn.nextInt();
-		this.rent = lnScn.nextInt();
-		this.rentHouse1 = lnScn.nextInt();
-		this.rentHouse2 = lnScn.nextInt();
-		this.rentHouse3 = lnScn.nextInt();
-		this.rentHouse4 = lnScn.nextInt();
-		this.rentHouse5 = lnScn.nextInt();
+		this.rentList.add(lnScn.nextInt());
+		this.rentList.add(lnScn.nextInt());
+		this.rentList.add(lnScn.nextInt());
+		this.rentList.add(lnScn.nextInt());
+		this.rentList.add(lnScn.nextInt());
+		this.rentList.add(lnScn.nextInt());
 		this.numSet = lnScn.nextInt();
 		
 		numHouses = 0;
+		
+		rent = rentList.get(0);
 		
 		
 		
@@ -60,21 +61,7 @@ public class Residential extends Property{
 	 */
 	public void buildHouse(int numHousesBuilt) {
 		numHouses = numHousesBuilt;
-		if(numHouses == 1) {
-			this.setRent(this.rentHouse1);
-		}
-		else if(numHouses == 2) {
-			this.setRent(this.rentHouse2);
-		}
-		else if(numHouses == 3) {
-			this.setRent(this.rentHouse3);
-		}
-		else if(numHouses == 4) {
-			this.setRent(this.rentHouse4);
-		}
-		else if(numHouses == 5) {
-			this.setRent(this.rentHouse5);
-		}
+		this.rent = rentList.get(numHouses);
 	}
 
 
@@ -126,40 +113,5 @@ public class Residential extends Property{
 		return numSet;
 	}
 	
-	/**
-	 * 
-	 * @return rent with one house on the property
-	 */
-	public int getRentHouse1() {
-		return rentHouse1;
-	}
-	/**
-	 * 
-	 * @return rent with two houses on the property
-	 */
-	public int getRentHouse2() {
-		return rentHouse2;
-	}
-	/**
-	 * 
-	 * @return rent with three houses on the property
-	 */
-	public int getRentHouse3() {
-		return rentHouse3;
-	}
-	/**
-	 * 
-	 * @return rent with four houses on the property
-	 */
-	public int getRentHouse4() {
-		return rentHouse4;
-	}
 	
-	/**
-	 * 
-	 * @return rent with five houses on the property
-	 */
-	public int getRentHouse5() {
-		return rentHouse5;
-	}
 }
